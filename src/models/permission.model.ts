@@ -1,5 +1,5 @@
 import {model, Schema} from 'mongoose';
-import {IPermission} from "../interfaces/permission-interface";
+import {IPermission} from '../interfaces/permission-interface';
 
 const PermissionSchema = new Schema({
         code: {type: String, required: true, unique: true,},

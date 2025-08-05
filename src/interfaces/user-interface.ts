@@ -1,6 +1,6 @@
-import {AccountType} from "../enums/enum-account-type";
-import {Types} from "mongoose";
-import {IRole} from "./role-interface";
+import {AccountType} from '../enums/enum-account-type';
+import {Types} from 'mongoose';
+import {IRole} from './role-interface';
 
 
 export  interface IUser {
