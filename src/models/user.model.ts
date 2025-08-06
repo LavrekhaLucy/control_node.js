@@ -1,6 +1,6 @@
 import {model, Schema} from 'mongoose';
-import {AccountType} from "../enums/enum-account-type";
-import {IUser} from "../interfaces/user-interface";
+import {AccountType} from '../enums/enum-account-type';
+import {IUser} from '../interfaces/user-interface';
 
 
 

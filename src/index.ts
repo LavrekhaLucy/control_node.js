@@ -3,7 +3,7 @@ import {ApiError} from './errors/api-error';
 import {configs} from './configs/config';
 import * as mongoose from 'mongoose';
 import fileUpload from 'express-fileupload';
-import roleRoutes from "./routers/role.routes";
+import roleRoutes from './routers/role.routes';
 import swaggerUi from 'swagger-ui-express';
 import swaggerDocument from '../docs/swagger.json';
 

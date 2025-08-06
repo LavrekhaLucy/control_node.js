@@ -1,6 +1,6 @@
-import {IRole} from "../interfaces/role-interface";
-import {IUser} from "../interfaces/user-interface";
-import {Role} from "../models/role.model";
+import {IRole} from '../interfaces/role-interface';
+import {IUser} from '../interfaces/user-interface';
+import {Role} from '../models/role.model';
 
 class RoleRepository {
     public async getAll() {

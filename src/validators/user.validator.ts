@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import {UserRole} from "../enums/enum-user-role";
+import {UserRole} from '../enums/enum-user-role';
 
 
 export const userIdSchema = Joi.object({

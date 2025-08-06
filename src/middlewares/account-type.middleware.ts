@@ -1,6 +1,6 @@
 import {Request, Response, NextFunction} from 'express';
-import {AccountType} from "../enums/enum-account-type";
-import {IUser} from "../interfaces/user-interface";
+import {AccountType} from '../enums/enum-account-type';
+import {IUser} from '../interfaces/user-interface';
 
 
 
