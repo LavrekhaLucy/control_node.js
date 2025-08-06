@@ -3,3 +3,4 @@ node_modules
 dist
 node.iml
 .env
+control_node.js.iml

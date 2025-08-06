@@ -1,13 +1,13 @@
 import {IPermission} from './permission-interface';
-import {Types} from 'mongoose';
+import {ObjectId} from 'mongoose';
 
 
 export interface IRole {
 
-    _id: Types.ObjectId;
+    _id: ObjectId;
     name: string;
-    organizationId: Types.ObjectId;
-    permissions: Types.ObjectId[] | IPermission[];
+    organizationId: ObjectId;
+    permissions: ObjectId[] | IPermission[];
     createdAt?: Date;
     updatedAt?: Date;
 }

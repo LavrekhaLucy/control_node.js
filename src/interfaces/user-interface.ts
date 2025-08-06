@@ -1,18 +1,16 @@
 import {AccountType} from '../enums/enum-account-type';
-import {Types} from 'mongoose';
+import {ObjectId} from 'mongoose';
 import {IRole} from './role-interface';
 
 
 export  interface IUser {
-    _id: Types.ObjectId;
+    _id: ObjectId;
     email: string;
     password: string;
-    roles: Types.ObjectId[] | IRole[];
+    roles: ObjectId[] | IRole[];
     accountType: AccountType;
     createdAt?: Date;
     updatedAt?: Date;
 }
-
-
 
 

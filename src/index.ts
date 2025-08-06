@@ -3,7 +3,9 @@ import {ApiError} from './errors/api-error';
 import {configs} from './configs/config';
 import * as mongoose from 'mongoose';
 import fileUpload from 'express-fileupload';
-
+import roleRoutes from "./routers/role.routes";
+import swaggerUi from 'swagger-ui-express';
+import swaggerDocument from '../docs/swagger.json';
 
 
 const app = express();
@@ -15,7 +17,8 @@ const mongo = configs.MONGO_URI;
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(fileUpload());
-// app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use((req: Request, res: Response, next: NextFunction) => {
     console.log(`${req.method} ${req.path}`);
@@ -24,6 +27,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 
 // app.use('/users', userRouter);
 // app.use('/auth', authRouter);
+app.use('/roles', roleRoutes);
 
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

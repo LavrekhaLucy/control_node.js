@@ -1,9 +1,9 @@
-import {Types} from 'mongoose';
+import {ObjectId} from 'mongoose';
 
 export interface IOrganization {
     _id: string;
     name: string;
     type: 'dealer';
-    roles: Types.ObjectId[];
-    users: Types.ObjectId[];
+    roles: ObjectId[];
+    users: ObjectId[];
 }

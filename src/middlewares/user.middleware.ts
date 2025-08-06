@@ -1,6 +1,6 @@
 // import {ApiError} from '../errors/api-error';
-// import {userRepository} from '../repositores/user.repository';
 // import {NextFunction, Request, Response} from 'express';
+// import {userRepository} from "../repositories/user.repository";
 //
 // class UserMiddleware {
 //

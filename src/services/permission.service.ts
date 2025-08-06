@@ -1,7 +1,8 @@
 import {User} from '../models/user.model';
-import {IUser} from '../interfaces/user-interface';
 import {IRole} from '../interfaces/role-interface';
 import {IPermission} from '../interfaces/permission-interface';
+import {IUser} from "../interfaces/user-interface";
+
 
 
 export const hasPermission = async (

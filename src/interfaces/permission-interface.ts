@@ -1,8 +1,8 @@
-import {Types} from 'mongoose';
+import {ObjectId} from 'mongoose';
 
 export interface IPermission{
 
-    _id: Types.ObjectId;
+    _id: ObjectId;
     code: string;
     description?: string;
     createdAt?: Date;
