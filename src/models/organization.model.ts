@@ -1,5 +1,6 @@
 import {model, Schema} from 'mongoose';
 import {OrganizationType} from '../enums/enum.organization-type';
+import {IOrganization} from '../interfaces/organization-interface';
 
 const OrganizationSchema = new Schema({
         name: {type: String, required: true, unique: true, trim: true,},
@@ -11,4 +12,4 @@ const OrganizationSchema = new Schema({
     }
 );
 
-export const Organization = model('organizations', OrganizationSchema);
+export const Organization = model<IOrganization>('Organization', OrganizationSchema);

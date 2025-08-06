@@ -8,16 +8,13 @@ const RoleSchema = new Schema({
         scope: {type: String,  enum: Object.values(RoleScope), required: true,},
         permissions: [{
                 type: Schema.Types.ObjectId,
-                ref: 'permissions'},],
-        users: [{
-                type: Schema.Types.ObjectId,
-                ref: 'users',},],
-    },
+                ref: 'Permission'},],
+        },
     {
         timestamps: true,
         versionKey: false,
     }
 );
 
-export const Role = model<IRole>('roles', RoleSchema);
+export const Role = model<IRole>('Role', RoleSchema);
 

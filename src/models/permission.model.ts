@@ -3,7 +3,7 @@ import {IPermission} from '../interfaces/permission-interface';
 
 const PermissionSchema = new Schema({
         code: {type: String, required: true, unique: true,},
-        description: {type: String, required: true,},
+        description: {type: String, required: false,},
     },
     {
         timestamps: true,
@@ -12,5 +12,5 @@ const PermissionSchema = new Schema({
 
 );
 
-export const Permission = model<IPermission>('permissions', PermissionSchema);
+export const Permission = model<IPermission>('Permission', PermissionSchema);
 

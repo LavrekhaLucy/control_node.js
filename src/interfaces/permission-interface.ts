@@ -8,3 +8,4 @@ export interface IPermission{
     createdAt?: Date;
     updatedAt?: Date;
 }
+
