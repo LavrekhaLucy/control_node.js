@@ -1,23 +1,23 @@
 import {Request, Response, NextFunction} from 'express';
 import {AccountType} from '../enums/enum-account-type';
 import {IUser} from '../interfaces/user-interface';
-
+import {ApiError} from "../errors/api-error";
 
 
 class AccountTypeMiddleware {
-    public verifyPremiumAccess() {
+    public verifyAccess(requiredType: AccountType) {
         return (req: Request, res: Response, next: NextFunction) => {
             try {
                 const user = req.user as IUser;
 
-                if (!user || user.accountType !== AccountType.PREMIUM) {
-                    return res.status(403).json({message: 'Premium account required'});
+                if (!user || user.accountType !== requiredType) {
+                    throw new ApiError(`${requiredType} account required`, 403 );
                 }
 
                 next();
-            } catch (error) {
-                console.error('RequirePremium middleware error:', error);
-                return res.status(500).json({message: 'Internal server error'});
+            } catch (e) {
+                console.error('RequirePremium middleware error:', e);
+                next(e);
             }
         };
     }

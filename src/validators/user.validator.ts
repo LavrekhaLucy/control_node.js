@@ -49,9 +49,10 @@ export const signInSchema = Joi.object({
     email: Joi.string().email().required(),
     password: Joi.string()
         .pattern(new RegExp('^(?=.*[A-Za-z])(?=.*\\d).{8,}$'))
-        .optional()
+        .required()
         .messages({
             'string.pattern.base': 'Password must be at least 8 characters long and contain both letters and numbers',
+
         }),
 });
 

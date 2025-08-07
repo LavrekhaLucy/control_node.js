@@ -1,0 +1,58 @@
+import {NextFunction, Request, Response} from 'express';
+import {userRepository} from "../repositories/user.repository";
+
+
+class UserController {
+    async createUser(req: Request, res: Response, next: NextFunction) {
+        try {
+            const user = await userRepository.create(req.body);
+            res.status(201).json(user);
+        } catch (e) {
+            next(e);
+        }
+    }
+
+    async getAllUsers(req: Request, res: Response, next: NextFunction) {
+        try {
+            const users = await userRepository.findAll();
+            res.json(users);
+        } catch (e) {
+            next(e);
+        }
+
+    }
+
+    async getUserById(req: Request, res: Response, next: NextFunction) {
+        try {
+            const user = await userRepository.findById(req.params.id);
+            if (!user) return res.status(404).json({message: 'User not found'});
+            res.json(user);
+        } catch (e) {
+            next(e);
+        }
+
+    }
+
+    async updateUser(req: Request, res: Response, next: NextFunction) {
+        try {
+            const user = await userRepository.update(req.params.id, req.body);
+            res.json(user);
+        } catch (e) {
+            next(e);
+        }
+
+    }
+
+    async deleteUser(req: Request, res: Response, next: NextFunction) {
+        try {
+            await userRepository.delete(req.params.id);
+            res.status(204).send();
+
+        } catch (e) {
+            next(e);
+        }
+
+    }
+}
+
+export const userController = new UserController();

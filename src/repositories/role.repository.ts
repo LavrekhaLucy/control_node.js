@@ -1,31 +1,33 @@
 import {IRole} from '../interfaces/role-interface';
-import {IUser} from '../interfaces/user-interface';
 import {Role} from '../models/role.model';
+import {UserRole} from "../enums/enum-user-role";
+import {HydratedDocument} from "mongoose";
 
 class RoleRepository {
-    public async getAll() {
-        return Role.find();
+    public async getAll():Promise<HydratedDocument<IRole>[]> {
+        return Role.find().populate('permissions');
     }
 
-    public async getById(id: string) {
+    public async getById(id: string):Promise<HydratedDocument<IRole> | null> {
         return Role.findById(id).populate('permissions');
     }
 
-    public async create(data: Partial<IRole>) {
-        return Role.create(data);
+    public async create(dto: Partial<IRole>):Promise<HydratedDocument<IRole>> {
+        return Role.create(dto);
     }
 
-    public async update(id: string, data: Partial<IRole>) {
-        return Role.findByIdAndUpdate(id, data, { new: true });
+    public async update(id: string, dto: Partial<IRole>):Promise<HydratedDocument<IRole>> {
+        return Role.findByIdAndUpdate(id, dto, { new: true });
     }
 
-    public async delete(id: string) {
-        return Role.findByIdAndDelete(id);
+    public async delete(id: string):Promise<void> {
+        await Role.findByIdAndDelete(id);
     }
 
-    public async getByName(name: IUser) {
-        return Role.findOne({ name });
+    public async getByName(name: UserRole):Promise<HydratedDocument<IRole> | null> {
+        return Role.findOne({ name }).populate('permissions');
     }
 }
 
 export const roleRepository = new RoleRepository();
+
