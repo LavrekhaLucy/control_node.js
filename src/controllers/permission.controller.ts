@@ -1,5 +1,5 @@
 import {NextFunction, Request, Response} from 'express';
-import {permissionRepository} from "../repositories/permission.repository";
+import {permissionRepository} from '../repositories/permission.repository';
 
 
 class PermissionController {

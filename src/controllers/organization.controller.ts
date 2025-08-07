@@ -1,5 +1,5 @@
 import {NextFunction, Request, Response} from 'express';
-import {organizationRepository} from "../repositories/organization.repository";
+import {organizationRepository} from '../repositories/organization.repository';
 
 
 class OrganizationController {

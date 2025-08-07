@@ -1,6 +1,6 @@
-import { User } from "../models/user.model";
-import { IUser } from "../interfaces/user-interface";
-import {HydratedDocument} from "mongoose";
+import { User } from '../models/user.model';
+import { IUser } from '../interfaces/user-interface';
+import {HydratedDocument} from 'mongoose';
 
 class UserRepository {
     public async create(dto: Partial<IUser>): Promise<HydratedDocument<IUser>> {
@@ -8,15 +8,15 @@ class UserRepository {
     }
 
     public async findById(id: string):Promise<HydratedDocument<IUser> | null> {
-        return User.findById(id).populate("roles");
+        return User.findById(id).populate('roles');
     }
 
     public async findByEmail(email: string):Promise<HydratedDocument<IUser> | null> {
-        return User.findOne({ email }).populate("roles");
+        return User.findOne({ email }).populate('roles');
     }
 
     public async findAll(): Promise<HydratedDocument<IUser>[]>{
-        return User.find().populate("roles");
+        return User.find().populate('roles');
     }
 
     public async update(id: string, dto: Partial<IUser>):Promise<HydratedDocument<IUser>> {

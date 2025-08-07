@@ -1,6 +1,6 @@
-import { Organization } from "../models/organization.model";
-import {IOrganization} from "../interfaces/organization-interface";
-import {HydratedDocument} from "mongoose";
+import { Organization } from '../models/organization.model';
+import {IOrganization} from '../interfaces/organization-interface';
+import {HydratedDocument} from 'mongoose';
 
 class OrganizationRepository {
     public async getAll():Promise<HydratedDocument<IOrganization>[]> {

@@ -1,7 +1,7 @@
 import {Request, Response, NextFunction} from 'express';
 import {AccountType} from '../enums/enum-account-type';
 import {IUser} from '../interfaces/user-interface';
-import {ApiError} from "../errors/api-error";
+import {ApiError} from '../errors/api-error';
 
 
 class AccountTypeMiddleware {

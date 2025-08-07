@@ -1,6 +1,6 @@
-import { Permission } from "../models/permission.model";
-import { IPermission } from "../interfaces/permission-interface";
-import {HydratedDocument} from "mongoose";
+import { Permission } from '../models/permission.model';
+import { IPermission } from '../interfaces/permission-interface';
+import {HydratedDocument} from 'mongoose';
 
 class PermissionRepository {
     public async getAll():Promise<HydratedDocument<IPermission>[]> {

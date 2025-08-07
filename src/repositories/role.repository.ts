@@ -1,7 +1,7 @@
 import {IRole} from '../interfaces/role-interface';
 import {Role} from '../models/role.model';
-import {UserRole} from "../enums/enum-user-role";
-import {HydratedDocument} from "mongoose";
+import {UserRole} from '../enums/enum-user-role';
+import {HydratedDocument} from 'mongoose';
 
 class RoleRepository {
     public async getAll():Promise<HydratedDocument<IRole>[]> {

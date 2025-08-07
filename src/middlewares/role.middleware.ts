@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
-import {UserRole} from "../enums/enum-user-role";
-import {ApiError} from "../errors/api-error";
+import {UserRole} from '../enums/enum-user-role';
+import {ApiError} from '../errors/api-error';
 
 
 
@@ -11,11 +11,11 @@ class RoleMiddleware {
                 const user = req.user;
 
                 if (!user) {
-                    throw new ApiError("Unauthorized", 401);
+                    throw new ApiError('Unauthorized', 401);
                 }
 
                 if (!allowedRoles.includes(user.role)) {
-                    throw new ApiError("Forbidden: insufficient permissions", 403);
+                    throw new ApiError('Forbidden: insufficient permissions', 403);
                 }
 
                 next();
@@ -31,11 +31,11 @@ class RoleMiddleware {
                 const user = req.user;
 
                 if (!user) {
-                    throw new ApiError("Unauthorized", 401);
+                    throw new ApiError('Unauthorized', 401);
                 }
 
                 if (user.role !== UserRole.ADMIN) {
-                    throw new ApiError("Access denied. Admins only.", 403);
+                    throw new ApiError('Access denied. Admins only.', 403);
                 }
 
                 next();

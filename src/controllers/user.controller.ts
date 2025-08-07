@@ -1,5 +1,5 @@
 import {NextFunction, Request, Response} from 'express';
-import {userRepository} from "../repositories/user.repository";
+import {userRepository} from '../repositories/user.repository';
 
 
 class UserController {
