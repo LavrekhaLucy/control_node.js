@@ -3,7 +3,7 @@ import {HydratedDocument} from 'mongoose';
 import {Ad} from '../models/ad.model';
 
 
-export class AdRepository {
+ export class AdRepository {
     public async create(dto: Partial<IAd>): Promise<HydratedDocument<IAd>> {
         return Ad.create(dto);
     }
@@ -23,7 +23,7 @@ export class AdRepository {
 
 
    public  async findActiveAds(): Promise<IAd[]> {
-        return Ad.find({ isActive: true }).exec();
+        return Ad.find({ isActive: true });
     }
 
     public async updateAdPrice(adId: string, newPriceUAH: number, rateUsed: number): Promise<void> {
@@ -31,7 +31,7 @@ export class AdRepository {
             priceInUAH: newPriceUAH,
             lastRateUsed: rateUsed,
             updatedAt: new Date()
-        }).exec();
+        });
     }
 };
 export const adRepository = new AdRepository();

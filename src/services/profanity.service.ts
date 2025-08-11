@@ -1,5 +1,5 @@
 // import Filter from 'bad-words';
-
+//
 // class ProfanityService {
 //     private filter = new Filter();
 //     public check(text: string) {

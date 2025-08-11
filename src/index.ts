@@ -7,6 +7,7 @@ import roleRoutes from './routers/role.router';
 import swaggerUi from 'swagger-ui-express';
 import swaggerDocument from '../docs/swagger.json';
 import carRoutes from './routers/car.routes';
+import {cronRunner} from "./cron";
 
 
 const app = express();
@@ -45,7 +46,7 @@ process.on('uncaughtException', (error) => {
 app.listen(port, async ()  => {
     await mongoose.connect(mongo);
 
-    // cronRunner();
+    cronRunner();
     console.log(`Server started on http://${host}:${port}`);
 });
 
