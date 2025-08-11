@@ -1,6 +1,6 @@
 import {NextFunction, Request, Response} from 'express';
-import {adService, AdService} from "../services/ad.service";
-import {ApiError} from "../errors/api-error";
+import {adService, AdService} from '../services/ad.service';
+import {ApiError} from '../errors/api-error';
 
 
 

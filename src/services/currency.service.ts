@@ -1,7 +1,7 @@
 import axios from 'axios';
-import {ICurrencyRate} from "../interfaces/currency-rate-interface";
-import {configs} from "../configs/config";
-import {ApiError} from "../errors/api-error";
+import {ICurrencyRate} from '../interfaces/currency-rate-interface';
+import {configs} from '../configs/config';
+import {ApiError} from '../errors/api-error';
 
 
 const APP_PRIVAT_URL =configs.APP_PRIVAT_URL;

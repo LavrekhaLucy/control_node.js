@@ -7,7 +7,7 @@ import roleRoutes from './routers/role.router';
 import swaggerUi from 'swagger-ui-express';
 import swaggerDocument from '../docs/swagger.json';
 import carRoutes from './routers/car.routes';
-import {cronRunner} from "./cron";
+import {cronRunner} from './cron';
 
 
 const app = express();

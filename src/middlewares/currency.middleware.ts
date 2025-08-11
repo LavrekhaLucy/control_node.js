@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import {ApiError} from "../errors/api-error";
+import {ApiError} from '../errors/api-error';
 
 const allowedCurrencies = ['USD', 'EUR', 'UAH'];
 

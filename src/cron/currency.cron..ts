@@ -1,5 +1,5 @@
 import {CronJob} from 'cron';
-import {adService} from "../services/ad.service";
+import {adService} from '../services/ad.service';
 
 
 

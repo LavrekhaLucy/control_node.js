@@ -1,8 +1,8 @@
-import { IAd } from "../interfaces/ad.interface";
-import { adRepository, AdRepository } from "../repositories/ad.repository";
-import { currencyService, CurrencyService } from "./currency.service";
-import {HydratedDocument} from "mongoose";
-import {ApiError} from "../errors/api-error";
+import { IAd } from '../interfaces/ad.interface';
+import { adRepository, AdRepository } from '../repositories/ad.repository';
+import { currencyService, CurrencyService } from './currency.service';
+import {HydratedDocument} from 'mongoose';
+import {ApiError} from '../errors/api-error';
 
  export class AdService {
     constructor(
@@ -12,7 +12,7 @@ import {ApiError} from "../errors/api-error";
 
     async createAd(dto: Partial<IAd>): Promise<HydratedDocument<IAd>> {
         if (!dto.currency || !dto.price) {
-            throw new ApiError("Currency and price are required", 400);
+            throw new ApiError('Currency and price are required', 400);
         }
 
         const exchangeRate = await this.currencyService.getRate(dto.currency);
