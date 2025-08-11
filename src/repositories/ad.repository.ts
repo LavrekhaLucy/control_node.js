@@ -3,17 +3,22 @@ import {HydratedDocument} from 'mongoose';
 import {Ad} from '../models/ad.model';
 
 
- export class AdRepository {
+export class AdRepository {
     public async create(dto: Partial<IAd>): Promise<HydratedDocument<IAd>> {
         return Ad.create(dto);
     }
 
     public async findById(id: string ): Promise<HydratedDocument<IAd>> {
-        return Ad.findById(id).populate('owner');
+        return Ad.findById(id).populate('seller');
     }
 
+     async updateById(adId: string, updateData:Partial<IAd>): Promise<HydratedDocument<IAd> | null> {
+         return Ad.findByIdAndUpdate(adId, updateData, { new: true });
+     }
+
+
     public async findAll(): Promise<HydratedDocument<IAd>[]> {
-        return Ad.find().populate('owner');
+        return Ad.find().populate('seller');
     }
 
     public async delete(id: string): Promise<void> {

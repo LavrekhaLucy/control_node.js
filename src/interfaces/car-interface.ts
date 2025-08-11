@@ -3,7 +3,6 @@ import {CurrencyEnum} from '../enums/currency.enum';
 import {AdStatusEnum} from '../enums/ad-status.enum';
 
 
-
 export interface ICar {
     _id?: ObjectId;
     title: string;

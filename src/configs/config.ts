@@ -27,6 +27,7 @@ export const configs = {
 
     SMTP_EMAIL: process.env.SMTP_EMAIL,
     SMTP_PASSWORD: process.env.SMTP_PASSWORD,
+    SMTP_MANAGER_EMAIL:process.env.SMTP_MANAGER_EMAIL,
 
     AWS_ACCESS_KEY: process.env.AWS_ACCESS_KEY,
     AWS_SECRET_KEY: process.env.AWS_SECRET_KEY,

@@ -1,20 +1,33 @@
 import {NextFunction, Request, Response} from 'express';
 import {adService, AdService} from '../services/ad.service';
 import {ApiError} from '../errors/api-error';
+import {ProfanityRequest} from '../interfaces/profanity-request.interface';
 
 
 
 export class AdController {
     constructor(private adService: AdService) {}
 
-    createAd = async (req: Request, res: Response, next:NextFunction) => {
+    createAd = async (req: ProfanityRequest, res: Response, next:NextFunction) => {
         try {
-            const result = await this.adService.createAd(req.body);
+
+            const status = req.hasProfanity ? 'pending_edit' : 'active';
+            const result = await this.adService.createAd({...req.body, status});
             res.status(201).json(result);
         } catch (e) {
             next(e);
         }
     };
+
+    // async createAd(req, res, next) {
+    //     try {
+    //
+    //         const ad = await adService.createAd({ ...req.body, status });
+    //         res.status(201).json(ad);
+    //     } catch (err) {
+    //         next(err);
+    //     }
+    // }
 
     getAd = async (req: Request, res: Response, next: NextFunction) => {
         try{

@@ -4,3 +4,4 @@ export enum AdStatusEnum {
     PENDING_EDIT = 'pending_edit',
     INACTIVE = 'inactive',
 }
+

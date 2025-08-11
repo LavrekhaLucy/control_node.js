@@ -1,5 +1,6 @@
 import {ObjectId} from 'mongoose';
 import {CurrencyEnum} from '../enums/currency.enum';
+import {AdStatusEnum} from '../enums/ad-status.enum';
 
 export interface IAd {
     _id: ObjectId;
@@ -8,6 +9,7 @@ export interface IAd {
     description: string;
     price: number;
     currency: CurrencyEnum;
+    status: AdStatusEnum;
     exchangeRate: number;
     priceInUAH: number;
     make: string;
@@ -19,6 +21,7 @@ export interface IAd {
     views: number;
     isProfanityChecked: boolean;
     isPublished: boolean;
+    profanityCheckAttempts: number
 
     createdAt: Date;
     updatedAt: Date;

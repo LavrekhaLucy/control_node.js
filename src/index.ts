@@ -51,3 +51,20 @@ app.listen(port, async ()  => {
 });
 
 
+// const start = async () => {
+//     try {
+//         await mongoose.connect(mongo);
+//         console.log('Connected to MongoDB');
+//
+//         cronRunner();
+//
+//         app.listen(port, host, () => {
+//             console.log(`Server started on http://${host}:${port}`);
+//         });
+//     } catch (err) {
+//         console.error('Failed to start server or connect to MongoDB:', err);
+//         process.exit(1);
+//     }
+// };
+//
+// start();

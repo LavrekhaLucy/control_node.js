@@ -20,11 +20,8 @@ const AdSchema = new Schema(
         },
         price: {type:Number, required: true},
         currency: { type: String, enum: Object.values(CurrencyEnum), required: true },
-
         exchangeRate: { type: Number, required: true },
         priceInUAH: { type: Number, required: true },
-        owner: { type: Schema.Types.ObjectId, ref: 'User', required: true },
-
         make: {type:String, required:true},
         model: { type: String, required: true },
         year: {type:Number, required:true},
@@ -34,6 +31,7 @@ const AdSchema = new Schema(
         views: { type: Number, default: 0},
         isProfanityChecked: {type: Boolean, default: false},
         isPublished: {type: Boolean, default: false},
+        profanityCheckAttempts: { type: Number, default: 0 }
 
 
     },
