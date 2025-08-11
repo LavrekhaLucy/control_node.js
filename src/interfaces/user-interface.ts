@@ -1,4 +1,4 @@
-import {AccountType} from '../enums/enum-account-type';
+import {AccountType} from '../enums/account-type.enum';
 import {ObjectId} from 'mongoose';
 import {IRole} from './role-interface';
 

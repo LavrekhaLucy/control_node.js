@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import {UserRole} from '../enums/enum-user-role';
+import {UserRole} from '../enums/user-role.enum';
 import {ApiError} from '../errors/api-error';
 
 

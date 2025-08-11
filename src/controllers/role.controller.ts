@@ -1,6 +1,6 @@
 import {NextFunction, Request, Response} from 'express';
 import {roleRepository} from '../repositories/role.repository';
-import {UserRole} from '../enums/enum-user-role';
+import {UserRole} from '../enums/user-role.enum';
 
 
 class RoleController {

@@ -6,6 +6,7 @@ import fileUpload from 'express-fileupload';
 import roleRoutes from './routers/role.router';
 import swaggerUi from 'swagger-ui-express';
 import swaggerDocument from '../docs/swagger.json';
+import carRoutes from './routers/car.routes';
 
 
 const app = express();
@@ -28,6 +29,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 // app.use('/users', userRouter);
 // app.use('/auth', authRouter);
 app.use('/roles', roleRoutes);
+app.use('/cars', carRoutes);
 
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -46,4 +48,5 @@ app.listen(port, async ()  => {
     // cronRunner();
     console.log(`Server started on http://${host}:${port}`);
 });
+
 

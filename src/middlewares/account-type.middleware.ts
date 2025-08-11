@@ -1,5 +1,5 @@
 import {Request, Response, NextFunction} from 'express';
-import {AccountType} from '../enums/enum-account-type';
+import {AccountType} from '../enums/account-type.enum';
 import {IUser} from '../interfaces/user-interface';
 import {ApiError} from '../errors/api-error';
 

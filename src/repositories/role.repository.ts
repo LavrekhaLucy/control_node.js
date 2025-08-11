@@ -1,6 +1,6 @@
 import {IRole} from '../interfaces/role-interface';
 import {Role} from '../models/role.model';
-import {UserRole} from '../enums/enum-user-role';
+import {UserRole} from '../enums/user-role.enum';
 import {HydratedDocument} from 'mongoose';
 
 class RoleRepository {

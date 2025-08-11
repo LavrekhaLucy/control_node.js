@@ -1,5 +1,6 @@
 import Joi from 'joi';
-import {UserRole} from '../enums/enum-user-role';
+import {UserRole} from '../enums/user-role.enum';
+import {CurrencyEnum} from '../enums/currency.enum';
 
 
 export const userIdSchema = Joi.object({
@@ -76,6 +77,15 @@ export const  changePasswordSchema = Joi.object({
         .messages({
             'string.pattern.base': 'Password must be at least 8 characters long and contain both letters and numbers',
         }),
+});
+
+ export const createSchema = Joi.object({
+    title: Joi.string().required(),
+    description: Joi.string().allow('', null),
+    brand: Joi.string().required(),
+    model: Joi.string().required(),
+    currency: Joi.string().valid(...Object.values(CurrencyEnum)).required(),
+    price: Joi.number().positive().required(),
 });
 
 

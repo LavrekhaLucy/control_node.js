@@ -1,5 +1,5 @@
 import {model, Schema} from 'mongoose';
-import {OrganizationType} from '../enums/enum.organization-type';
+import {OrganizationType} from '../enums/organization-type.enum';
 import {IOrganization} from '../interfaces/organization-interface';
 
 const OrganizationSchema = new Schema({
