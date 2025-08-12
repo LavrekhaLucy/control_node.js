@@ -5,14 +5,14 @@ import {EmailService, emailService} from './email.service';
 import {ApiError} from '../errors/api-error';
 
 
-export class AdService {
+export class CarService {
     constructor(
         private adRepository: AdRepository,
         private emailService: EmailService
     ) {
     }
 
-    async createAd(dto: Partial<IAd>): Promise<IAd> {
+    async createCar(dto: Partial<IAd>): Promise<IAd> {
 
         const textToCheck = `${dto.title} ${dto.description}`;
         const hasProfanity = containsProfanity(textToCheck);
@@ -36,7 +36,7 @@ export class AdService {
         });
     }
 
-    async updateAd(adId: string, updateData: Partial<IAd>): Promise<IAd> {
+    async updateCar(adId: string, updateData: Partial<IAd>): Promise<IAd> {
         const ad = await this.adRepository.findById(adId);
         if (!ad) {
             throw new ApiError(`Ad with ID ${adId} not found.`, 404);
@@ -75,5 +75,5 @@ export class AdService {
     }
 }
 
-export const adService = new AdService(adRepository, emailService);
+export const carService = new CarService(adRepository, emailService);
 

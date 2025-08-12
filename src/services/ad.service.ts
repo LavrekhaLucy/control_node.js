@@ -1,9 +1,9 @@
 import {IAd} from '../interfaces/ad.interface';
 import {adRepository, AdRepository} from '../repositories/ad.repository';
-import {currencyService, CurrencyService} from './currency.service';
 import {HydratedDocument} from 'mongoose';
 import {containsProfanity} from '../utils/check-profanity';
 import {AdStatusEnum} from '../enums/ad-status.enum';
+import {currencyService, CurrencyService} from './currency.service';
 
 export class AdService {
     constructor(
@@ -19,7 +19,7 @@ export class AdService {
         const status = hasBadWords   ? AdStatusEnum.PENDING_EDIT
             : AdStatusEnum.ACTIVE;
 
-        // Перевірка, що ціна і валюта задані
+
         if (!dto.price || !dto.currency) {
             throw new Error('Currency and price are required');
         }
@@ -27,7 +27,7 @@ export class AdService {
         const exchangeRate = await this.currencyService.getRate(dto.currency);
         const priceInUAH = dto.price * exchangeRate;
 
-        // Створюємо тільки один раз
+
         return this.adRepository.create({
             ...dto,
             status,

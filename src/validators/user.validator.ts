@@ -1,6 +1,6 @@
 import Joi from 'joi';
-import {UserRole} from '../enums/user-role.enum';
 import {CurrencyEnum} from '../enums/currency.enum';
+import {RoleEnum} from '../enums/role.enum';
 
 
 export const userIdSchema = Joi.object({
@@ -18,7 +18,7 @@ export const userBodySchema = Joi.object({
         }),
     age: Joi.number().min(0).required(),
     phone: Joi.string().pattern(/^\+?\d{7,15}$/).optional(),
-    roles: Joi.string().valid(...Object.values(UserRole)).default(UserRole.SELLER),
+    roles: Joi.string().valid(...Object.values(RoleEnum)).default(RoleEnum.SELLER),
     isVerified: Joi.boolean().default(false),
     isDeleted: Joi.boolean().default(false),
 });
@@ -34,7 +34,7 @@ export const updateUserSchema = Joi.object({
         }),
     age: Joi.number().integer().min(0).optional(),
     phone: Joi.string().pattern(/^\+?\d{7,15}$/).optional(),
-    roles: Joi.string().valid(...Object.values(UserRole)).optional(),
+    roles: Joi.string().valid(...Object.values(RoleEnum)).optional(),
     isVerified: Joi.boolean().optional(),
     isDeleted: Joi.boolean().optional(),
 }).min(1);

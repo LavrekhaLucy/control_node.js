@@ -1,20 +1,69 @@
+// import { Request, Response, NextFunction } from 'express';
+// import {ApiError} from '../errors/api-error';
+// import {RoleEnum} from "../enums/role.enum";
+
+
+//
+// class RoleMiddleware {
+//     public checkRole(...allowedRoles: RoleEnum[]) {
+//         return (req: Request, res: Response, next: NextFunction) => {
+//             try {
+//                 const user = req.user;
+//
+//                 if (!user) {
+//                     throw new ApiError('Unauthorized', 401);
+//                 }
+//
+//                 if (!allowedRoles.includes(user.role)) {
+//                     throw new ApiError('Forbidden: insufficient permissions', 403);
+//                 }
+//
+//                 next();
+//             } catch (e) {
+//                 next(e);
+//             }
+//         };
+//     }
+//
+//     public isAdmin() {
+//         return (req: Request, res: Response, next: NextFunction) => {
+//             try {
+//                 const user = req.user;
+//
+//                 if (!user) {
+//                     throw new ApiError('Unauthorized', 401);
+//                 }
+//
+//                 if (user.role !== UserRole.ADMIN) {
+//                     throw new ApiError('Access denied. Admins only.', 403);
+//                 }
+//
+//                 next();
+//             } catch (e) {
+//                 next(e);
+//             }
+//         };
+//     }
+// }
+//
+// export const roleMiddleware = new RoleMiddleware();
+
 import { Request, Response, NextFunction } from 'express';
-import {UserRole} from '../enums/user-role.enum';
-import {ApiError} from '../errors/api-error';
+import { ApiError } from '../errors/api-error';
+import { RoleEnum } from '../enums/role.enum';
+import { ITokenPayload } from '../interfaces/token.interface';
 
-
-
-class RoleMiddleware {
-    public checkRole(...allowedRoles: UserRole[]) {
+ class RoleMiddleware {
+    public checkRole(...allowedRoles: RoleEnum[]) {
         return (req: Request, res: Response, next: NextFunction) => {
             try {
-                const user = req.user;
+                const payload = res.locals.jwtPayload as ITokenPayload | undefined;
 
-                if (!user) {
+                if (!payload) {
                     throw new ApiError('Unauthorized', 401);
                 }
 
-                if (!allowedRoles.includes(user.role)) {
+                if (!allowedRoles.includes(payload.role)) {
                     throw new ApiError('Forbidden: insufficient permissions', 403);
                 }
 
@@ -26,25 +75,18 @@ class RoleMiddleware {
     }
 
     public isAdmin() {
-        return (req: Request, res: Response, next: NextFunction) => {
-            try {
-                const user = req.user;
+        return this.checkRole(RoleEnum.ADMIN);
+    }
 
-                if (!user) {
-                    throw new ApiError('Unauthorized', 401);
-                }
+    public isManager() {
+        return this.checkRole(RoleEnum.MANAGER);
+    }
 
-                if (user.role !== UserRole.ADMIN) {
-                    throw new ApiError('Access denied. Admins only.', 403);
-                }
-
-                next();
-            } catch (e) {
-                next(e);
-            }
-        };
+    public isSeller() {
+        return this.checkRole(RoleEnum.SELLER);
     }
 }
 
 export const roleMiddleware = new RoleMiddleware();
+
 

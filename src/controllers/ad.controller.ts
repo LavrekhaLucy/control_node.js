@@ -8,7 +8,7 @@ import {ProfanityRequest} from '../interfaces/profanity-request.interface';
 export class AdController {
     constructor(private adService: AdService) {}
 
-    createAd = async (req: ProfanityRequest, res: Response, next:NextFunction) => {
+   async createAd (req: ProfanityRequest, res: Response, next:NextFunction)  {
         try {
 
             const status = req.hasProfanity ? 'pending_edit' : 'active';
@@ -19,17 +19,8 @@ export class AdController {
         }
     };
 
-    // async createAd(req, res, next) {
-    //     try {
-    //
-    //         const ad = await adService.createAd({ ...req.body, status });
-    //         res.status(201).json(ad);
-    //     } catch (err) {
-    //         next(err);
-    //     }
-    // }
 
-    getAd = async (req: Request, res: Response, next: NextFunction) => {
+    async  getAd (req: Request, res: Response, next: NextFunction)  {
         try{
             const result = await this.adService.getAd(req.params.id);
             if (!result)
@@ -41,7 +32,7 @@ export class AdController {
 
     };
 
-    getAllAds = async ( req:Request, res: Response, next: NextFunction) => {
+    async getAllAds  ( req:Request, res: Response, next: NextFunction)  {
         try{
         const result = await this.adService.getAllAds();
         res.json(result);

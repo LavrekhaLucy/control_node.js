@@ -1,11 +1,12 @@
 import { Request, Response, NextFunction } from 'express';
-import { carService } from '../services/car.service';
+import {carService} from '../services/car.service';
+
 
 class CarController {
     public async create(req: Request, res: Response, next: NextFunction) {
         try {
             const user = req.user!;
-            const car = await carService.createAd(user._id.toString(), req.body);
+            const car = await carService.createCar(user._id.toString());
             res.status(201).json(car);
         } catch (e) {
             next(e);
@@ -14,7 +15,7 @@ class CarController {
     public async update(req: Request, res: Response, next: NextFunction) {
         try {
             const user = req.user!;
-            const updated = await carService.editAd(req.params.id, user._id.toString(), req.body);
+            const updated = await carService.updateCar(req.params.id, user._id.toString());
             res.json(updated);
         } catch (e) {
             next(e);

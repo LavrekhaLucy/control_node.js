@@ -1,6 +1,7 @@
 import {NextFunction, Request, Response} from 'express';
 import {roleRepository} from '../repositories/role.repository';
-import {UserRole} from '../enums/user-role.enum';
+import {RoleEnum} from '../enums/role.enum';
+
 
 
 class RoleController {
@@ -54,7 +55,7 @@ class RoleController {
 
     async getRoleByName(req: Request, res: Response, next: NextFunction) {
         try {
-            const name = req.params.name as UserRole;
+            const name = req.params.name as RoleEnum;
             const role = await roleRepository.getByName(name);
             res.json(role);
         } catch (e) {
