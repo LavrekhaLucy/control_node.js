@@ -13,6 +13,7 @@
 // import {tokenRepository} from "../repositories/token.repository";
 // import {actionTokenRepository} from "../repositories/action-token.repository";
 // import {oldPasswordRepository} from "../repositories/old-password.repository";
+// import {ObjectId} from "mongoose";
 //
 //
 // class AuthService {
@@ -23,7 +24,7 @@
 //         console.log('Created user:', user);
 //
 //         const tokens = tokenService.generateTokens({
-//             userId: user._id.toString(),
+//             userId: user._id,
 //             roles: user.roles,
 //             name: user.name,
 //             email: user.email,
@@ -35,7 +36,7 @@
 //
 //         const verificationToken = tokenService.generateActionTokens(
 //             {
-//                 userId: user._id.toString(),
+//                 userId: user._id,
 //                 roles: user.roles,
 //                 email: user.email,
 //                 name: user.name,
@@ -44,7 +45,7 @@
 //         );
 //
 //         await actionTokenRepository.create({
-//             _userId: user._id.toString(),
+//             _userId: user._id,
 //             token: verificationToken,
 //             type: ActionTokenTypeEnum.VERIFY_EMAIL
 //         });
@@ -62,7 +63,7 @@
 //     }
 //
 //     public async signIn(dto: ISignIn,): Promise<{ user: IUser; tokens: ITokenPair }> {
-//         const user = await userRepository.getByEmail(dto.email);
+//         const user = await userRepository.findByEmail(dto.email);
 //         if (!user) {
 //             throw new ApiError('User not found', 404);
 //         }
@@ -76,7 +77,7 @@
 //         }
 //
 //         const tokens = tokenService.generateTokens({
-//             userId: user._id.toString(),
+//             userId: user._id,
 //             roles: user.roles,
 //             name:user.name,
 //             email:user.email,
@@ -84,41 +85,6 @@
 //         await tokenRepository.create({ ...tokens, _userId: user._id });
 //         return { user, tokens };
 //     }
-//
-//
-//     // public async signIn(dto: ISignIn): Promise<{ user: IUserResponse; tokens: ITokenPair }> { // Змінено тип повернення на IUserResponse
-//     //     const user = await userRepository.getByEmail(dto.email);
-//     //     if (!user) {
-//     //         throw new ApiError('User not found', 404);
-//     //     }
-//     //
-//     //     const isPasswordCorrect = await passwordService.comparePassword(
-//     //         dto.password,
-//     //         user.password,
-//     //     );
-//     //     if (!isPasswordCorrect) {
-//     //         throw new ApiError('Invalid credentials', 401);
-//     //     }
-//     //
-//     //     const tokens = tokenService.generateTokens({
-//     //         userId: user._id.toString(), // 👈 Виправлено: перетворення ObjectId на рядок
-//     //         roles: user.roles,           // 👈 Виправлено: role -> roles
-//     //         name: user.name,
-//     //         email: user.email,
-//     //     });
-//     //     await tokenRepository.create({...tokens, _userId: user._id});
-//     //     return { user, tokens };
-//     // }
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //     public async refreshToken(refreshToken: string): Promise<ITokenPair> {
 //
@@ -134,7 +100,7 @@
 //
 //         const newTokens = tokenService.generateTokens({
 //             userId: user._id,
-//             role: user.role,
+//             roles: user.roles,
 //             name:user.name,
 //             email:user.email,
 //         });
@@ -152,14 +118,13 @@
 //         await tokenRepository.deleteByParams({ refreshToken });
 //     }
 //
-//     public async logoutAll(userId: string): Promise<void> {
+//     public async logoutAll(userId:ObjectId): Promise<void> {
 //         const result = await tokenRepository.deleteByParams({ _userId: userId });
 //         console.log(`Deleted ${result} tokens for user ${userId}`);
 //
 //     }
-//
 //     public async forgotPasswordSendEmail(dto: IResetPasswordSend): Promise<void> {
-//         const user = await userRepository.getByEmail(dto.email);
+//         const user = await userRepository.findByEmail(dto.email);
 //         if (!user) {
 //             throw new ApiError('User not found', 404);
 //         }
@@ -167,7 +132,7 @@
 //         const token = tokenService.generateActionTokens(
 //             {
 //                 userId: user._id,
-//                 role: user.role,
+//                 roles: user.roles,
 //                 email: user.email,
 //                 name: user.name,
 //             },

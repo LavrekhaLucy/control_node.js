@@ -6,7 +6,7 @@ class UserRepository {
     public async getList(query: IUserListQuery): Promise<[IUser[], number]> {
         const filterObj: FilterQuery<IUser> = {'isVerified': false};
         if (query.search) {
-            filterObj.name = { $regex: query.search, $options: 'i' };
+            filterObj.name = {$regex: query.search, $options: 'i'};
             // filterObj.$or = [
             //   { name: { $regex: query.search, $options: "i" } },
             //   { email: { $regex: query.search, $options: "i" } },
@@ -29,29 +29,29 @@ class UserRepository {
         return User.create(dto);
     }
 
-    public async findById(id: string):Promise<HydratedDocument<IUser> | null> {
+    public async findById(id: string): Promise<HydratedDocument<IUser> | null> {
         return User.findById(id).populate('roles');
     }
 
-    public async findByEmail(email: string):Promise<HydratedDocument<IUser> | null> {
-        return User.findOne({ email }).populate('roles');
+    public async findByEmail(email: string): Promise<HydratedDocument<IUser> | null> {
+        return User.findOne({email}).populate('roles').select('+password');
     }
 
-    public async findAll(): Promise<HydratedDocument<IUser>[]>{
+    public async findAll(): Promise<HydratedDocument<IUser>[]> {
         return User.find().populate('roles');
     }
 
-    public async update(id: string, dto: Partial<IUser>):Promise<HydratedDocument<IUser>> {
-        return User.findByIdAndUpdate(id, dto, { new: true });
+    public async update(id: string, dto: Partial<IUser>): Promise<HydratedDocument<IUser>> {
+        return User.findByIdAndUpdate(id, dto, {new: true});
     }
 
-    public async delete(id: string):Promise<void> {
+    public async delete(id: string): Promise<void> {
         await User.findByIdAndDelete(id);
     }
-
-    // async getByEmail(email: string) {
-    //
-    // }
 }
+    // public async getByEmail(email: string): Promise<IUser | null> {
+    //     return await User.findOne({ email }).select('+password');
+    // }
+
 
 export const userRepository = new UserRepository();

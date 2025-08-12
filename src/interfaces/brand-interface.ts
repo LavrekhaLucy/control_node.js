@@ -1,5 +1,7 @@
+import {ObjectId} from "mongoose";
+
 export interface IBrand {
-    _id?: string;
+    _id?: ObjectId;
     name: string;
     createdAt?: Date;
 }

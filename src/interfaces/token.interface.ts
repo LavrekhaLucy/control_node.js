@@ -12,7 +12,7 @@ export interface IToken {
 }
 
 export interface ITokenPayload {
-    userId: string;
+    userId: ObjectId;
     roles: ObjectId[] | IRole[];
     email?: string;
     name?: string;
