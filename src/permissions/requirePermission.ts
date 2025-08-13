@@ -4,7 +4,7 @@ import { hasPermission } from '../services/permission.service';
 
 export const requirePermission = (permissionCode: string) => {
     return async (req: Request, res: Response, next: NextFunction) => {
-        const user = req.user; // припускаємо, що user вже є в req (наприклад, після jwt перевірки)
+        const user = req.user;
 
         if (!user || !user._id) {
             return res.status(401).json({ message: 'Unauthorized' });

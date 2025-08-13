@@ -18,7 +18,7 @@ router.put('/:id',
 
 
 router.post(
-    '/cars',
+    '/cars/create',
     authMiddleware.checkAccessToken,
     roleMiddleware.isSeller,roleMiddleware.isAdmin,
     carController.create

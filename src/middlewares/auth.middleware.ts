@@ -22,6 +22,7 @@ class AuthMiddleware {
             if (!pair) {
                 throw new ApiError('Token is not valid', 401);
             }
+
             res.locals.jwtPayload = payload;
             next();
         } catch (e) {
@@ -41,6 +42,7 @@ class AuthMiddleware {
                 throw new ApiError('Refresh token is invalid or has been revoked', 401);
             }
             const payload = tokenService.verifyToken(refreshToken, TokenTypeEnum.REFRESH);
+
             res.locals.jwtPayload = payload;
             next();
         } catch (e) {
@@ -61,6 +63,7 @@ class AuthMiddleware {
                 if (!tokenEntity) {
                     throw new ApiError('Token is not valid', 401);
                 }
+
                 res.locals.jwtPayload = payload;
                 next();
             } catch (e) {

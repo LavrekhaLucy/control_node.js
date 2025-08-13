@@ -23,9 +23,11 @@ app.use(fileUpload());
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use((req: Request, res: Response, next: NextFunction) => {
+
     console.log(`${req.method} ${req.path}`);
     next();
 });
+
 
 // app.use('/users', userRouter);
 // app.use('/auth', authRouter);
@@ -51,20 +53,3 @@ app.listen(port, async ()  => {
 });
 
 
-// const start = async () => {
-//     try {
-//         await mongoose.connect(mongo);
-//         console.log('Connected to MongoDB');
-//
-//         cronRunner();
-//
-//         app.listen(port, host, () => {
-//             console.log(`Server started on http://${host}:${port}`);
-//         });
-//     } catch (err) {
-//         console.error('Failed to start server or connect to MongoDB:', err);
-//         process.exit(1);
-//     }
-// };
-//
-// start();
