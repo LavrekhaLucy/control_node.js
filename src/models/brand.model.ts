@@ -8,7 +8,7 @@
 // export const Brand = model<IBrand>('Brand', BrandSchema);
 
 import mongoose, { Schema,  } from 'mongoose';
-import {IBrand} from "../interfaces/brand-interface";
+import {IBrand} from '../interfaces/brand-interface';
 
 // export interface IBrand extends Document {
 //     name: string;

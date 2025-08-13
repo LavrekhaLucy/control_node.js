@@ -2,7 +2,7 @@
 import { IBrand } from '../interfaces/brand-interface';
 import { HydratedDocument } from 'mongoose';
 import {ICar} from '../interfaces/car-interface';
-import {BrandModel} from "../models/brand.model";
+import {BrandModel} from '../models/brand.model';
 
 class BrandRepository {
     public async getAll(): Promise<HydratedDocument<IBrand>[]> {

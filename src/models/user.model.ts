@@ -1,7 +1,7 @@
 import {model, Schema} from 'mongoose';
 import {AccountType} from '../enums/account-type.enum';
 import {IUser} from '../interfaces/user-interface';
-import {RoleEnum} from "../enums/role.enum";
+import {RoleEnum} from '../enums/role.enum';
 
 
 

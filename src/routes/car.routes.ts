@@ -2,7 +2,7 @@ import {Router} from 'express';
 import {authMiddleware} from '../middlewares/auth.middleware';
 import {carController} from '../controllers/car.controller';
 import {roleMiddleware} from '../middlewares/role.middleware';
-import {RoleEnum} from "../enums/role.enum";
+import {RoleEnum} from '../enums/role.enum';
 
 const router = Router();
 

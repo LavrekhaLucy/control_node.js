@@ -8,9 +8,9 @@ import swaggerUi from 'swagger-ui-express';
 import swaggerDocument from '../docs/swagger.json';
 
 import {cronRunner} from './cron';
-import {authRoutes} from "./routes/auth.routes";
-import {carRoutes} from "./routes/car.routes";
-import {roleRoutes} from "./routes/role.routes";
+import {authRoutes} from './routes/auth.routes';
+import {carRoutes} from './routes/car.routes';
+import {roleRoutes} from './routes/role.routes';
 
 
 const app = express();
