@@ -7,7 +7,7 @@
 //
 // export const Brand = model<IBrand>('Brand', BrandSchema);
 
-import mongoose, { Schema, Document } from "mongoose";
+import mongoose, { Schema, Document } from 'mongoose';
 
 export interface IBrand extends Document {
     name: string;
@@ -19,4 +19,4 @@ const BrandSchema = new Schema<IBrand>({
     models: { type: [String], default: [] }
 });
 
-export const BrandModel = mongoose.model<IBrand>("Brand", BrandSchema);
+export const BrandModel = mongoose.model<IBrand>('Brand', BrandSchema);

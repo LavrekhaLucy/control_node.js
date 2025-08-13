@@ -1,6 +1,6 @@
 // src/controllers/brand.controller.ts
-import { Request, Response, NextFunction } from "express";
-import { brandRepository } from "../repositories/brand.repository";
+import { Request, Response, NextFunction } from 'express';
+import { brandRepository } from '../repositories/brand.repository';
 
 class BrandController {
     async getAll(req: Request, res: Response, next: NextFunction) {
@@ -15,10 +15,10 @@ class BrandController {
     async requestNewBrand(req: Request, res: Response, next: NextFunction) {
         try {
             const { name } = req.body;
-            if (!name) return res.status(400).json({ message: "Brand name is required" });
+            if (!name) return res.status(400).json({ message: 'Brand name is required' });
 
             await brandRepository.create(name);
-            res.status(201).json({ message: "Brand added successfully" });
+            res.status(201).json({ message: 'Brand added successfully' });
         } catch (e) {
             next(e);
         }

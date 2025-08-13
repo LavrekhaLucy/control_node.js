@@ -1,12 +1,12 @@
 // src/routes/brand.router.ts
-import { Router } from "express";
-import { brandController } from "../controllers/brand.controller";
+import { Router } from 'express';
+import { brandController } from '../controllers/brand.controller';
 
 export const brandRouter = Router();
 
-brandRouter.get("/",
+brandRouter.get('/',
     brandController.getAll.bind(brandController));
 
 
-brandRouter.post("/request",
+brandRouter.post('/request',
     brandController.requestNewBrand.bind(brandController));
