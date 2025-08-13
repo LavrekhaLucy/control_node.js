@@ -8,12 +8,12 @@ import {emailService} from './email.service';
 import {EmailTypeEnum} from '../enums/email-type.enum';
 import {ActionTokenTypeEnum} from '../enums/action-token-type.enum';
 import {configs} from '../configs/config';
-import {IChangePassword, IResetPasswordSend, IResetPasswordSet, ISignIn, IUser} from "../interfaces/user-interface";
-import {userRepository} from "../repositories/user.repository";
-import {tokenRepository} from "../repositories/token.repository";
-import {actionTokenRepository} from "../repositories/action-token.repository";
-import {oldPasswordRepository} from "../repositories/old-password.repository";
-import {Types} from "mongoose";
+import {IChangePassword, IResetPasswordSend, IResetPasswordSet, ISignIn, IUser} from '../interfaces/user-interface';
+import {userRepository} from '../repositories/user.repository';
+import {tokenRepository} from '../repositories/token.repository';
+import {actionTokenRepository} from '../repositories/action-token.repository';
+import {oldPasswordRepository} from '../repositories/old-password.repository';
+import {Types} from 'mongoose';
 
 
 class AuthService {

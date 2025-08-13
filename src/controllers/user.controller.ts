@@ -1,6 +1,6 @@
 import {NextFunction, Request, Response} from 'express';
 import {userRepository} from '../repositories/user.repository';
-import {Types} from "mongoose";
+import {Types} from 'mongoose';
 
 
 class UserController {

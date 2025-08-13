@@ -1,7 +1,7 @@
 import { User } from '../models/user.model';
 import {IUser, IUserListQuery} from '../interfaces/user-interface';
 import {FilterQuery, HydratedDocument} from 'mongoose';
-import {ObjectId} from "../types/common";
+import {ObjectId} from '../types/common';
 
 class UserRepository {
     public async getList(query: IUserListQuery): Promise<[IUser[], number]> {

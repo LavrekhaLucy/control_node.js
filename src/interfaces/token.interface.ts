@@ -1,4 +1,4 @@
-import {ObjectId} from "../types/common";
+import {ObjectId} from '../types/common';
 import {IRole} from './role-interface';
 
 

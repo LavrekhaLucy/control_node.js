@@ -1,7 +1,7 @@
 import {IOldPassword} from '../interfaces/old-password.interface';
 import {FilterQuery} from 'mongoose';
 import {OldPassword} from '../models/old-password.model';
-import {ObjectId} from "../types/common";
+import {ObjectId} from '../types/common';
 
 class OldPasswordRepository {
     public async create(dto:IOldPassword): Promise<IOldPassword> {

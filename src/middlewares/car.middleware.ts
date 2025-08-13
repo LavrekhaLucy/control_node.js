@@ -3,7 +3,7 @@ import {userRepository} from '../repositories/user.repository';
 import {ApiError} from '../errors/api-error';
 import {AccountType} from '../enums/account-type.enum';
 import {carRepository} from '../repositories/car.repository';
-import {Types} from "mongoose";
+import {Types} from 'mongoose';
 
 
 interface IRequestWithBody extends Request {

@@ -3,7 +3,7 @@ import {AccountType} from '../enums/account-type.enum';
 import {IRole} from './role-interface';
 import {OrderEnum} from '../enums/order.enum';
 import {UserListOrderByEnum} from '../enums/user-list-order-by.enum';
-import {ObjectId} from "../types/common";
+import {ObjectId} from '../types/common';
 
 
 
