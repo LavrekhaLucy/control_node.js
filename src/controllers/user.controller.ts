@@ -1,5 +1,6 @@
 import {NextFunction, Request, Response} from 'express';
 import {userRepository} from '../repositories/user.repository';
+import {Types} from "mongoose";
 
 
 class UserController {
@@ -24,7 +25,8 @@ class UserController {
 
     async getUserById(req: Request, res: Response, next: NextFunction) {
         try {
-            const user = await userRepository.findById(req.params.id);
+            const userId = new Types.ObjectId(req.params.id);
+            const user = await userRepository.findById(userId);
             if (!user) return res.status(404).json({message: 'User not found'});
             res.json(user);
         } catch (e) {
@@ -35,7 +37,8 @@ class UserController {
 
     async updateUser(req: Request, res: Response, next: NextFunction) {
         try {
-            const user = await userRepository.update(req.params.id, req.body);
+            const userId = new Types.ObjectId(req.params.id);
+            const user = await userRepository.update(userId, req.body);
             res.json(user);
         } catch (e) {
             next(e);
@@ -45,7 +48,8 @@ class UserController {
 
     async deleteUser(req: Request, res: Response, next: NextFunction) {
         try {
-            await userRepository.delete(req.params.id);
+            const userId = new Types.ObjectId(req.params.id);
+            await userRepository.delete(userId);
             res.status(204).send();
 
         } catch (e) {

@@ -1,13 +1,14 @@
 import {IOldPassword} from '../interfaces/old-password.interface';
 import {FilterQuery} from 'mongoose';
 import {OldPassword} from '../models/old-password.model';
+import {ObjectId} from "../types/common";
 
 class OldPasswordRepository {
     public async create(dto:IOldPassword): Promise<IOldPassword> {
         return await OldPassword.create(dto);
     }
 
-    public async findByParams(userId:string): Promise<IOldPassword[]> {
+    public async findByParams(userId:ObjectId): Promise<IOldPassword[]> {
         return await OldPassword.find({userId: userId});
     }
 

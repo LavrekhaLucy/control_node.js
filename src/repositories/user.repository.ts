@@ -1,6 +1,7 @@
 import { User } from '../models/user.model';
 import {IUser, IUserListQuery} from '../interfaces/user-interface';
 import {FilterQuery, HydratedDocument} from 'mongoose';
+import {ObjectId} from "../types/common";
 
 class UserRepository {
     public async getList(query: IUserListQuery): Promise<[IUser[], number]> {
@@ -29,7 +30,7 @@ class UserRepository {
         return User.create(dto);
     }
 
-    public async findById(id: string): Promise<HydratedDocument<IUser> | null> {
+    public async findById(id: ObjectId): Promise<HydratedDocument<IUser> | null> {
         return User.findById(id).populate('roles');
     }
 
@@ -41,17 +42,14 @@ class UserRepository {
         return User.find().populate('roles');
     }
 
-    public async update(id: string, dto: Partial<IUser>): Promise<HydratedDocument<IUser>> {
+    public async update(id: ObjectId, dto: Partial<IUser>): Promise<HydratedDocument<IUser>> {
         return User.findByIdAndUpdate(id, dto, {new: true});
     }
 
-    public async delete(id: string): Promise<void> {
+    public async delete(id: ObjectId): Promise<void> {
         await User.findByIdAndDelete(id);
     }
 }
-    // public async getByEmail(email: string): Promise<IUser | null> {
-    //     return await User.findOne({ email }).select('+password');
-    // }
 
 
 export const userRepository = new UserRepository();

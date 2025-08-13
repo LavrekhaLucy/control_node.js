@@ -1,13 +1,13 @@
 import {model, Schema} from 'mongoose';
 import {RoleScope} from '../enums/role-scope.enum';
 import {IRole} from '../interfaces/role-interface';
-import {UserRole} from '../enums/role.enum';
+import {RoleEnum} from "../enums/role.enum";
 
 
 const RoleSchema = new Schema({
         name: {
                 type: String,
-                enum: Object.values(UserRole),
+                enum: Object.values(RoleEnum),
                 required: true, unique: true,
         },
         organizationId: {

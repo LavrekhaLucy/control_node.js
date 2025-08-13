@@ -1,7 +1,7 @@
 import {IRole} from '../interfaces/role-interface';
 import {Role} from '../models/role.model';
-import {UserRole} from '../enums/role.enum';
 import {HydratedDocument} from 'mongoose';
+import {RoleEnum} from "../enums/role.enum";
 
 class RoleRepository {
     public async getAll():Promise<HydratedDocument<IRole>[]> {
@@ -24,7 +24,7 @@ class RoleRepository {
         await Role.findByIdAndDelete(id);
     }
 
-    public async getByName(name: UserRole):Promise<HydratedDocument<IRole> | null> {
+    public async getByName(name: RoleEnum):Promise<HydratedDocument<IRole> | null> {
         return Role.findOne({ name }).populate('permissions');
     }
 }

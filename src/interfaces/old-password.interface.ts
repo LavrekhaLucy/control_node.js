@@ -1,9 +1,9 @@
-import {ObjectId} from 'mongoose';
+import {ObjectId} from "../types/common";
 
 export interface IOldPassword {
     _id?: ObjectId;
+    _userId: ObjectId;
     password: string;
-    _userId: string;
     createdAt?: Date;
     updatedAt?: Date;
 }

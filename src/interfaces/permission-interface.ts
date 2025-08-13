@@ -1,4 +1,4 @@
-import {ObjectId} from 'mongoose';
+import { ObjectId } from '../types/common';
 
 export interface IPermission{
 

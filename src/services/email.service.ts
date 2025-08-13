@@ -6,7 +6,7 @@ import {emailConstants} from '../constants/email.constant';
 import {EmailTypeEnum} from '../enums/email-type.enum';
 import {EmailTypeToPayload} from '../types/email-type-to-payload.type';
 
-class EmailService {
+export class EmailService {
     private transporter: Transporter;
 
     constructor() {

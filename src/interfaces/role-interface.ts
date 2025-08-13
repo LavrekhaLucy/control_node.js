@@ -1,5 +1,5 @@
 import {IPermission} from './permission-interface';
-import {ObjectId} from 'mongoose';
+import { ObjectId } from '../types/common';
 
 
 export interface IRole {

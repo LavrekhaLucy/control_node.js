@@ -1,18 +1,18 @@
-import {ObjectId} from 'mongoose';
+import {ObjectId} from "../types/common";
 import {IRole} from './role-interface';
 
 
 export interface IToken {
     _id?: ObjectId;
+    _userId: ObjectId;
     accessToken: string;
     refreshToken: string;
-    _userId: ObjectId;
     createdAt: Date;
     updatedAt: Date;
 }
 
 export interface ITokenPayload {
-    userId: ObjectId;
+    userId: string;
     roles: ObjectId[] | IRole[];
     email?: string;
     name?: string;

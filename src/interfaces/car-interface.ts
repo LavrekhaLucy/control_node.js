@@ -1,4 +1,4 @@
-import {ObjectId} from 'mongoose';
+import { ObjectId } from '../types/common';
 import {CurrencyEnum} from '../enums/currency.enum';
 import {AdStatusEnum} from '../enums/ad-status.enum';
 
