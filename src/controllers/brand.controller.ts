@@ -1,4 +1,4 @@
-// src/controllers/brand.controller.ts
+
 import { Request, Response, NextFunction } from 'express';
 import { brandRepository } from '../repositories/brand.repository';
 

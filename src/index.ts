@@ -3,11 +3,14 @@ import {ApiError} from './errors/api-error';
 import {configs} from './configs/config';
 import * as mongoose from 'mongoose';
 import fileUpload from 'express-fileupload';
-import roleRoutes from './routes/role.routes';
+
 import swaggerUi from 'swagger-ui-express';
 import swaggerDocument from '../docs/swagger.json';
-import carRoutes from './routes/car.routes';
+
 import {cronRunner} from './cron';
+import {authRoutes} from "./routes/auth.routes";
+import {carRoutes} from "./routes/car.routes";
+import {roleRoutes} from "./routes/role.routes";
 
 
 const app = express();
@@ -30,7 +33,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 
 
 // app.use('/users', userRouter);
-// app.use('/auth', authRouter);
+app.use('/auth', authRoutes);
 app.use('/roles', roleRoutes);
 app.use('/cars', carRoutes);
 

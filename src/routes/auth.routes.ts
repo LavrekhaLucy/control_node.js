@@ -66,5 +66,5 @@ router.delete('/user/:id',
     roleMiddleware.isAdmin(),
     userController.deleteUser);
 
-export default router;
+export const authRoutes = router;
 

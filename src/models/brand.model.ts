@@ -7,12 +7,13 @@
 //
 // export const Brand = model<IBrand>('Brand', BrandSchema);
 
-import mongoose, { Schema, Document } from 'mongoose';
+import mongoose, { Schema,  } from 'mongoose';
+import {IBrand} from "../interfaces/brand-interface";
 
-export interface IBrand extends Document {
-    name: string;
-    models: string[];
-}
+// export interface IBrand extends Document {
+//     name: string;
+//     models: string[];
+// }
 
 const BrandSchema = new Schema<IBrand>({
     name: { type: String, required: true },

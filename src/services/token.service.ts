@@ -23,6 +23,7 @@ class TokenService {
         return { accessToken, refreshToken };
     }
 
+
     // public verifyToken(token: string, type: TokenTypeEnum | ActionTokenTypeEnum): ITokenPayload {
     //     try {
     //         let secret: string;
@@ -59,6 +60,8 @@ class TokenService {
     //         throw new ApiError('Invalid token', 401);
     //     }
     // }
+
+
     public verifyToken(token: string, type: TokenTypeEnum | ActionTokenTypeEnum): ITokenPayload {
         try {
             let secret: Secret;

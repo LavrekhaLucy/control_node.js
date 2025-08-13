@@ -21,4 +21,4 @@ router.delete('/:id', roleController.deleteRole);
 // GET /roles/name/:name — знайти роль за назвою (ENUM)
 // router.get('/name/:name', roleController.getRoleByName);
 
-export default router;
+export const roleRoutes = router;

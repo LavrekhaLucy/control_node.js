@@ -22,7 +22,7 @@ class AuthMiddleware {
             if (!pair) {
                 throw new ApiError('Token is not valid', 401);
             }
-
+            console.log(payload);
             res.locals.jwtPayload = payload;
             next();
         } catch (e) {

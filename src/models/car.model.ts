@@ -8,7 +8,7 @@ const CarSchema = new Schema<ICar>({
     title: { type: String, required: true },
     description: { type: String },
     brand: { type: String, required: true },
-    model: { type: String, required: true },
+    model:[ { type: String, required: true }],
     sellerId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
     currency: { type: String, enum: Object.values(CurrencyEnum), required: true },
     price: { type: Number, required: true },

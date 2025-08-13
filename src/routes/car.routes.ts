@@ -2,13 +2,25 @@ import {Router} from 'express';
 import {authMiddleware} from '../middlewares/auth.middleware';
 import {carController} from '../controllers/car.controller';
 import {roleMiddleware} from '../middlewares/role.middleware';
+import {RoleEnum} from "../enums/role.enum";
 
 const router = Router();
 
-router.post('/',
-    authMiddleware.checkAccessToken,
-    carController.create);
 
+
+router.post(
+    '/create',
+    authMiddleware.checkAccessToken,
+    roleMiddleware.isSeller(),  // тільки продавці можуть створювати авто
+    carController.create
+);
+
+router.put(
+    '/:id',
+    authMiddleware.checkAccessToken,
+    roleMiddleware.checkRole(RoleEnum.SELLER, RoleEnum.ADMIN), // продавець або адмін можуть редагувати
+    carController.update
+);
 
 
 router.put('/:id',
@@ -17,11 +29,11 @@ router.put('/:id',
     carController.update);
 
 
-router.post(
-    '/cars/create',
-    authMiddleware.checkAccessToken,
-    roleMiddleware.isSeller,roleMiddleware.isAdmin,
-    carController.create
-);
+// router.post(
+//     '/create',
+//     authMiddleware.checkAccessToken,
+//     roleMiddleware.checkRole(RoleEnum.SELLER),
+//     carController.create
+// );
 
-export default router;
+export const carRoutes = router;
