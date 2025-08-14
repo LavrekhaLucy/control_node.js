@@ -39,9 +39,9 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 app.use('/users', adminRouter);
 app.use('/auth', authRoutes);
 app.use('/cars', carRouter);
-app.use('/', buyerRouter);
-app.use('/', managerRouter);
-app.use('/', sellerRouter);
+app.use('/buyer', buyerRouter);
+app.use('/manager', managerRouter);
+app.use('/seller', sellerRouter);
 
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
