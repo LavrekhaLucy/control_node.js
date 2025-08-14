@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { carService } from '../services/car.service';
-import {CarFilters} from "../interfaces/car-filters.interface";
+import {CarFilters} from '../interfaces/car-filters.interface';
 
 class BuyerController {
     async viewCars(req: Request, res: Response, next: NextFunction) {
