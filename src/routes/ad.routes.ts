@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { adController } from '../controllers/ad.controller';
 import { authMiddleware } from '../middlewares/auth.middleware';
-import {requirePermission} from "../middlewares/require-permission";
+import {requirePermission} from '../middlewares/require-permission';
 
 
 const adRouter = Router();
