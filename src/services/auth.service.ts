@@ -15,86 +15,28 @@ import {oldPasswordRepository} from '../repositories/old-password.repository';
 import {Types} from 'mongoose';
 import {mapRolesToEnum} from '../utils/map-roles-to-enum';
 import {configs} from '../configs/config';
-import {RoleEnum} from '../enums/role.enum';
-import {AccountType} from '../enums/account-type.enum';
-import {Role} from '../models/role.model';
 
 
 class AuthService {
-    // public async signUp(dto: Partial<IUser>): Promise<{ user: IUser; tokens: ITokenPair }> {
-    //
-    //     const password = await passwordService.hashPassword(dto.password);
-    //
-    //     const user = await userRepository.create({...dto, password});
-    //
-    //     console.log('Created user:', user);
-    //     const rolesEnum = await mapRolesToEnum(user.roles);
-    //
-    //     const tokens = tokenService.generateTokens({
-    //         userId: user._id.toString(),
-    //         roles:rolesEnum,
-    //         name: user.name,
-    //         email: user.email,
-    //     });
-    //
-    //     await tokenRepository.create({...tokens, _userId: user._id});
-    //
-    //
-    //     const verificationToken = tokenService.generateActionTokens(
-    //         {
-    //             userId: user._id.toString(),
-    //             roles: rolesEnum,
-    //             email: user.email,
-    //             name: user.name,
-    //         },
-    //         ActionTokenTypeEnum.VERIFY_EMAIL
-    //     );
-    //
-    //     await actionTokenRepository.create({
-    //         _userId: user._id,
-    //         token: verificationToken,
-    //         type: ActionTokenTypeEnum.VERIFY_EMAIL
-    //     });
-    //
-    //     const verificationLink = `${configs.APP_FRONT_URL}/auth/verify-email?token=${verificationToken}`;
-    //
-    //     await emailService.sendMail(
-    //         EmailTypeEnum.VERIFY_EMAIL,
-    //         'lavreha7@gmail.com',
-    //         {
-    //             name: user.name,
-    //             verifyLink: verificationLink,
-    //         });
-    //     return {user, tokens};
-    // }
+    public async signUp(dto: Partial<IUser>): Promise<{ user: IUser; tokens: ITokenPair }> {
 
-    public async signUp(
-        dto: Partial<IUser>,
-        roleName?: RoleEnum,
-        accountType?: AccountType
-    ): Promise<{ user: IUser; tokens: ITokenPair }> {
         const password = await passwordService.hashPassword(dto.password);
 
-        const role = roleName
-            ? await Role.findOne({ name: roleName }).select('_id')
-            : await Role.findOne({ name: RoleEnum.BUYER }).select('_id');
+        const user = await userRepository.create({...dto, password});
 
-        if (!role) throw new Error('Role not found');
-        const user = await userRepository.create({
-            ...dto,
-            password,
-            roles: [role._id],
-            accountType: accountType || AccountType.BASE,
-            isVerified: false
-        });
+        console.log('Created user:', user);
         const rolesEnum = await mapRolesToEnum(user.roles);
+
         const tokens = tokenService.generateTokens({
             userId: user._id.toString(),
-            roles: rolesEnum,
+            roles:rolesEnum,
             name: user.name,
             email: user.email,
         });
-        await tokenRepository.create({ ...tokens, _userId: user._id });
+
+        await tokenRepository.create({...tokens, _userId: user._id});
+
+
         const verificationToken = tokenService.generateActionTokens(
             {
                 userId: user._id.toString(),
@@ -104,22 +46,77 @@ class AuthService {
             },
             ActionTokenTypeEnum.VERIFY_EMAIL
         );
+
         await actionTokenRepository.create({
             _userId: user._id,
             token: verificationToken,
             type: ActionTokenTypeEnum.VERIFY_EMAIL
         });
+
         const verificationLink = `${configs.APP_FRONT_URL}/auth/verify-email?token=${verificationToken}`;
+
         await emailService.sendMail(
             EmailTypeEnum.VERIFY_EMAIL,
-            user.email,
+            'lavreha7@gmail.com',
             {
                 name: user.name,
                 verifyLink: verificationLink,
-            }
-        );
-        return { user, tokens };
+            });
+        return {user, tokens};
     }
+
+    // public async signUp(
+    //     dto: Partial<IUser>,
+    //     roleName?: RoleEnum,
+    //     accountType?: AccountType
+    // ): Promise<{ user: IUser; tokens: ITokenPair }> {
+    //     const password = await passwordService.hashPassword(dto.password);
+    //
+    //     const role = roleName
+    //         ? await Role.findOne({ name: roleName }).select('_id')
+    //         : await Role.findOne({ name: RoleEnum.BUYER }).select('_id');
+    //
+    //     if (!role) throw new Error('Role not found');
+    //     const user = await userRepository.create({
+    //         ...dto,
+    //         password,
+    //         roles: [role._id],
+    //         accountType: accountType || AccountType.BASE,
+    //         isVerified: false
+    //     });
+    //     const rolesEnum = await mapRolesToEnum(user.roles);
+    //     const tokens = tokenService.generateTokens({
+    //         userId: user._id.toString(),
+    //         roles: rolesEnum,
+    //         name: user.name,
+    //         email: user.email,
+    //     });
+    //     await tokenRepository.create({ ...tokens, _userId: user._id });
+    //     const verificationToken = tokenService.generateActionTokens(
+    //         {
+    //             userId: user._id.toString(),
+    //             roles: rolesEnum,
+    //             email: user.email,
+    //             name: user.name,
+    //         },
+    //         ActionTokenTypeEnum.VERIFY_EMAIL
+    //     );
+    //     await actionTokenRepository.create({
+    //         _userId: user._id,
+    //         token: verificationToken,
+    //         type: ActionTokenTypeEnum.VERIFY_EMAIL
+    //     });
+    //     const verificationLink = `${configs.APP_FRONT_URL}/auth/verify-email?token=${verificationToken}`;
+    //     await emailService.sendMail(
+    //         EmailTypeEnum.VERIFY_EMAIL,
+    //         user.email,
+    //         {
+    //             name: user.name,
+    //             verifyLink: verificationLink,
+    //         }
+    //     );
+    //     return { user, tokens };
+    // }
 
     // public async signUp(
     //     dto: Partial<IUser>,

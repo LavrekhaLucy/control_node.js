@@ -4,8 +4,6 @@ import {IChangePassword, IResetPasswordSend, IResetPasswordSet, ISignIn, IUser} 
 import {authService} from '../services/auth.service';
 import {emailService} from '../services/email.service';
 import {EmailTypeEnum} from '../enums/email-type.enum';
-import {RoleEnum} from '../enums/role.enum';
-import {AccountType} from '../enums/account-type.enum';
 
 
 class AuthController {
@@ -23,7 +21,7 @@ class AuthController {
     public async signUpBuyer(req: Request, res: Response, next: NextFunction) {
         try {
             const dto = req.body;
-            const result = await authService.signUp(dto, RoleEnum.BUYER, AccountType.BASE);
+            const result = await authService.signUp(dto, );
             res.status(201).json(result);
         } catch (e) {
             next(e);
@@ -34,7 +32,7 @@ class AuthController {
     public async signUpSeller(req: Request, res: Response, next: NextFunction) {
         try {
             const dto = req.body;
-            const result = await authService.signUp(dto, RoleEnum.SELLER, AccountType.BASE);
+            const result = await authService.signUp(dto, );
             res.status(201).json(result);
         } catch (e) {
             next(e);
