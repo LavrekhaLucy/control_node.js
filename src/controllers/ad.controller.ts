@@ -1,44 +1,36 @@
-import {NextFunction, Request, Response} from 'express';
-import {adService, AdService} from '../services/ad.service';
-import {ApiError} from '../errors/api-error';
-import {ProfanityRequest} from '../interfaces/profanity-request.interface';
+import { Request, Response, NextFunction } from 'express';
+import { adService } from '../services/ad.service';
 
-
-
-export class AdController {
-    constructor(private adService: AdService) {}
-
-   async createAd (req: ProfanityRequest, res: Response, next:NextFunction)  {
+class AdController {
+    async createAd(req: Request, res: Response, next: NextFunction) {
         try {
-
-            const status = req.hasProfanity ? 'pending_edit' : 'active';
-            const result = await this.adService.createAd({...req.body, status});
-            res.status(201).json(result);
+            const user = req.user!;
+            const adData = { ...req.body, userId: user._id }; // додаємо userId в DTO
+            const ad = await adService.createAd(adData); // один аргумент
+            res.status(201).json(ad);
         } catch (e) {
             next(e);
         }
-    };
-
-
-    async  getAd (req: Request, res: Response, next: NextFunction)  {
-        try{
-            const result = await this.adService.getAd(req.params.id);
-            if (!result)
-                throw new ApiError( 'No ads found.',404 );
-            res.json(result);
-        }catch (e) {
+    }
+    async updateAd(req: Request, res: Response, next: NextFunction) {
+        try {
+            const { adId } = req.params;
+            const updated = await adService.updateAd(adId, req.body);
+            res.json(updated);
+        } catch (e) {
             next(e);
         }
-
-    };
-
-    async getAllAds  ( req:Request, res: Response, next: NextFunction)  {
-        try{
-        const result = await this.adService.getAllAds();
-        res.json(result);
-    } catch (e) {
-        next(e);
     }
-    };
+
+    async deleteAd(req: Request, res: Response, next: NextFunction) {
+        try {
+            const { adId } = req.params;
+            await adService.deleteAd(adId);
+            res.json({ message: `Ad ${adId} deleted` });
+        } catch (e) {
+            next(e);
+        }
+    }
 }
-export  const  adController = new AdController(adService);
+
+export const adController = new AdController();

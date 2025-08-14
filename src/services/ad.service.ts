@@ -67,7 +67,40 @@ export class AdService {
         );
 
         }
+    async updateAd(id: string, dto: Partial<IAd>): Promise<HydratedDocument<IAd>> {
+        const ad = await this.adRepository.findById(id);
+        if (!ad) {
+            throw new Error(`Ad with ID ${id} not found`);
+        }
+
+        // Якщо змінюється ціна або валюта, оновлюємо priceInUAH
+        let priceInUAH = ad.priceInUAH;
+        let exchangeRate = ad.exchangeRate;
+        if ((dto.price && dto.price !== ad.price) || (dto.currency && dto.currency !== ad.currency)) {
+            const currency = dto.currency || ad.currency;
+            exchangeRate = await this.currencyService.getRate(currency);
+            priceInUAH = (dto.price || ad.price) * exchangeRate;
+        }
+
+        const updatedAd = await this.adRepository.updateById(id, {
+            ...dto,
+            exchangeRate,
+            priceInUAH
+        });
+
+        return updatedAd;
     }
+
+    async deleteAd(id: string): Promise<void> {
+        const ad = await this.adRepository.findById(id);
+        if (!ad) {
+            throw new Error(`Ad with ID ${id} not found`);
+        }
+
+        await this.adRepository.delete(id);
+    }
+    }
+
 
 
 export const adService = new AdService(adRepository, currencyService);
