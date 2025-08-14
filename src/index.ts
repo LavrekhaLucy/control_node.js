@@ -9,8 +9,7 @@ import swaggerDocument from '../docs/swagger.json';
 
 import {cronRunner} from './cron';
 import {authRoutes} from './routes/auth.routes';
-import {carRoutes} from './routes/car.routes';
-import {roleRoutes} from './routes/role.routes';
+import {carRoutes} from './routes/seller.routes';
 
 
 const app = express();
@@ -34,7 +33,6 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 
 // app.use('/users', userRouter);
 app.use('/auth', authRoutes);
-app.use('/roles', roleRoutes);
 app.use('/cars', carRoutes);
 
 

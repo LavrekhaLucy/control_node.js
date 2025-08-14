@@ -34,6 +34,15 @@ class UserRepository {
         return User.findById(id).populate('roles');
     }
 
+
+    public async findByIdWithRoles(id: ObjectId): Promise<HydratedDocument<IUser> | null> {
+        return User.findById(id)
+            .populate({
+                path: 'roles',
+                populate: { path: 'permissions' }
+            });
+    }
+
     public async findByEmail(email: string): Promise<HydratedDocument<IUser> | null> {
         return User.findOne({email}).populate('roles').select('+password');
     }

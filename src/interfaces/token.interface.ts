@@ -1,5 +1,5 @@
 import {ObjectId} from '../types/common';
-import {IRole} from './role-interface';
+import {RoleEnum} from "../enums/role.enum";
 
 
 export interface IToken {
@@ -13,7 +13,7 @@ export interface IToken {
 
 export interface ITokenPayload {
     userId: string;
-    roles: ObjectId[] | IRole[];
+    roles: RoleEnum[];
     email?: string;
     name?: string;
 

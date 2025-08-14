@@ -7,6 +7,7 @@ import {userRepository} from '../repositories/user.repository';
 import {userPresenter} from '../presenters/user.presenter';
 import {FileItemTypeEnum} from '../enums/file-item-type.enum';
 import {Types} from 'mongoose';
+import {passwordService} from "./password.service";
 
 
 class UserService {
@@ -72,6 +73,38 @@ class UserService {
             await s3Service.deleteFile(user.avatar);
         }
         return await userRepository.update(user.id, { avatar: null });
+    }
+
+    public async createUser(dto: Partial<IUser>): Promise<IUser> {
+        if (!dto.password) {
+            throw new ApiError('Password is required', 400);
+        }
+
+        // Хешуємо пароль
+        const hashedPassword = await passwordService.hashPassword(dto.password);
+
+        // Створюємо користувача
+        const user = await userRepository.create({
+            ...dto,
+            password: hashedPassword,
+        });
+
+        return user;
+    }
+
+    // Бан користувача
+    public async banUser(userId: string): Promise<IUser> {
+        const objectId = new Types.ObjectId(userId);
+        const user = await userRepository.findById(objectId);
+
+        if (!user) {
+            throw new ApiError('User not found', 404);
+        }
+
+        // Можна додати поле isBanned або isActive
+        const updatedUser = await userRepository.update(objectId, { isDeleted: true });
+
+        return updatedUser;
     }
 
 }

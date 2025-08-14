@@ -12,7 +12,7 @@ const UserSchema = new Schema({
         age: {type: Number, required: true},
         phone: {type: String, required: false},
         avatar: {type: String, required: false},
-        roles: { type: [String], enum: Object.values(RoleEnum), default: [RoleEnum.USER] },
+        roles: { type: [String], enum: Object.values(RoleEnum), default: [RoleEnum.BUYER] },
         isVerified: {type: Boolean, default: false},
         isDeleted: {type: Boolean, default: false},
         organizationId: {
@@ -33,15 +33,3 @@ const UserSchema = new Schema({
      }
  );
 export const User = model<IUser>('User', UserSchema);
-
-// import { Schema, model, Types } from "mongoose";
-// import { RoleEnum } from "../enums/role.enum";
-//
-// const userSchema = new Schema({
-//     name: { type: String, required: true },
-//     email: { type: String, required: true, unique: true },
-//     password: { type: String, required: true },
-//     roles: { type: [String], enum: Object.values(RoleEnum), default: [RoleEnum.USER] }
-// });
-//
-// export const UserModel = model("User", userSchema);

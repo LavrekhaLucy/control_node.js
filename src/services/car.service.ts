@@ -73,6 +73,15 @@ export class CarService {
 
         return this.adRepository.updateById(adId, updateData);
     }
+    async deleteCar(id: string): Promise<void> {
+        const ad = await this.adRepository.findById(id);
+        if (!ad) {
+            throw new ApiError(`Ad with ID ${id} not found.`, 404);
+        }
+
+        await this.adRepository.delete(id);
+    }
+
 }
 
 export const carService = new CarService(adRepository, emailService);
