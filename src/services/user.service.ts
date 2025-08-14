@@ -7,7 +7,7 @@ import {userRepository} from '../repositories/user.repository';
 import {userPresenter} from '../presenters/user.presenter';
 import {FileItemTypeEnum} from '../enums/file-item-type.enum';
 import {Types} from 'mongoose';
-import {passwordService} from "./password.service";
+import {passwordService} from './password.service';
 
 
 class UserService {

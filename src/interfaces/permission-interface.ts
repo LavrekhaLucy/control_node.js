@@ -1,5 +1,5 @@
 import { ObjectId } from '../types/common';
-import {PermissionEnum} from "../enums/permission.enum";
+import {PermissionEnum} from '../enums/permission.enum';
 
 export interface IPermission{
 

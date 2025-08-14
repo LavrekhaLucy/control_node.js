@@ -2,7 +2,7 @@
 import { IRole } from '../interfaces/role-interface';
 import { RoleEnum } from '../enums/role.enum';
 import { Types } from 'mongoose';
-import {Role} from "../models/role.model";
+import {Role} from '../models/role.model';
 
 export  async function mapRolesToEnum(roles: Types.ObjectId[] | IRole[]): Promise<RoleEnum[]> {
     if (roles.length === 0) return [];

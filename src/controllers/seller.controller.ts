@@ -22,7 +22,7 @@ class SellerController {
         } catch (e) {
             next(e);
         }
-    }
+    };
 
     public updateCar = async (req: Request, res: Response, next: NextFunction) => {
         try {
@@ -31,7 +31,7 @@ class SellerController {
         } catch (e) {
             next(e);
         }
-    }
+    };
 
     public deleteCar = async (req: Request, res: Response, next: NextFunction) => {
         try {
@@ -40,7 +40,7 @@ class SellerController {
         } catch (e) {
             next(e);
         }
-    }
+    };
 }
 
 export const sellerController = new SellerController();

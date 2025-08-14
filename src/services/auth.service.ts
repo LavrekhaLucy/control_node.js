@@ -14,7 +14,7 @@ import {tokenRepository} from '../repositories/token.repository';
 import {actionTokenRepository} from '../repositories/action-token.repository';
 import {oldPasswordRepository} from '../repositories/old-password.repository';
 import {Types} from 'mongoose';
-import {mapRolesToEnum} from "../utils/map-roles-to-enum";
+import {mapRolesToEnum} from '../utils/map-roles-to-enum';
 
 
 class AuthService {

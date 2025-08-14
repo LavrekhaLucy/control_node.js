@@ -1,9 +1,9 @@
 import {NextFunction, Request, Response} from 'express';
 import {ITokenPair, ITokenPayload} from '../interfaces/token.interface';
 import {IChangePassword, IResetPasswordSend, IResetPasswordSet, ISignIn, IUser} from '../interfaces/user-interface';
-import {authService} from "../services/auth.service";
-import {emailService} from "../services/email.service";
-import {EmailTypeEnum} from "../enums/email-type.enum";
+import {authService} from '../services/auth.service';
+import {emailService} from '../services/email.service';
+import {EmailTypeEnum} from '../enums/email-type.enum';
 
 
 class AuthController {
