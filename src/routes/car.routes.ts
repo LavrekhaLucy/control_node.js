@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { carController } from '../controllers/car.controller';
 import { authMiddleware } from '../middlewares/auth.middleware';
-import {requirePermission} from "../middlewares/require-permission";
+import {requirePermission} from '../middlewares/require-permission';
 
 
 const carRouter = Router();

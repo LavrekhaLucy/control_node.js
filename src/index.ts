@@ -9,11 +9,11 @@ import swaggerDocument from '../docs/swagger.json';
 
 import {cronRunner} from './cron';
 import {authRoutes} from './routes/auth.routes';
-import {carRouter} from "./routes/car.routes";
-import {adminRouter} from "./routes/admin.routes";
-import {buyerRouter} from "./routes/buyer.routes";
-import {managerRouter} from "./routes/manager.routes";
-import {sellerRouter} from "./routes/seller.routes";
+import {carRouter} from './routes/car.routes';
+import {adminRouter} from './routes/admin.routes';
+import {buyerRouter} from './routes/buyer.routes';
+import {managerRouter} from './routes/manager.routes';
+import {sellerRouter} from './routes/seller.routes';
 
 
 
