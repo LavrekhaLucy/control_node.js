@@ -24,9 +24,9 @@ class SellerController {
         }
     };
 
-    public updateCar = async (req: Request, res: Response, next: NextFunction) => {
+    public editCar = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const car = await carService.updateCar(req.params.id, req.body);
+            const car = await carService.editCar(req.params.id, req.body);
             res.status(200).json(car);
         } catch (e) {
             next(e);
@@ -42,5 +42,4 @@ class SellerController {
         }
     };
 }
-
 export const sellerController = new SellerController();

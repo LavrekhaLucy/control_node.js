@@ -40,9 +40,13 @@ class UserService {
         return await userRepository.update(userId, dto);
     }
 
-    public async delete(jwtPayload: ITokenPayload): Promise<void> {
+    public async deleteMe(jwtPayload: ITokenPayload): Promise<void> {
         const userId = new Types.ObjectId(jwtPayload.userId);
         return await userRepository.delete(userId);
+    }
+    public async delete(userId: string): Promise<void> {
+        const id = new Types.ObjectId(userId);
+        await userRepository.delete(id);
     }
 
     public async uploadAvatar(
@@ -106,6 +110,21 @@ class UserService {
 
         return updatedUser;
     }
+    public async unbanUser(userId: string): Promise<IUser> {
+        const objectId = new Types.ObjectId(userId);
+        const user = await userRepository.findById(objectId);
+
+        if (!user) {
+            throw new ApiError('User not found', 404);
+        }
+
+        // Можна додати поле isBanned або isActive
+        const updatedUser = await userRepository.update(objectId, { isDeleted: false});
+
+        return updatedUser;
+    }
+
+
 
 }
 

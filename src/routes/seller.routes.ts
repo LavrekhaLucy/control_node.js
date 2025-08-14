@@ -19,7 +19,7 @@ router.put(
     '/cars/:id',
     authMiddleware.checkAccessToken,
     requirePermission('EDIT_CAR'),
-    sellerController.updateCar
+    sellerController.editCar
 );
 
 // Видалення оголошення — пермішн DELETE_CAR

@@ -3,6 +3,9 @@ import {IAd} from '../interfaces/ad.interface';
 import {containsProfanity} from '../utils/check-profanity';
 import {EmailService, emailService} from './email.service';
 import {ApiError} from '../errors/api-error';
+import {ICar} from '../interfaces/car-interface';
+import {carRepository} from '../repositories/car.repository';
+import {FilterQuery} from 'mongoose';
 
 
 export class CarService {
@@ -36,7 +39,7 @@ export class CarService {
         });
     }
 
-    async updateCar(adId: string, updateData: Partial<IAd>): Promise<IAd> {
+    async editCar(adId: string, updateData: Partial<IAd>): Promise<IAd> {
         const ad = await this.adRepository.findById(adId);
         if (!ad) {
             throw new ApiError(`Ad with ID ${adId} not found.`, 404);
@@ -73,6 +76,20 @@ export class CarService {
 
         return this.adRepository.updateById(adId, updateData);
     }
+
+    async findCars(
+        filters: FilterQuery<ICar>,
+        options: { sort?: Record<string, 1 | -1>; skip?: number; limit?: number }
+    ) {
+        return carRepository
+            .find(filters)
+            .sort(options.sort || { createdAt: -1 })
+            .skip(options.skip || 0)
+            .limit(options.limit || 10)
+            .lean()
+            .exec();
+    }
+
     async deleteCar(id: string): Promise<void> {
         const ad = await this.adRepository.findById(id);
         if (!ad) {
