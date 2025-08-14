@@ -3,7 +3,7 @@ import {carService} from '../services/car.service';
 
 
 class CarController {
-    public async create(req: Request, res: Response, next: NextFunction) {
+    public async createCar(req: Request, res: Response, next: NextFunction) {
         try {
 
 
@@ -15,10 +15,10 @@ class CarController {
             next(e);
         }
     }
-    public async update(req: Request, res: Response, next: NextFunction) {
+    public async editCar(req: Request, res: Response, next: NextFunction) {
         try {
             const user = req.user!;
-            const updated = await carService.updateCar(req.params.id, user._id);
+            const updated = await carService.editCar(req.params.id, user._id);
             res.json(updated);
         } catch (e) {
             next(e);

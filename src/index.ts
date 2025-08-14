@@ -9,7 +9,12 @@ import swaggerDocument from '../docs/swagger.json';
 
 import {cronRunner} from './cron';
 import {authRoutes} from './routes/auth.routes';
-import {carRoutes} from './routes/seller.routes';
+import {carRouter} from "./routes/car.routes";
+import {adminRouter} from "./routes/admin.routes";
+import {buyerRouter} from "./routes/buyer.routes";
+import {managerRouter} from "./routes/manager.routes";
+import {sellerRouter} from "./routes/seller.routes";
+
 
 
 const app = express();
@@ -31,9 +36,12 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 });
 
 
-// app.use('/users', userRouter);
+app.use('/users', adminRouter);
 app.use('/auth', authRoutes);
-app.use('/cars', carRoutes);
+app.use('/cars', carRouter);
+app.use('/', buyerRouter);
+app.use('/', managerRouter);
+app.use('/', sellerRouter);
 
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

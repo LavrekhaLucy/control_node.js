@@ -29,3 +29,4 @@ router.post(
 );
 
 
+export const managerRouter = router;
