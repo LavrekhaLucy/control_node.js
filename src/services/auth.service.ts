@@ -14,10 +14,10 @@ import {actionTokenRepository} from '../repositories/action-token.repository';
 import {oldPasswordRepository} from '../repositories/old-password.repository';
 import {Types} from 'mongoose';
 import {mapRolesToEnum} from '../utils/map-roles-to-enum';
-import {configs} from "../configs/config";
-import {RoleEnum} from "../enums/role.enum";
-import {AccountType} from "../enums/account-type.enum";
-import {Role} from "../models/role.model";
+import {configs} from '../configs/config';
+import {RoleEnum} from '../enums/role.enum';
+import {AccountType} from '../enums/account-type.enum';
+import {Role} from '../models/role.model';
 
 
 class AuthService {

@@ -4,8 +4,8 @@ import {IChangePassword, IResetPasswordSend, IResetPasswordSet, ISignIn, IUser} 
 import {authService} from '../services/auth.service';
 import {emailService} from '../services/email.service';
 import {EmailTypeEnum} from '../enums/email-type.enum';
-import {RoleEnum} from "../enums/role.enum";
-import {AccountType} from "../enums/account-type.enum";
+import {RoleEnum} from '../enums/role.enum';
+import {AccountType} from '../enums/account-type.enum';
 
 
 class AuthController {

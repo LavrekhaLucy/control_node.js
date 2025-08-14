@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import {BrandModel} from '../models/brand.model';
-import {configs} from "../configs/config";
+import {configs} from '../configs/config';
 
 
 export const seedBrandsWithModels = async () => {
