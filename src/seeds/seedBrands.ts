@@ -1,16 +1,10 @@
-import mongoose from 'mongoose';
 import {BrandModel} from '../models/brand.model';
-import {configs} from '../configs/config';
 
 
 export const seedBrandsWithModels = async () => {
     try {
 
-    await mongoose.connect(configs.MONGO_URI);
-
-        await BrandModel.deleteMany({});
-
-
+           await BrandModel.deleteMany({});
 
         const brandsWithModels = [
     {
@@ -88,9 +82,8 @@ export const seedBrandsWithModels = async () => {
 
     } catch (error) {
         console.error(' Seed error:', error);
-    } finally {
-        await mongoose.disconnect();
     }
+
 };
 
 seedBrandsWithModels().catch(err => {
