@@ -1,8 +1,18 @@
 import mongoose from 'mongoose';
 import {BrandModel} from '../models/brand.model';
+import {configs} from "../configs/config";
 
 
-const brandsWithModels = [
+export const seedBrandsWithModels = async () => {
+    try {
+
+    await mongoose.connect(configs.MONGO_URI);
+
+        await BrandModel.deleteMany({});
+
+
+
+        const brandsWithModels = [
     {
         name: 'Audi',
         models: ['A3', 'A4', 'A6', 'Q5', 'Q7']
@@ -73,12 +83,16 @@ const brandsWithModels = [
     }
 ];
 
-(async () => {
-    await mongoose.connect('mongodb://localhost:27017/car-market');
-
-    await BrandModel.deleteMany({});
-    await BrandModel.insertMany(brandsWithModels);
-
+        await BrandModel.insertMany( brandsWithModels);
     console.log('Brands and models seeded');
-    await mongoose.connection.close();
-})();
+
+    } catch (error) {
+        console.error(' Seed error:', error);
+    } finally {
+        await mongoose.disconnect();
+    }
+};
+
+seedBrandsWithModels().catch(err => {
+    console.error(' Error seeding database:', err);
+});

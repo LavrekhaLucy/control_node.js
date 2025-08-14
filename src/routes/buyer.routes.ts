@@ -6,7 +6,7 @@ import {buyerController} from '../controllers/buyer.controller';
 
 const router = Router();
 
-// Перегляд всіх авто — пермішн VIEW_CAR
+
 router.get(
     '/cars',
     authMiddleware.checkAccessToken,
@@ -14,11 +14,5 @@ router.get(
     buyerController.viewCars
 );
 
-// router.get(
-//     '/cars/:id',
-//     authMiddleware.checkAccessToken,
-//     requirePermission('VIEW_CAR'),
-//     buyerController.viewCarById
-// );
 
 export const buyerRouter = router;

@@ -31,7 +31,7 @@ const router = Router();
 
 // Створити менеджера — пермішн CREATE_MANAGER
 router.post(
-    '/users/manager',
+    '/manager',
     authMiddleware.checkAccessToken,
     requirePermission('CREATE_MANAGER'),
     adminController.createManager
@@ -39,7 +39,7 @@ router.post(
 
 // Бан користувача — пермішн BAN_USER
 router.post(
-    '/users/:userId/ban',
+    '/:userId/ban',
     authMiddleware.checkAccessToken,
     requirePermission('BAN_USER'),
     adminController.banUser
@@ -47,7 +47,7 @@ router.post(
 
 // Розбан користувача — пермішн UNBAN_USER
 router.post(
-    '/users/:userId/unban',
+    '/:userId/unban',
     authMiddleware.checkAccessToken,
     requirePermission('UNBAN_USER'),
     adminController.unbanUser
