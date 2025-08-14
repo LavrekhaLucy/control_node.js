@@ -1,6 +1,6 @@
 import {Role} from '../models/role.model';
 import {Permission} from '../models/permission.model';
-import {IPermission} from "../interfaces/permission-interface";
+import {IPermission} from '../interfaces/permission-interface';
 
 
 export const seedDatabase = async () => {
