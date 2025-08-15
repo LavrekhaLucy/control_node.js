@@ -14,6 +14,7 @@ import {adminRouter} from './routes/admin.routes';
 import {buyerRouter} from './routes/buyer.routes';
 import {managerRouter} from './routes/manager.routes';
 import {sellerRouter} from './routes/seller.routes';
+import {seedDatabase} from "./seeds/seedData";
 
 
 
@@ -54,11 +55,31 @@ process.on('uncaughtException', (error) => {
     process.exit(1);
 });
 
-app.listen(port, async ()  => {
-    await mongoose.connect(mongo);
+// app.listen(port, async ()  => {
+//     await mongoose.connect(mongo);
+//
+//
+//
+//     cronRunner();
+//     console.log(`Server started on http://${host}:${port}`);
+// });
 
-    cronRunner();
-    console.log(`Server started on http://${host}:${port}`);
+app.listen(port, async () => {
+    try {
+        await mongoose.connect(mongo);
+        console.log('✅ MongoDB connected');
+
+        // Виконуємо seed, якщо потрібно
+        await seedDatabase();
+        console.log('✅ Database seeded');
+
+        // Запуск cron
+        cronRunner();
+
+        console.log(`Server started on http://${host}:${port}`);
+    } catch (err) {
+        console.error('Error starting server:', err);
+        process.exit(1); // тут можна завершити, бо сервер не запустився
+    }
 });
-
 

@@ -1,7 +1,11 @@
+
 import { User } from '../models/user.model';
 import {IUser, IUserListQuery} from '../interfaces/user-interface';
 import {FilterQuery, HydratedDocument} from 'mongoose';
 import {ObjectId} from '../types/common';
+
+
+
 
 class UserRepository {
     public async getList(query: IUserListQuery): Promise<[IUser[], number]> {
@@ -35,13 +39,25 @@ class UserRepository {
     }
 
 
+    // public async findByIdWithRoles(id: ObjectId): Promise<HydratedDocument<IUser> | null> {
+    //     return User.findById(id)
+    //         .populate({
+    //             path: 'roles',
+    //             populate: { path: 'permissions' }
+    //         });
+    // }
+
     public async findByIdWithRoles(id: ObjectId): Promise<HydratedDocument<IUser> | null> {
         return User.findById(id)
             .populate({
                 path: 'roles',
-                populate: { path: 'permissions' }
+                populate: {
+                    path: 'permissions',
+                    model: 'Permission' // важливо, щоб Mongoose знав модель
+                }
             });
     }
+
 
     public async findByEmail(email: string): Promise<HydratedDocument<IUser> | null> {
         return User.findOne({email}).populate('roles').select('+password');

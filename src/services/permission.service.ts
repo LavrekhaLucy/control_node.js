@@ -35,8 +35,6 @@
 //
 // };
 
-// services/permission.service.ts
-
 import {IRole} from '../interfaces/role-interface';
 import {IPermission} from '../interfaces/permission-interface';
 import {userRepository} from '../repositories/user.repository';

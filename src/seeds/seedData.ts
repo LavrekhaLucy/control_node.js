@@ -1,5 +1,6 @@
-import {Role} from '../models/role.model';
+
 import {Permission} from '../models/permission.model';
+import {Role} from '../models/role.model';
 import {IPermission} from '../interfaces/permission-interface';
 
 
