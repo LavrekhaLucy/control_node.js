@@ -1,7 +1,7 @@
 
 import { User } from '../models/user.model';
 import {IUser, IUserListQuery} from '../interfaces/user-interface';
-import {FilterQuery, HydratedDocument} from 'mongoose';
+import {FilterQuery, HydratedDocument, Types} from 'mongoose';
 import {ObjectId} from '../types/common';
 
 
@@ -37,7 +37,25 @@ class UserRepository {
     public async findById(id: ObjectId): Promise<HydratedDocument<IUser> | null> {
         return User.findById(id).populate('roles');
     }
+    public async findByIdWithRoles  (userId: Types.ObjectId):Promise<HydratedDocument<IUser> | null> {
+        // return await User.findById(userId).populate({
+        //     path: 'roles', // Завантажуємо ролі
+        //     populate: {
+        //         path: 'permissions', // Завантажуємо права всередині ролей
+        //     },
+        // });
 
+        return User.findById(userId)
+
+            .populate({
+                path: 'roles', // Шлях до поля в моделі User
+            })
+            .populate({
+                path: 'roles.permissions', // Шлях до поля 'permissions' всередині ролей
+            });
+
+
+    };
 
     // public async findByIdWithRoles(id: ObjectId): Promise<HydratedDocument<IUser> | null> {
     //     return User.findById(id)
@@ -47,16 +65,25 @@ class UserRepository {
     //         });
     // }
 
-    public async findByIdWithRoles(id: ObjectId): Promise<HydratedDocument<IUser> | null> {
-        return User.findById(id)
-            .populate({
-                path: 'roles',
-                populate: {
-                    path: 'permissions',
-                    model: 'Permission' // важливо, щоб Mongoose знав модель
-                }
-            });
-    }
+    //
+    // public async findByIdWithRoles(id: ObjectId) {
+    //     return User.findById(id)
+    //         .populate({
+    //             path: 'roles',
+    //             populate: { path: 'permissions' }
+    //         });
+    // }
+
+    // public async findByIdWithRoles(id: ObjectId): Promise<HydratedDocument<IUser> | null> {
+    //     return User.findById(id)
+    //         .populate({
+    //             path: 'roles',
+    //             populate: {
+    //                 path: 'permissions',
+    //                 model: 'Permission' // важливо, щоб Mongoose знав модель
+    //             }
+    //         });
+    // }
 
 
     public async findByEmail(email: string): Promise<HydratedDocument<IUser> | null> {

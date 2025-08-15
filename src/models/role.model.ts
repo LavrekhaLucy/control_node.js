@@ -30,3 +30,4 @@ const RoleSchema = new Schema({
 );
 
 export const Role = model<IRole>('Role', RoleSchema);
+

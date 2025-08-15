@@ -13,6 +13,8 @@ export  interface IUser {
     email: string;
     password: string;
     roles: ObjectId[] | IRole[];
+    // roles: ObjectId[] | IRole[]; // краще типізувати як IRole[] після populate
+    organizationId?: ObjectId | null;
     accountType: AccountType;
     isVerified:boolean;
     isDeleted:boolean;

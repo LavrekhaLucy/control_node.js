@@ -19,6 +19,23 @@ import {configs} from '../configs/config';
 
 class AuthService {
     public async signUp(dto: Partial<IUser>): Promise<{ user: IUser; tokens: ITokenPair }> {
+        //
+        // // Хешування пароля
+        // const password = await passwordService.hashPassword(dto.password);
+        //
+        // // Знаходимо об'єкт ролі за її назвою (наприклад, 'seller')
+        // const roleName = dto.roles?.length ? dto.roles[0] : RoleEnum.BUYER;
+        // const role = await Role.findOne({ name: roleName });
+        //
+        // if (!role) {
+        //     throw new ApiError('Role not found', 404);
+        // }
+        //
+        // // Створюємо користувача, передаючи _id ролі
+        // const user = await userRepository.create({ ...dto, password, roles: [role._id] });
+
+
+
 
         const password = await passwordService.hashPassword(dto.password);
 

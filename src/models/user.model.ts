@@ -1,8 +1,6 @@
 import {model, Schema} from 'mongoose';
 import {AccountType} from '../enums/account-type.enum';
 import {IUser} from '../interfaces/user-interface';
-import {RoleEnum} from '../enums/role.enum';
-
 
 
 const UserSchema = new Schema({
@@ -12,7 +10,11 @@ const UserSchema = new Schema({
         age: {type: Number, required: true},
         phone: {type: String, required: false},
         avatar: {type: String, required: false},
-        roles: { type: [String], enum: Object.values(RoleEnum), default: [RoleEnum.BUYER] },
+        // roles: { type: [String], enum: Object.values(RoleEnum), default: [RoleEnum.BUYER] },
+        roles: {
+            type: [Schema.Types.ObjectId], // Змінюємо тип на масив ObjectId
+            ref: 'Role', // Додаємо посилання на модель 'Role'
+        },
         isVerified: {type: Boolean, default: false},
         isDeleted: {type: Boolean, default: false},
         organizationId: {

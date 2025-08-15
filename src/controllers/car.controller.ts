@@ -6,7 +6,6 @@ class CarController {
     public async createCar(req: Request, res: Response, next: NextFunction) {
         try {
 
-
             const user = req.user!;
 
             const car = await carService.createCar(user._id);

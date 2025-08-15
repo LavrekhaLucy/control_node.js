@@ -27,8 +27,49 @@
 //              }
 //          };
 //      }
+
+// async function checkUserRoles() {
+//     await mongoose.connect(configs.MONGO_URI);
 //
-//      public checkPermission(permission: string) {
+//     const user = await userRepository.findByIdWithRoles("689efc4e84c42323bd719138");
+//
+//     if (!user) {
+//         console.log('User not found');
+//         return;
+//     }
+//
+//     console.log(user.roles.map(r => ({
+//         name: r.name,
+//         permissions: r.permissions?.map(p => p.code) || []
+//     })));
+//
+//     await mongoose.disconnect();
+// }
+
+// checkUserRoles();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//
+//
+//
+// public checkPermission(permission: string) {
 //          return async (req: Request, res: Response, next: NextFunction) => {
 //              try {
 //                  const userRoles = res.locals.jwtPayload.roles as IRole[];
