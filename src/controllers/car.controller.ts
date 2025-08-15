@@ -1,6 +1,6 @@
 import {NextFunction, Request, Response} from 'express';
 import {carService} from '../services/car.service';
-import {IUser} from "../interfaces/user-interface";
+import {IUser} from '../interfaces/user-interface';
 import { ApiError } from '../errors/api-error';
 
 

@@ -3,8 +3,8 @@ import {Role} from '../models/role.model';
 import {IPermission} from '../interfaces/permission-interface';
 import {Organization} from '../models/organization.model';
 import {User} from '../models/user.model';
-import {Types} from "mongoose";
-import {userRepository} from "../repositories/user.repository";
+import {Types} from 'mongoose';
+import {userRepository} from '../repositories/user.repository';
 
 
 export const seedDatabase = async () => {

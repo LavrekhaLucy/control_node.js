@@ -1,7 +1,7 @@
 import { Car } from '../models/car.model';
 import { ICar } from '../interfaces/car-interface';
 import mongoose, {FilterQuery, HydratedDocument, Types} from 'mongoose';
-import {ObjectId} from "../types/common";
+import {ObjectId} from '../types/common';
 
 export class CarRepository {
 

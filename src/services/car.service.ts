@@ -1,8 +1,8 @@
 import {ICar} from '../interfaces/car-interface';
 import {CarRepository, carRepository} from '../repositories/car.repository';
 import {FilterQuery} from 'mongoose';
-import {AdStatusEnum} from "../enums/ad-status.enum";
-import {ApiError} from "../errors/api-error";
+import {AdStatusEnum} from '../enums/ad-status.enum';
+import {ApiError} from '../errors/api-error';
 
 
 class CarService {

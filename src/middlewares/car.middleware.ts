@@ -2,7 +2,7 @@ import {NextFunction, Request, Response} from 'express';
 import {ApiError} from '../errors/api-error';
 import {carRepository} from '../repositories/car.repository';
 import {AccountType} from '../enums/account-type.enum';
-import {IUser} from "../interfaces/user-interface";
+import {IUser} from '../interfaces/user-interface';
 
 
 //

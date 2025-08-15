@@ -52,7 +52,7 @@
 
 import { franc } from 'franc';
 import natural from 'natural';
-import {PROFANITY_WORDS_EN, PROFANITY_WORDS_UA} from "./profanity-list";
+import {PROFANITY_WORDS_EN, PROFANITY_WORDS_UA} from './profanity-list';
 
 export function containsProfanity(text: string): boolean {
     if (!text) return false;

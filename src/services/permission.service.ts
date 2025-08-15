@@ -78,10 +78,10 @@
 //     );
 // };
 
-import {Types} from "mongoose";
-import {userRepository} from "../repositories/user.repository";
-import {IPermission} from "../interfaces/permission-interface";
-import {IRole} from "../interfaces/role-interface";
+import {Types} from 'mongoose';
+import {userRepository} from '../repositories/user.repository';
+import {IPermission} from '../interfaces/permission-interface';
+import {IRole} from '../interfaces/role-interface';
 
 export const hasPermission = async (
     userId: string,

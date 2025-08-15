@@ -1,5 +1,5 @@
-import {User} from "../models/user.model";
-import {Role} from "../models/role.model";
+import {User} from '../models/user.model';
+import {Role} from '../models/role.model';
 import * as bcrypt from 'bcrypt';
 
 export const  seedAdmin = async () => {
@@ -19,4 +19,4 @@ export const  seedAdmin = async () => {
     });
 
     console.log(' Admin created: admin@example.com / AdminPassword123');
-}
+};

@@ -15,9 +15,9 @@ import {oldPasswordRepository} from '../repositories/old-password.repository';
 import {Types} from 'mongoose';
 import {mapRolesToEnum} from '../utils/map-roles-to-enum';
 import {configs} from '../configs/config';
-import {Role} from "../models/role.model";
-import {AccountType} from "../enums/account-type.enum";
-import {IRole} from "../interfaces/role-interface";
+import {Role} from '../models/role.model';
+import {AccountType} from '../enums/account-type.enum';
+import {IRole} from '../interfaces/role-interface';
 
 export interface ISignUpDTO {
     name: string;

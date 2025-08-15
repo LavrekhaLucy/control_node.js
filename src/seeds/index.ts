@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import { seedDatabase } from './seedData';
 import { seedBrandsWithModels } from './seedBrands';
 import { configs } from '../configs/config';
-import {seedAdmin} from "./seedAdmin";
+import {seedAdmin} from './seedAdmin';
 
 async function runSeeds() {
     try {
