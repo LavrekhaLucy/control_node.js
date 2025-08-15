@@ -14,7 +14,7 @@ import {adminRouter} from './routes/admin.routes';
 import {buyerRouter} from './routes/buyer.routes';
 import {managerRouter} from './routes/manager.routes';
 import {sellerRouter} from './routes/seller.routes';
-import {seedDatabase} from "./seeds/seedData";
+import {seedDatabase} from './seeds/seedData';
 
 
 
