@@ -7,7 +7,25 @@ export const userIdSchema = Joi.object({
     userId: Joi.string().hex().length(24).required()
 });
 
-// export const userBodySchema = Joi.object({
+export const userBodySchema = Joi.object({
+    name: Joi.string().min(3).required(),
+    email: Joi.string().email().required(),
+    password: Joi.string()
+        .pattern(new RegExp('^(?=.*[A-Za-z])(?=.*\\d).{8,}$'))
+        .required()
+        .messages({
+            'string.pattern.base': 'Password must be at least 8 characters long and contain both letters and numbers',
+        }),
+    age: Joi.number().min(0).required(),
+    phone: Joi.string().pattern(/^\+?\d{7,15}$/).optional(),
+    role: Joi.array().items(Joi.string().valid(...Object.values(RoleEnum))).optional(),
+    // accountType: Joi.string().valid(...Object.values(AccountType)).optional(),
+    accountType: Joi.string().valid('base', 'premium').default('base'),
+    isVerified: Joi.boolean().default(false),
+    isDeleted: Joi.boolean().default(false),
+});
+//
+// export const userBuyerBodySchema = Joi.object({
 //     name: Joi.string().min(3).required(),
 //     email: Joi.string().email().required(),
 //     password: Joi.string()
@@ -18,43 +36,27 @@ export const userIdSchema = Joi.object({
 //         }),
 //     age: Joi.number().min(0).required(),
 //     phone: Joi.string().pattern(/^\+?\d{7,15}$/).optional(),
-//     role: Joi.array().items(Joi.string().valid(...Object.values(RoleEnum))).optional(),
+//     roles: Joi.array().items(Joi.string().valid(...Object.values(RoleEnum))).optional(),
+//     accountType: Joi.string().valid('base', 'premium').default('base'),
 //     isVerified: Joi.boolean().default(false),
 //     isDeleted: Joi.boolean().default(false),
 // });
-
-export const userBuyerBodySchema = Joi.object({
-    name: Joi.string().min(3).required(),
-    email: Joi.string().email().required(),
-    password: Joi.string()
-        .pattern(new RegExp('^(?=.*[A-Za-z])(?=.*\\d).{8,}$'))
-        .required()
-        .messages({
-            'string.pattern.base': 'Password must be at least 8 characters long and contain both letters and numbers',
-        }),
-    age: Joi.number().min(0).required(),
-    phone: Joi.string().pattern(/^\+?\d{7,15}$/).optional(),
-    roles: Joi.array().items(Joi.string().valid(...Object.values(RoleEnum))).default([RoleEnum.BUYER]),
-    accountType: Joi.string().valid('base', 'premium').default('base'),
-    isVerified: Joi.boolean().default(false),
-    isDeleted: Joi.boolean().default(false),
-});
-export const userSellerBodySchema = Joi.object({
-    name: Joi.string().min(3).required(),
-    email: Joi.string().email().required(),
-    password: Joi.string()
-        .pattern(new RegExp('^(?=.*[A-Za-z])(?=.*\\d).{8,}$'))
-        .required()
-        .messages({
-            'string.pattern.base': 'Password must be at least 8 characters long and contain both letters and numbers',
-        }),
-    age: Joi.number().min(0).required(),
-    phone: Joi.string().pattern(/^\+?\d{7,15}$/).optional(),
-    roles: Joi.array().items(Joi.string().valid(...Object.values(RoleEnum))).default([RoleEnum.SELLER]),
-    accountType: Joi.string().valid('base', 'premium').default('base'),
-    isVerified: Joi.boolean().default(false),
-    isDeleted: Joi.boolean().default(false),
-});
+// export const userSellerBodySchema = Joi.object({
+//     name: Joi.string().min(3).required(),
+//     email: Joi.string().email().required(),
+//     password: Joi.string()
+//         .pattern(new RegExp('^(?=.*[A-Za-z])(?=.*\\d).{8,}$'))
+//         .required()
+//         .messages({
+//             'string.pattern.base': 'Password must be at least 8 characters long and contain both letters and numbers',
+//         }),
+//     age: Joi.number().min(0).required(),
+//     phone: Joi.string().pattern(/^\+?\d{7,15}$/).optional(),
+//     roles: Joi.array().items(Joi.string().valid(...Object.values(RoleEnum))).default([RoleEnum.SELLER]),
+//     accountType: Joi.string().valid('base', 'premium').default('base'),
+//     isVerified: Joi.boolean().default(false),
+//     isDeleted: Joi.boolean().default(false),
+// });
 
 
 export const updateUserSchema = Joi.object({

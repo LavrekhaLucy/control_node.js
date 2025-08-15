@@ -61,12 +61,26 @@ export const hasPermission = async (
         : (user.roles as (IRole & { permissions: IPermission[] })[]);
 
     for (const role of roles) {
-        for (const permission of role.permissions) {
+        const permissions = Array.isArray(role.permissions) ? role.permissions : [];
+        for (const permission of permissions) {
             if (permission.code === permissionCode) {
                 return true;
             }
         }
     }
+    console.log('User roles:', roles.map(r => ({
+        name: r.name,
+        org: r.organizationId?.toString(),
+        permissions: r.permissions.map(p => p.code)
+    })));
 
     return false;
 };
+// for (const role of roles) {
+//     const permissions = Array.isArray(role.permissions) ? role.permissions : [];
+//     for (const permission of permissions) {
+//         if (permission.code === permissionCode) {
+//             return true;
+//         }
+//     }
+// }
