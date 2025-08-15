@@ -1,14 +1,12 @@
-// src/controllers/admin.controller.ts
 import { Request, Response, NextFunction } from 'express';
 import { userService } from '../services/user.service';
 
 class AdminController {
-    // Створення менеджера
     async createManager(req: Request, res: Response, next: NextFunction) {
         try {
             const manager = await userService.createUser({
                 ...req.body,
-                roles: ['manager'], // або ObjectId ролі
+                roles: ['manager'],
             });
             res.status(201).json(manager);
         } catch (e) {
@@ -16,7 +14,6 @@ class AdminController {
         }
     }
 
-    // Створення адміна (опціонально)
     async createAdmin(req: Request, res: Response, next: NextFunction) {
         try {
             const admin = await userService.createUser({
@@ -29,33 +26,7 @@ class AdminController {
         }
     }
 
-//     import { Request, Response, NextFunction } from 'express';
-// import { userService } from '../services/user.service';
-// export class AdminController {
-//     async createManager(req: Request, res: Response, next: NextFunction) {
-//         try {
-//             const { name, email, password, accountType } = req.body;
-//             const user = await userService.createUser({ name, email, password, roles: ['manager'], accountType });
-//             res.status(201).json(user);
-//         } catch (e) {
-//             next(e);
-//         }
-//     }
-//
-//     async createAdmin(req: Request, res: Response, next: NextFunction) {
-//         try {
-//             const { name, email, password, accountType } = req.body;
-//             const user = await userService.createUser({ name, email, password, roles: ['admin'], accountType });
-//             res.status(201).json(user);
-//         } catch (e) {
-//             next(e);
-//         }
-//     }
-// }
-//
-// export const adminController = new AdminController();
 
-// Бан користувача
     async banUser(req: Request, res: Response, next: NextFunction) {
         try {
             const { userId } = req.params;
@@ -66,7 +37,6 @@ class AdminController {
         }
     }
 
-    // Розбан користувача
     async unbanUser(req: Request, res: Response, next: NextFunction) {
         try {
             const { userId } = req.params;
@@ -77,7 +47,7 @@ class AdminController {
         }
     }
 
-    // Список користувачів
+
     async listUsers(req: Request, res: Response, next: NextFunction) {
         try {
             const filters = req.query || {};
@@ -88,7 +58,6 @@ class AdminController {
         }
     }
 
-    // Видалення користувача
     async deleteUser(req: Request, res: Response, next: NextFunction) {
         try {
             const { userId } = req.params;

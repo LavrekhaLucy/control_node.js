@@ -1,4 +1,3 @@
-// import * as jsonwebtoken from 'jsonwebtoken';
 import jwt, { Secret, SignOptions } from 'jsonwebtoken';
 import { TokenTypeEnum } from '../enums/token-type.enum';
 import { ApiError } from '../errors/api-error';
@@ -24,45 +23,7 @@ class TokenService {
     }
 
 
-    // public verifyToken(token: string, type: TokenTypeEnum | ActionTokenTypeEnum): ITokenPayload {
-    //     try {
-    //         let secret: string;
-    //
-    //         switch (type) {
-    //             case TokenTypeEnum.ACCESS:
-    //                 secret = configs.JWT_ACCESS_SECRET;
-    //                 break;
-    //
-    //             case TokenTypeEnum.REFRESH:
-    //                 secret = configs.JWT_REFRESH_SECRET;
-    //                 break;
-    //
-    //             case ActionTokenTypeEnum.FORGOT_PASSWORD:
-    //                 secret = configs.ACTION_FORGOT_PASSWORD_SECRET;
-    //                 break;
-    //
-    //             case ActionTokenTypeEnum.VERIFY_EMAIL:
-    //                 secret = configs.ACTION_VERIFY_EMAIL_SECRET;
-    //                 break;
-    //
-    //             default:
-    //                 throw new ApiError('Invalid token type', 400);
-    //         }
-    //
-    //         // return jsonwebtoken.verify(token, secret) as ITokenPayload;
-    //         return jwt.sign(
-    //             token,
-    //             secret as Secret,
-    //         );
-    //
-    //     } catch (e) {
-    //         console.error(e.message);
-    //         throw new ApiError('Invalid token', 401);
-    //     }
-    // }
-
-
-    public verifyToken(token: string, type: TokenTypeEnum | ActionTokenTypeEnum): ITokenPayload {
+      public verifyToken(token: string, type: TokenTypeEnum | ActionTokenTypeEnum): ITokenPayload {
         try {
             let secret: Secret;
             switch (type) {
@@ -116,8 +77,6 @@ class TokenService {
                 throw new ApiError('Invalid token type', 400);
         }
 
-
-        // return jsonwebtoken.sign(payload, secret, { expiresIn });
         return jwt.sign(
             payload,
             secret as Secret,

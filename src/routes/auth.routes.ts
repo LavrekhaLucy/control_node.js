@@ -1,7 +1,7 @@
 import {authMiddleware} from '../middlewares/auth.middleware';
 import {Router} from 'express';
 import {commonMiddleware} from '../middlewares/common.middleware';
-import {changePasswordSchema, signInSchema, updateUserSchema, userBodySchema} from '../validators/user.validator';
+import {changePasswordSchema, signInSchema, userBodySchema} from '../validators/user.validator';
 import {userMiddleware} from '../middlewares/user.middleware';
 import {authController} from '../controllers/auth.controller';
 import {ActionTokenTypeEnum} from '../enums/action-token-type.enum';
@@ -9,23 +9,11 @@ import {ActionTokenTypeEnum} from '../enums/action-token-type.enum';
 
 const router = Router();
 
-router.post(
-    '/sign-up',
-    commonMiddleware.isBodyValid(updateUserSchema),
-    userMiddleware.isEmailExist,
-    authController.signUp,
-);
-
-router.post('/sign-up/buyer',
+router.post('/sign-up',
     commonMiddleware.isBodyValid(userBodySchema),
     userMiddleware.isEmailExist,
-    authController.signUpBuyer);
+    authController.signUp);
 
-
-router.post('/sign-up/seller',
-    commonMiddleware.isBodyValid(userBodySchema),
-    userMiddleware.isEmailExist,
-    authController.signUpSeller);
 
 router.post(
     '/sign-in',

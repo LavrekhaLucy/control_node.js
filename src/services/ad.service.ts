@@ -72,8 +72,6 @@ export class AdService {
         if (!ad) {
             throw new Error(`Ad with ID ${id} not found`);
         }
-
-        // Якщо змінюється ціна або валюта, оновлюємо priceInUAH
         let priceInUAH = ad.priceInUAH;
         let exchangeRate = ad.exchangeRate;
         if ((dto.price && dto.price !== ad.price) || (dto.currency && dto.currency !== ad.currency)) {

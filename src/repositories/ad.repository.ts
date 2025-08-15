@@ -25,8 +25,6 @@ export class AdRepository {
         await Ad.findByIdAndDelete(id);
     }
 
-
-
    public  async findActiveAds(): Promise<IAd[]> {
         return Ad.find({ isActive: true });
     }

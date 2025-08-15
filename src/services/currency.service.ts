@@ -28,9 +28,7 @@ export class CurrencyService {
         }
     }
 
-    // async convert(price: number, from: CurrencyEnum, UAH: CurrencyEnum) {
-    //
-    // }
+
 }
 
 export const currencyService = new CurrencyService();

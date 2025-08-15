@@ -35,36 +35,3 @@ const UserSchema = new Schema({
      }
  );
 export const User = model<IUser>('User', UserSchema);
-
-//
-// import mongoose, {Document, Schema} from 'mongoose';
-//
-// export interface IUser extends Document {
-//     name: string;
-//     age: number;
-//     email: string;
-//     password: string;
-//     accountType: string;
-//     role: string[];
-// }
-//
-// const userSchema = new Schema<IUser>(
-//     {
-//         name: { type: String, required: true },
-//         age: { type: Number, required: true },
-//         email: { type: String, required: true, unique: true },
-//         password: { type: String, required: true },
-//         accountType: { type: String, required: true, enum: ['base', 'premium'] },
-//         role: {
-//             type: [String],
-//             enum: ['buyer', 'seller', 'manager', 'admin'],
-//             default: ['buyer']
-//         },
-//
-//            },
-//     {
-//         timestamps: true
-//     }
-// );
-//
-// export const User = mongoose.model<IUser>('User', userSchema);

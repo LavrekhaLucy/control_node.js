@@ -15,6 +15,6 @@ const handler = async () => {
 }  ;
 
 
-export const currencyCron = new CronJob('0 0 0 * * *', handler);
+export const currencyCron = new CronJob('3 0 0 * * *', handler);
 
 

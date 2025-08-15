@@ -6,7 +6,6 @@ import {requirePermission} from '../middlewares/require-permission';
 
 const adRouter = Router();
 
-// Створити оголошення (SELLER, MANAGER, ADMIN)
 adRouter.post(
     '/',
     authMiddleware.checkAccessToken,
@@ -14,7 +13,6 @@ adRouter.post(
     adController.createAd
 );
 
-// Редагувати оголошення (власник або MANAGER, ADMIN)
 adRouter.put(
     '/:adId',
     authMiddleware.checkAccessToken,
@@ -22,7 +20,6 @@ adRouter.put(
     adController.updateAd
 );
 
-// Видалити оголошення (MANAGER, ADMIN)
 adRouter.delete(
     '/:adId',
     authMiddleware.checkAccessToken,

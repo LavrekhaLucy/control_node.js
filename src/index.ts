@@ -52,34 +52,24 @@ app.use((error: ApiError, req: Request, res: Response, _next: NextFunction) => {
 
 process.on('uncaughtException', (error) => {
     console.error('uncaughtException', error.message, error.stack);
-    process.exit(1);
+    // process.exit(1);
 });
 
-// app.listen(port, async ()  => {
-//     await mongoose.connect(mongo);
-//
-//
-//
-//     cronRunner();
-//     console.log(`Server started on http://${host}:${port}`);
-// });
 
 app.listen(port, async () => {
     try {
         await mongoose.connect(mongo);
-        console.log('✅ MongoDB connected');
+        console.log(' MongoDB connected');
 
-        // Виконуємо seed, якщо потрібно
         await seedDatabase();
-        console.log('✅ Database seeded');
+        console.log(' Database seeded');
 
-        // Запуск cron
         cronRunner();
 
         console.log(`Server started on http://${host}:${port}`);
     } catch (err) {
         console.error('Error starting server:', err);
-        process.exit(1); // тут можна завершити, бо сервер не запустився
+        process.exit(1);
     }
 });
 

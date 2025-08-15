@@ -29,7 +29,6 @@ import {Router} from 'express';
 
 const router = Router();
 
-// Створити менеджера — пермішн CREATE_MANAGER
 router.post(
     '/manager',
     authMiddleware.checkAccessToken,
@@ -37,7 +36,7 @@ router.post(
     adminController.createManager
 );
 
-// Бан користувача — пермішн BAN_USER
+
 router.post(
     '/:userId/ban',
     authMiddleware.checkAccessToken,
@@ -45,7 +44,6 @@ router.post(
     adminController.banUser
 );
 
-// Розбан користувача — пермішн UNBAN_USER
 router.post(
     '/:userId/unban',
     authMiddleware.checkAccessToken,
@@ -53,7 +51,6 @@ router.post(
     adminController.unbanUser
 );
 
-// Видалити користувача — пермішн DELETE_USER
 router.delete(
     '/users/:userId',
     authMiddleware.checkAccessToken,
@@ -61,7 +58,6 @@ router.delete(
     adminController.deleteUser
 );
 
-// Перегляд усіх користувачів — пермішн VIEW_USERS
 router.get(
     '/users',
     authMiddleware.checkAccessToken,

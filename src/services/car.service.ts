@@ -1,88 +1,43 @@
-import {adRepository, AdRepository} from '../repositories/ad.repository';
-import {IAd} from '../interfaces/ad.interface';
-import {containsProfanity} from '../utils/check-profanity';
-import {EmailService, emailService} from './email.service';
-import {ApiError} from '../errors/api-error';
 import {ICar} from '../interfaces/car-interface';
-import {carRepository} from '../repositories/car.repository';
+import {CarRepository, carRepository} from '../repositories/car.repository';
 import {FilterQuery} from 'mongoose';
+import {AdStatusEnum} from "../enums/ad-status.enum";
+import {ApiError} from "../errors/api-error";
 
 
-export class CarService {
-    constructor(
-        private adRepository: AdRepository,
-        private emailService: EmailService
-    ) {
+class CarService {
+    carRepository: CarRepository;
+
+    constructor() {
+        this.carRepository = carRepository; // присвоюємо вже створений інстанс репозиторію
     }
 
-    async createCar(dto: Partial<IAd>): Promise<IAd> {
 
-        const textToCheck = `${dto.title} ${dto.description}`;
-        const hasProfanity = containsProfanity(textToCheck);
-        if (!hasProfanity) {
-
-            return this.adRepository.create({
-                ...dto,
-                isPublished: true,
-                isProfanityChecked: true,
-                profanityCheckAttempts: 0,
-            });
-        }
-        const message = `The ad from user ${dto.userId} failed the automatic profanity check. Manual moderation is required.`;
-        await this.emailService.sendToManager(message);
-
-        return this.adRepository.create({
+    async createCar(dto: Partial<ICar>): Promise<ICar> {
+        return this.carRepository.create({
             ...dto,
-            isPublished: false,
-            isProfanityChecked: false,
-            profanityCheckAttempts: 1,
+            adStatus: AdStatusEnum.PENDING,
+            hasProfanity: false,
+            profaneWords: [],
+            editAttempts: 0,
         });
     }
 
-    async editCar(adId: string, updateData: Partial<IAd>): Promise<IAd> {
-        const ad = await this.adRepository.findById(adId);
-        if (!ad) {
-            throw new ApiError(`Ad with ID ${adId} not found.`, 404);
-        }
 
-        if (ad.isPublished === false && ad.profanityCheckAttempts < 3) {
-            const textToCheck = `${updateData.title || ad.title} ${updateData.description || ad.description}`;
-            const hasProfanity = containsProfanity(textToCheck);
+    async editCar(carId: string, dto: Partial<ICar>): Promise<ICar | null> {
+        return  this.carRepository.findByIdAndUpdate(
+            carId,
+            { ...dto, editAttempts: (dto.editAttempts || 0) + 1 });
 
-            if (!hasProfanity) {
-
-                return this.adRepository.updateById(adId, {
-                    ...updateData,
-                    isPublished: true,
-                    isProfanityChecked: true,
-                    profanityCheckAttempts: ad.profanityCheckAttempts,
-                });
-            } else {
-
-                const newAttempts = ad.profanityCheckAttempts + 1;
-
-                if (newAttempts >= 3) {
-                    const message = `The ad from user ${ad.userId} failed the profanity check 3 times. Manual moderation is required. Ad ID: ${adId}`;
-                    await this.emailService.sendToManager(message);
-                }
-
-                return this.adRepository.updateById(adId, {
-                    ...updateData,
-                    profanityCheckAttempts: newAttempts,
-                    isPublished: false,
-                });
-            }
-        }
-
-        return this.adRepository.updateById(adId, updateData);
     }
 
-    async findCars(
+
+async findCars(
         filters: FilterQuery<ICar>,
         options: { sort?: Record<string, 1 | -1>; skip?: number; limit?: number }
     ) {
         return carRepository
-            .find(filters)
+            .findQuery(filters)
             .sort(options.sort || { createdAt: -1 })
             .skip(options.skip || 0)
             .limit(options.limit || 10)
@@ -91,15 +46,14 @@ export class CarService {
     }
 
     async deleteCar(id: string): Promise<void> {
-        const ad = await this.adRepository.findById(id);
+        const ad = await this.carRepository.findById(id);
         if (!ad) {
             throw new ApiError(`Ad with ID ${id} not found.`, 404);
         }
-
-        await this.adRepository.delete(id);
+        await this.carRepository.delete(id);
     }
 
 }
 
-export const carService = new CarService(adRepository, emailService);
+export const carService = new CarService();
 

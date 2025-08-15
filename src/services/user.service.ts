@@ -83,11 +83,8 @@ class UserService {
         if (!dto.password) {
             throw new ApiError('Password is required', 400);
         }
-
-        // Хешуємо пароль
         const hashedPassword = await passwordService.hashPassword(dto.password);
 
-        // Створюємо користувача
         const user = await userRepository.create({
             ...dto,
             password: hashedPassword,
@@ -96,7 +93,6 @@ class UserService {
         return user;
     }
 
-    // Бан користувача
     public async banUser(userId: string): Promise<IUser> {
         const objectId = new Types.ObjectId(userId);
         const user = await userRepository.findById(objectId);
@@ -105,7 +101,6 @@ class UserService {
             throw new ApiError('User not found', 404);
         }
 
-        // Можна додати поле isBanned або isActive
         const updatedUser = await userRepository.update(objectId, { isDeleted: true });
 
         return updatedUser;
@@ -118,7 +113,6 @@ class UserService {
             throw new ApiError('User not found', 404);
         }
 
-        // Можна додати поле isBanned або isActive
         const updatedUser = await userRepository.update(objectId, { isDeleted: false});
 
         return updatedUser;

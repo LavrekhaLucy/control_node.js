@@ -5,15 +5,14 @@ import {managerController} from '../controllers/manager.controller';
 
 const router = Router();
 
-// Видалення авто — DELETE_CAR
-router.delete(
-    '/cars/:id',
+router.post(
+    '/cars/:id/verify',
     authMiddleware.checkAccessToken,
-    requirePermission('DELETE_CAR'),
-    managerController.deleteCar
+    requirePermission('VERIFY_CAR'),
+    managerController.verifyCar
 );
 
-// Бан користувача — BAN_USER
+
 router.post(
     '/users/:id/ban',
     authMiddleware.checkAccessToken,
@@ -21,12 +20,15 @@ router.post(
     managerController.banUser
 );
 
-router.post(
-    '/cars/:id/verify',
+
+router.delete(
+    '/cars/:id',
     authMiddleware.checkAccessToken,
-    requirePermission('VERIFY_CAR'),
-    managerController.verifyCar
+    requirePermission('DELETE_CAR'),
+    managerController.deleteCar
 );
+
+
 
 
 export const managerRouter = router;

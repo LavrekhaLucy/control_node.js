@@ -1,49 +1,73 @@
 import {NextFunction, Request, Response} from 'express';
 import {ITokenPair, ITokenPayload} from '../interfaces/token.interface';
-import {IChangePassword, IResetPasswordSend, IResetPasswordSet, ISignIn, IUser} from '../interfaces/user-interface';
-import {authService} from '../services/auth.service';
+import {IChangePassword, IResetPasswordSend, IResetPasswordSet} from '../interfaces/user-interface';
+import {authService, ISignUpDTO} from '../services/auth.service';
 import {emailService} from '../services/email.service';
 import {EmailTypeEnum} from '../enums/email-type.enum';
 
 
 class AuthController {
+    // public async signUp(req: Request, res: Response, next: NextFunction) {
+    //     try {
+    //         const dto = req.body as IUser;
+    //
+    //
+    //         const result = await authService.signUp(dto);
+    //         res.status(201).json(result);
+    //     } catch (e) {
+    //         next(e);
+    //     }
+    // }
+
+
     public async signUp(req: Request, res: Response, next: NextFunction) {
         try {
-            const dto = req.body as IUser;
-
-
+            const dto = req.body as ISignUpDTO;
             const result = await authService.signUp(dto);
             res.status(201).json(result);
         } catch (e) {
             next(e);
         }
     }
-    public async signUpBuyer(req: Request, res: Response, next: NextFunction) {
-        try {
-            const dto = req.body;
-            const result = await authService.signUp(dto, );
-            res.status(201).json(result);
-        } catch (e) {
-            next(e);
-        }
-    }
 
 
-    public async signUpSeller(req: Request, res: Response, next: NextFunction) {
-        try {
-            const dto = req.body;
-            const result = await authService.signUp(dto, );
-            res.status(201).json(result);
-        } catch (e) {
-            next(e);
-        }
-    }
 
-public async signIn(req: Request, res: Response, next: NextFunction) {
+    // public async signUpBuyer(req: Request, res: Response, next: NextFunction) {
+    //     try {
+    //         const dto = req.body;
+    //         const result = await authService.signUp(dto, );
+    //         res.status(201).json(result);
+    //     } catch (e) {
+    //         next(e);
+    //     }
+    // }
+    //
+    //
+    // public async signUpSeller(req: Request, res: Response, next: NextFunction) {
+    //     try {
+    //         const dto = req.body;
+    //         const result = await authService.signUp(dto, );
+    //         res.status(201).json(result);
+    //     } catch (e) {
+    //         next(e);
+    //     }
+    // }
+
+// public async signIn(req: Request, res: Response, next: NextFunction) {
+//         try {
+//             const dto = req.body as ISignIn;
+//             const result = await authService.signIn(dto);
+//             res.status(201).json(result);
+//         } catch (e) {
+//             next(e);
+//         }
+//     }
+
+    public async signIn(req: Request, res: Response, next: NextFunction) {
         try {
-            const dto = req.body as ISignIn;
-            const result = await authService.signIn(dto);
-            res.status(201).json(result);
+            const {email, password} = req.body;
+            const result = await authService.signIn({email, password});
+            res.status(200).json(result);
         } catch (e) {
             next(e);
         }

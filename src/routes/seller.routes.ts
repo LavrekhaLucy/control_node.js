@@ -2,19 +2,22 @@ import { Router } from 'express';
 import { authMiddleware } from '../middlewares/auth.middleware';
 import { sellerController } from '../controllers/seller.controller';
 import {requirePermission} from '../middlewares/require-permission';
+import {carMiddleware} from "../middlewares/car.middleware";
+import {carController} from "../controllers/car.controller";
+import {carRouter} from "./car.routes";
 
 
 const router = Router();
 
-// Створення оголошення — потрібен пермішн CREATE_CAR
-router.post(
+
+carRouter.post(
     '/cars',
     authMiddleware.checkAccessToken,
     requirePermission('CREATE_CAR'),
-    sellerController.createCar
+    carMiddleware.checkCreatePermissions,
+    carController.createCar
 );
 
-// Редагування оголошення — пермішн UPDATE_CAR
 router.put(
     '/cars/:id',
     authMiddleware.checkAccessToken,
@@ -22,7 +25,7 @@ router.put(
     sellerController.editCar
 );
 
-// Видалення оголошення — пермішн DELETE_CAR
+
 router.delete(
     '/cars/:id',
     authMiddleware.checkAccessToken,

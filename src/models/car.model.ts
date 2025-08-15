@@ -5,7 +5,7 @@ import {AdStatusEnum} from '../enums/ad-status.enum';
 
 
 const CarSchema = new Schema<ICar>({
-    title: { type: String, required: true },
+        title: { type: String, required: true },
     description: { type: String },
     brand: { type: String, required: true },
     model:[ { type: String, required: true }],
@@ -17,8 +17,8 @@ const CarSchema = new Schema<ICar>({
     priceEUR: { type: Number },
     priceSource: { type: String },
     adStatus: { type: String, enum: Object.values(AdStatusEnum), default: AdStatusEnum.PENDING },
-    hasProfanity: { type: Boolean, default: false },
-    profaneWords: [{ type: String }],
+    // hasProfanity: { type: Boolean, default: false },
+    // profaneWords: [{ type: String }],
     editAttempts: { type: Number, default: 0 },
 }, { timestamps: true });
 

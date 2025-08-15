@@ -25,3 +25,14 @@ export interface ITokenPair {
 }
 
 
+export interface IUserJwtPayload {
+    _id: string;
+    roles: string[];
+    permissions?: string[];
+    name?: string;
+    email?: string;
+}
+
+export interface IRequestWithUser extends Request {
+    user?: IUserJwtPayload;
+}
