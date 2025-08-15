@@ -1,10 +1,10 @@
 import {Permission} from '../models/permission.model';
 import {Role} from '../models/role.model';
 import {IPermission} from '../interfaces/permission-interface';
-import {Organization} from "../models/organization.model";
-import {userRepository} from "../repositories/user.repository";
-import {Types} from "mongoose";
-import {User} from "../models/user.model";
+import {Organization} from '../models/organization.model';
+import {userRepository} from '../repositories/user.repository';
+import {Types} from 'mongoose';
+import {User} from '../models/user.model';
 
 
 export const seedDatabase = async () => {
@@ -60,7 +60,7 @@ export const seedDatabase = async () => {
             populate: { path: 'permissions', model: 'Permission' }
         });
 
-        const userId = new Types.ObjectId("689efc4e84c42323bd719138");
+        const userId = new Types.ObjectId('689efc4e84c42323bd719138');
         const newUser = await userRepository.findByIdWithRoles(userId);
 
         console.log(user.roles.map(r => ({
