@@ -6,8 +6,8 @@ import {ITokenPayload} from '../interfaces/token.interface';
 import {tokenRepository} from '../repositories/token.repository';
 import {ActionTokenTypeEnum} from '../enums/action-token-type.enum';
 import {actionTokenRepository} from '../repositories/action-token.repository';
-import {userRepository} from "../repositories/user.repository";
-import {Types} from "mongoose";
+import {userRepository} from '../repositories/user.repository';
+import {Types} from 'mongoose';
 
 
 class AuthMiddleware {
