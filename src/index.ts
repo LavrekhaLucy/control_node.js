@@ -11,11 +11,9 @@ import {cronRunner} from './cron';
 import {authRoutes} from './routes/auth.routes';
 import {carRouter} from './routes/car.routes';
 import {adminRouter} from './routes/admin.routes';
-import {buyerRouter} from './routes/buyer.routes';
 import {managerRouter} from './routes/manager.routes';
 import {sellerRouter} from './routes/seller.routes';
 import {seedDatabase} from './seeds/seedData';
-
 
 
 const app = express();
@@ -40,7 +38,6 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 app.use('/users', adminRouter);
 app.use('/auth', authRoutes);
 app.use('/cars', carRouter);
-app.use('/buyer', buyerRouter);
 app.use('/manager', managerRouter);
 app.use('/seller', sellerRouter);
 

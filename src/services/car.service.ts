@@ -24,25 +24,30 @@ class CarService {
     }
 
 
-    async editCar(carId: string, dto: Partial<ICar>): Promise<ICar | null> {
-        return  this.carRepository.findByIdAndUpdate(
-            carId,
-            { ...dto, editAttempts: (dto.editAttempts || 0) + 1 });
-
+    public async editCar(carId: string, dto: Partial<ICar>): Promise<ICar | null> {
+        return this.carRepository.findByIdAndUpdate(carId, dto, true);
     }
 
 
-async findCars(
+    public async findCars(
         filters: FilterQuery<ICar>,
         options: { sort?: Record<string, 1 | -1>; skip?: number; limit?: number }
     ) {
         return carRepository
             .findQuery(filters)
-            .sort(options.sort || { createdAt: -1 })
+            .sort(options.sort || {createdAt: -1})
             .skip(options.skip || 0)
             .limit(options.limit || 10)
             .lean()
             .exec();
+    }
+
+    public async getById(id: string): Promise<ICar | null> {
+        return this.carRepository.findById(id);
+    }
+
+    public async getAll(): Promise<ICar[]> {
+        return this.carRepository.findAll();
     }
 
     async deleteCar(id: string): Promise<void> {

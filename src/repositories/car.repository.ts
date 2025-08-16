@@ -1,6 +1,6 @@
 import { Car } from '../models/car.model';
 import { ICar } from '../interfaces/car-interface';
-import mongoose, {FilterQuery, HydratedDocument, Types} from 'mongoose';
+import mongoose, {FilterQuery, HydratedDocument, Types, UpdateQuery} from 'mongoose';
 import {ObjectId} from '../types/common';
 
 export class CarRepository {
@@ -8,6 +8,10 @@ export class CarRepository {
     public async create(dto: Partial<ICar>): Promise<HydratedDocument<ICar>> {
         return Car.create(dto);
     }
+    async findAll(filters: FilterQuery<ICar> = {}): Promise<ICar[]> {
+        return Car.find(filters);
+    }
+
 
     public async findById(id: string): Promise<HydratedDocument<ICar> | null> {
         if (!id || !mongoose.Types.ObjectId.isValid(id)) return null;
@@ -15,9 +19,22 @@ export class CarRepository {
 
     }
 
-    public async findByIdAndUpdate(id: string, dto: Partial<ICar>): Promise<HydratedDocument<ICar> | null> {
+
+    public async findByIdAndUpdate(
+        id: string,
+        dto: Partial<ICar>,
+        incrementEditAttempts = false
+    ): Promise<HydratedDocument<ICar> | null> {
         if (!id || !Types.ObjectId.isValid(id)) return null;
-        return Car.findByIdAndUpdate(id, dto, { new: true });
+
+        const update: UpdateQuery<ICar> = { ...dto };
+
+
+        if (incrementEditAttempts) {
+            update.$inc = { editAttempts: 1 };
+        }
+
+        return Car.findByIdAndUpdate(id, update, { new: true });
     }
 
     public findQuery(filters: FilterQuery<ICar> = {}) {

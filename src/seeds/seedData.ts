@@ -16,6 +16,7 @@ export const seedDatabase = async () => {
         );
 
         const permissionsData = [
+            { code: 'VIEW_CAR', description: 'Переглядати авто' },
             { code: 'CREATE_CAR', description: 'Створювати авто' },
             { code: 'EDIT_CAR', description: 'Редагувати авто' },
             { code: 'DELETE_CAR', description: 'Видаляти авто' },
@@ -34,12 +35,20 @@ export const seedDatabase = async () => {
             permissions.push(updatedPerm);
         }
 
+        // const rolesData = [
+        //     { name: 'buyer', scope: 'platform', permissions: ['VIEW_CAR'] },
+        //     { name: 'seller', scope: 'platform', permissions: ['CREATE_CAR', 'EDIT_CAR'] },
+        //     { name: 'manager', scope: 'platform', permissions: ['CREATE_CAR', 'EDIT_CAR', 'DELETE_CAR', 'BAN_USER', 'VERIFY_CAR', 'MANAGE_SALON'] },
+        //     { name: 'admin', scope: 'platform', permissions: ['CREATE_CAR', 'EDIT_CAR', 'DELETE_CAR', 'BAN_USER', 'VERIFY_CAR', 'MANAGE_SALON'] },
+        // ];
+
         const rolesData = [
             { name: 'buyer', scope: 'platform', permissions: ['VIEW_CAR'] },
-            { name: 'seller', scope: 'platform', permissions: ['CREATE_CAR', 'EDIT_CAR'] },
-            { name: 'manager', scope: 'platform', permissions: ['CREATE_CAR', 'EDIT_CAR', 'DELETE_CAR', 'BAN_USER', 'VERIFY_CAR', 'MANAGE_SALON'] },
-            { name: 'admin', scope: 'platform', permissions: ['CREATE_CAR', 'EDIT_CAR', 'DELETE_CAR', 'BAN_USER', 'VERIFY_CAR', 'MANAGE_SALON'] },
+            { name: 'seller', scope: 'platform', permissions: ['CREATE_CAR', 'EDIT_CAR', 'VIEW_CAR'] },
+            { name: 'manager', scope: 'platform', permissions: ['CREATE_CAR', 'EDIT_CAR', 'DELETE_CAR', 'BAN_USER', 'VERIFY_CAR', 'MANAGE_SALON', 'VIEW_CAR'] },
+            { name: 'admin', scope: 'platform', permissions: ['CREATE_CAR', 'EDIT_CAR', 'DELETE_CAR', 'BAN_USER', 'VERIFY_CAR', 'MANAGE_SALON', 'VIEW_CAR'] },
         ];
+
 
         for (const role of rolesData) {
             const perms = permissions.filter(p => role.permissions.includes(p.code));
