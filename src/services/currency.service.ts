@@ -27,11 +27,23 @@ export class CurrencyService {
             throw new ApiError(`Failed to get rate for ${currencyCode}`,500);
         }
     }
+    async getAllRates(): Promise<{ [key: string]: number }> {
+        try {
+            const { data } = await axios.get<ICurrencyRate[]>(APP_PRIVAT_URL);
 
+            const rates: { [key: string]: number } = {};
+            data.forEach(r => {
+                rates[r.ccy] = parseFloat(r.sale);
+                rates[r.base_ccy] = 1; // базова валюта UAH
+            });
+
+            return rates;
+        } catch (error) {
+            console.error('Failed to fetch currency rates:', error);
+            throw new ApiError('Failed to get currency rates', 500);
+        }
+    }
 
 }
 
 export const currencyService = new CurrencyService();
-
-
-

@@ -1,4 +1,3 @@
-
 import { Request, Response, NextFunction } from 'express';
 import { hasPermission } from '../services/permission.service';
 import { IUser } from '../interfaces/user-interface';

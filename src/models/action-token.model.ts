@@ -1,5 +1,4 @@
 import { model, Schema } from 'mongoose';
-
 import { ActionTokenTypeEnum } from '../enums/action-token-type.enum';
 import { IActionToken } from '../interfaces/action-token.interface';
 import { User } from './user.model';

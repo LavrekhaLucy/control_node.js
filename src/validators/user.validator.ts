@@ -19,8 +19,6 @@ export const userBodySchema = Joi.object({
     age: Joi.number().min(0).required(),
     phone: Joi.string().pattern(/^\+?\d{7,15}$/).optional(),
     roles: Joi.array().items(Joi.string().valid(...Object.values(RoleEnum))).optional(),
-    // roles: Joi.string().valid(...Object.values(RoleEnum)).optional(),
-    // accountType: Joi.string().valid(...Object.values(AccountType)).optional(),
     accountType: Joi.string().valid('base', 'premium').default('base'),
     isVerified: Joi.boolean().default(false),
     isDeleted: Joi.boolean().default(false),

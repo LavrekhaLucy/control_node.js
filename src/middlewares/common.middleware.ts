@@ -1,7 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { ObjectSchema } from 'joi';
 import { isObjectIdOrHexString } from 'mongoose';
-
 import { ApiError } from '../errors/api-error';
 
 class CommonMiddleware {

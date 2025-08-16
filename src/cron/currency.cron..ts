@@ -3,6 +3,7 @@ import {adService} from '../services/ad.service';
 
 
 
+
 const handler = async () => {
 
     console.log('[CRON] Updating ad prices...');
@@ -15,6 +16,6 @@ const handler = async () => {
 }  ;
 
 
-export const currencyCron = new CronJob('3 0 0 * * *', handler);
+export const currencyCron = new CronJob('1/3 0 0 * * *', handler);
 
 

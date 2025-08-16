@@ -65,4 +65,4 @@ router.get(
     adminController.listUsers
 );
 
-export const adminRouter = router;
+export const adminRoutes = router;

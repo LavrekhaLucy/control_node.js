@@ -4,16 +4,16 @@ import {configs} from './configs/config';
 import * as mongoose from 'mongoose';
 import fileUpload from 'express-fileupload';
 
-import swaggerUi from 'swagger-ui-express';
-import swaggerDocument from '../docs/swagger.json';
+// import swaggerUi from 'swagger-ui-express';
+// import swaggerDocument from '../docs/swagger.json';
 
 import {cronRunner} from './cron';
 import {authRoutes} from './routes/auth.routes';
-import {carRouter} from './routes/car.routes';
-import {adminRouter} from './routes/admin.routes';
-import {managerRouter} from './routes/manager.routes';
-import {sellerRouter} from './routes/seller.routes';
+import {adminRoutes} from './routes/admin.routes';
+import {managerRoutes} from './routes/manager.routes';
 import {seedDatabase} from './seeds/seedData';
+
+import {carRoutes} from './routes/car.routes';
 
 
 const app = express();
@@ -26,7 +26,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(fileUpload());
 
-app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+// app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use((req: Request, res: Response, next: NextFunction) => {
 
@@ -35,11 +35,13 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 });
 
 
-app.use('/users', adminRouter);
+app.use('/users', adminRoutes);
 app.use('/auth', authRoutes);
-app.use('/cars', carRouter);
-app.use('/manager', managerRouter);
-app.use('/seller', sellerRouter);
+app.use('/cars', carRoutes);
+app.use('/manager', managerRoutes);
+
+
+
 
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

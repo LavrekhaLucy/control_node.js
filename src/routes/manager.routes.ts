@@ -31,4 +31,4 @@ router.delete(
 
 
 
-export const managerRouter = router;
+export const managerRoutes = router;

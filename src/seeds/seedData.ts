@@ -35,13 +35,6 @@ export const seedDatabase = async () => {
             permissions.push(updatedPerm);
         }
 
-        // const rolesData = [
-        //     { name: 'buyer', scope: 'platform', permissions: ['VIEW_CAR'] },
-        //     { name: 'seller', scope: 'platform', permissions: ['CREATE_CAR', 'EDIT_CAR'] },
-        //     { name: 'manager', scope: 'platform', permissions: ['CREATE_CAR', 'EDIT_CAR', 'DELETE_CAR', 'BAN_USER', 'VERIFY_CAR', 'MANAGE_SALON'] },
-        //     { name: 'admin', scope: 'platform', permissions: ['CREATE_CAR', 'EDIT_CAR', 'DELETE_CAR', 'BAN_USER', 'VERIFY_CAR', 'MANAGE_SALON'] },
-        // ];
-
         const rolesData = [
             { name: 'buyer', scope: 'platform', permissions: ['VIEW_CAR'] },
             { name: 'seller', scope: 'platform', permissions: ['CREATE_CAR', 'EDIT_CAR', 'VIEW_CAR'] },

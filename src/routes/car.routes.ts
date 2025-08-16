@@ -1,41 +1,43 @@
 import {Router} from 'express';
 import {carController} from '../controllers/car.controller';
 import {authMiddleware} from '../middlewares/auth.middleware';
-import {requirePermission} from '../middlewares/require-permission';
 import {carMiddleware} from '../middlewares/car.middleware';
 
 
-const carRouter = Router();
+const router = Router();
 
-carRouter.get(
-    '/',
+router.get('/stats/:id',
     authMiddleware.checkAccessToken,
-    requirePermission('VIEW_CAR'),
-   carController.getAll
-);
-carRouter.get(
-    '/:id',
+    carMiddleware.checkPremiumAccess,
+    carController.getCarStats);
+
+router.get('/:id',
     authMiddleware.checkAccessToken,
-    requirePermission('VIEW_CAR'),
-    carController.getById
-);
+    carMiddleware.filterActiveAds,
+    carController.getById);
 
-carRouter.post(
-    '/',
+router.get('/',
     authMiddleware.checkAccessToken,
-    requirePermission('CREATE_CAR'),
-    carMiddleware.checkCreatePermissions,
-    carController.createCar
-);
+    carMiddleware.filterActiveAds,
+    carController.getAll);
 
-
-carRouter.put(
-    '/:id',
+router.post('/create',
     authMiddleware.checkAccessToken,
-    requirePermission('EDIT_CAR'),
-    carController.editCar
-);
+     carMiddleware.checkCreatePermission,
+    carMiddleware.checkProfanity,
+    carController.createCar);
+
+router.put('/edit/:id',
+    authMiddleware.checkAccessToken,
+    carMiddleware.checkEditPermission,
+    carController.editCar);
+
+router.patch('/update-prices',
+    authMiddleware.checkAccessToken,
+    carMiddleware.checkAdmin,
+    carController.updatePrices);
+
+export const carRoutes = router;
 
 
 
-export { carRouter };

@@ -1,23 +1,12 @@
 import {model, Schema} from 'mongoose';
-import {containsProfanity} from '../utils/check-profanity';
 import {IAd} from '../interfaces/ad.interface';
 import {CurrencyEnum} from '../enums/currency.enum';
 
 
 const AdSchema = new Schema(
     {
-    title: {type: String, required: true, minlength: 5, maxlength: 100,
-            validate: {
-                validator: containsProfanity,
-                message: 'The title contains inappropriate language',
-            },
-        },
-        description: {type: String, required: true, minlength: 20, maxlength: 1000,
-            validate: {
-                validator: containsProfanity,
-                message: 'The description contains inappropriate language',
-            },
-        },
+    title: {type: String, required: true, minlength: 5, maxlength: 100,},
+    description: {type: String, required: true, minlength: 20, maxlength: 1000,},
         price: {type:Number, required: true},
         currency: { type: String, enum: Object.values(CurrencyEnum), required: true },
         exchangeRate: { type: Number, required: true },

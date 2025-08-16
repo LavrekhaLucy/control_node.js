@@ -10,10 +10,9 @@ const UserSchema = new Schema({
         age: {type: Number, required: true},
         phone: {type: String, required: false},
         avatar: {type: String, required: false},
-        // roles: { type: [String], enum: Object.values(RoleEnum), default: [RoleEnum.BUYER] },
         roles: {
-            type: [Schema.Types.ObjectId], // Змінюємо тип на масив ObjectId
-            ref: 'Role', // Додаємо посилання на модель 'Role'
+            type: [Schema.Types.ObjectId],
+            ref: 'Role',
         },
         isVerified: {type: Boolean, default: false},
         isDeleted: {type: Boolean, default: false},

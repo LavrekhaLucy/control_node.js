@@ -5,6 +5,7 @@ import {configs} from '../configs/config';
 import {emailConstants} from '../constants/email.constant';
 import {EmailTypeEnum} from '../enums/email-type.enum';
 import {EmailTypeToPayload} from '../types/email-type-to-payload.type';
+import {ICar} from '../interfaces/car-interface';
 
 export class EmailService {
     private transporter: Transporter;
@@ -57,15 +58,33 @@ export class EmailService {
     }
 
 
-    public async sendToManager(message: string): Promise<void> {
+    public async sendToManager(car: ICar, seller: { name: string; email: string }): Promise<void> {
         try {
+            const message = `
+                <p><b>Авто потребує ручної перевірки:</b></p>
+                <ul>
+                    <li>ID авто: ${car._id}</li>
+                    <li>Назва: ${car.title}</li>
+                    <li>Продавець: ${seller.name} (${seller.email})</li>
+                    <li>Причина: оголошення не пройшло автоматичну модерацію (${car.editAttempts} спроб редагування або підозріла лексика)</li>
+                    <li>Поточний статус: ${car.adStatus}</li>
+                </ul>
+                <p>Будь ласка, перевірте оголошення та прийміть рішення щодо його активації.</p>
+            `;
+
             const mailOptions = {
                 from: `"No Reply" <${configs.SMTP_EMAIL}>`,
                 to: configs.SMTP_MANAGER_EMAIL,
-                subject: 'URGENT: Ad Moderation Required',
-                html: `<p><b>WARNING!</b> Manual ad moderation is required.</p>
-               <p>${message}</p>`,
+                subject: `URGENT: Ad Moderation Required: ${car.title} (ID: ${car._id})`,
+                html: message,
             };
+
+            // from: `"No Reply" <${configs.SMTP_EMAIL}>`,
+            //     to: configs.SMTP_MANAGER_EMAIL,
+            //     subject: `🚨 Модерація оголошення: ${car.title} (ID: ${car._id})`,
+            //     html: message,
+
+
 
             await this.transporter.sendMail(mailOptions);
             console.log('Message to manager sent successfully!');
@@ -74,8 +93,21 @@ export class EmailService {
             throw error;
         }
     }
-
-
+//     export const sendEmailToManager = async (car: ICar, seller: { name: string; email: string }) => {
+//         const message = `
+// Авто потребує ручної перевірки:
+// - ID авто: ${car._id}
+// - Назва: ${car.title}
+// - Продавець: ${seller.name} (${seller.email})
+// - Причина: оголошення не пройшло автоматичну модерацію (${car.editAttempts} спроб редагування або підозріла лексика)
+// - Поточний статус: ${car.status}
+//
+// Будь ласка, перевірте оголошення та прийміть рішення щодо його активації.
+//     `;
+//
+//         // Тут можна підключити реальну відправку email через nodemailer
+//         console.log("Відправлено повідомлення менеджеру:\n", message);
+//     };
 
 
 

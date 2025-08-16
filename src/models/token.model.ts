@@ -1,5 +1,4 @@
 import { model, Schema } from 'mongoose';
-
 import { IToken } from '../interfaces/token.interface';
 import { User } from './user.model';
 
