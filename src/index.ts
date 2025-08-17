@@ -8,7 +8,7 @@ import {authRoutes} from './routes/auth.routes';
 import {adminRoutes} from './routes/admin.routes';
 import {seedDatabase} from './seeds/seedData';
 import {carRoutes} from './routes/car.routes';
-import {brandRoutes} from "./routes/brand.routes";
+import {brandRoutes} from './routes/brand.routes';
 
 
 

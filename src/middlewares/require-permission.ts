@@ -1,5 +1,5 @@
 import {NextFunction, Request, Response} from 'express';
-import {hasPermission} from "../services/permission.service";
+import {hasPermission} from '../services/permission.service';
 
 
 // export const requirePermissionMiddleware = (permissionCode: PermissionEnum) => {
