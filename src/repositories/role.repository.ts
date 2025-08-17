@@ -20,23 +20,8 @@ class RoleRepository {
         await Role.findByIdAndDelete(id);
     }
 
-    // public async upsert(
-    //     name: string,
-    //     scope: string,
-    //     permissionIds: ObjectId[]
-    // ): Promise<IRole> {
-    //     return Role.findOneAndUpdate(
-    //         { name },
-    //         { $set: { scope, permissions: permissionIds } },
-    //         { upsert: true, new: true }
-    //     ).exec();
-    // }
-
     public async upsert(roleName: string, scope: string, permissionCodes: PermissionEnum[]): Promise<IRole> {
-        // Знаходимо всі permissions за кодами
         const permissions = await Permission.find({ code: { $in: permissionCodes } });
-
-        // Створюємо або оновлюємо роль
         const role = await Role.findOneAndUpdate(
             { name: roleName, scope },
             { name: roleName, scope, permissions },

@@ -48,7 +48,6 @@ router.post(
     carController.verifyCar
 );
 
-
 router.delete('/:carId',
     authMiddleware.checkAccessToken,
     requirePermissionMiddleware('delete_car'),

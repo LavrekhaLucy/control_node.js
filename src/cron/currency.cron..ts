@@ -2,8 +2,6 @@ import {CronJob} from 'cron';
 import {carService} from '../services/car.service';
 
 
-
-
 const handler = async () => {
 
     console.log('[CRON] Updating ad prices...');

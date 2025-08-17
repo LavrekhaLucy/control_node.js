@@ -179,8 +179,8 @@ class AuthService {
         });
 
         await emailService.sendMail(EmailTypeEnum.FORGOT_PASSWORD,
-            'lavreha7@gmail.com',
-            // user.email,
+            // 'lavreha7@gmail.com',
+            user.email,
             {
                 name: user.name,
                 email: user.email,

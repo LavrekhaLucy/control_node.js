@@ -1,4 +1,3 @@
-
 import { IRole } from '../interfaces/role-interface';
 import { RoleEnum } from '../enums/role.enum';
 import { Types } from 'mongoose';

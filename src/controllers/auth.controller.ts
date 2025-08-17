@@ -58,7 +58,7 @@ class AuthController {
             await authService.logoutAll(_id);
             await emailService.sendMail(
                 EmailTypeEnum.LOGOUT_ALL,
-                'lavreha7@gmail.com',
+                'user.email',
                 {
                     name,
                     email,
