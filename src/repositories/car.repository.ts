@@ -10,36 +10,11 @@ export class CarRepository {
         return Car.create(dto);
     }
 
-
-
-    public async findAll(filters: FilterQuery<ICar> = {}): Promise<ICar[]> {
-        return Car.find(filters);
-    }
-
-
     public async findById(id: string): Promise<HydratedDocument<ICar> | null> {
         if (!id || !mongoose.Types.ObjectId.isValid(id)) return null;
         return Car.findById(id);
 
     }
-
-
-    // public async findByIdAndUpdate(
-    //     id: string,
-    //     dto: Partial<ICar>,
-    //     incrementEditAttempts = false
-    // ): Promise<HydratedDocument<ICar> | null> {
-    //     if (!id || !Types.ObjectId.isValid(id)) return null;
-    //
-    //     const update: UpdateQuery<ICar> = { ...dto };
-    //
-    //
-    //     if (incrementEditAttempts) {
-    //         update.$inc = { editAttempts: 1 };
-    //     }
-    //
-    //     return Car.findByIdAndUpdate(id, update, { new: true });
-    // }
 
     public findQuery(filters: FilterQuery<ICar> = {}) {
         return Car.find({ ...filters, isDeleted: false });
@@ -49,7 +24,7 @@ export class CarRepository {
         const id = typeof sellerId === 'string' ? new Types.ObjectId(sellerId) : sellerId;
         return Car.countDocuments({
             sellerId: id,
-            adStatus: AdStatusEnum.ACTIVE // тільки опубліковані
+            adStatus: AdStatusEnum.ACTIVE
         });
     }
 
@@ -57,7 +32,13 @@ export class CarRepository {
         if (!id || !Types.ObjectId.isValid(id)) return;
         await Car.findByIdAndUpdate(id, { isDeleted: true });
     }
+    public async updateCar(carId: Types.ObjectId, update: object) {
+        return Car.findByIdAndUpdate(carId, update, { new: true }).exec();
+    }
 
+    public async deleteCar(carId: Types.ObjectId) {
+        return Car.findByIdAndDelete(carId).exec();
+    }
 
 }
 

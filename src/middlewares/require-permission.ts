@@ -1,22 +1,22 @@
-import { Request, Response, NextFunction } from 'express';
-import { hasPermission } from '../services/permission.service';
-import { IUser } from '../interfaces/user-interface';
-import { ApiError } from '../errors/api-error';
+import {NextFunction, Request, Response} from 'express';
+import {IUser} from '../interfaces/user-interface';
+import {PermissionEnum} from '../enums/permission.enum';
 
-export const requirePermission = (permissionCode: string) => {
+
+export const requirePermissionMiddleware = (permissionCode: PermissionEnum) => {
     return async (req: Request, res: Response, next: NextFunction) => {
         try {
+            const user = req.user as IUser;
+            if (!user) return res.status(401).json({message: 'Unauthorized'});
 
-            const user = req.user as IUser | undefined;
-            if (!user) throw new ApiError('Unauthorized', 401);
+            console.log('USER ROLES AND PERMISSIONS:', user.roles);
 
-            console.log('USER PERMISSIONS:', req.user.permissions);
+            const isSuperUser = user.roles?.some(role => role.permissions.includes(PermissionEnum.ALL));
+            if (isSuperUser) return next();
 
-            const orgId = req.headers['x-org-id'] as string | undefined;
+            const hasPermission = user.roles?.some(role => role.permissions.includes(permissionCode));
 
-            const allowed = await hasPermission(user._id.toString(), permissionCode, orgId);
-
-            if (!allowed) throw new ApiError('Forbidden: insufficient permissions', 403);
+            if (!hasPermission) return res.status(403).json({ message: `You do not have permission to ${permissionCode.replace('_', ' ')}` });
 
             next();
         } catch (err) {

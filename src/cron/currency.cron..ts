@@ -1,5 +1,5 @@
 import {CronJob} from 'cron';
-import {adService} from '../services/ad.service';
+import {carService} from '../services/car.service';
 
 
 
@@ -8,7 +8,7 @@ const handler = async () => {
 
     console.log('[CRON] Updating ad prices...');
     try {
-        await adService.updatePrices();
+        await carService.updatePrices();
         console.log('[CRON] Prices updated successfully');
     } catch (err) {
         console.error('[CRON] Failed to update prices:', err);
@@ -16,6 +16,6 @@ const handler = async () => {
 }  ;
 
 
-export const currencyCron = new CronJob('1/3 0 0 * * *', handler);
+export const currencyCron = new CronJob('0 1/3 0 * * *', handler);
 
 

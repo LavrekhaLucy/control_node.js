@@ -2,30 +2,6 @@ import { Request, Response, NextFunction } from 'express';
 import { userService } from '../services/user.service';
 
 class AdminController {
-    async createManager(req: Request, res: Response, next: NextFunction) {
-        try {
-            const manager = await userService.createUser({
-                ...req.body,
-                roles: ['manager'],
-            });
-            res.status(201).json(manager);
-        } catch (e) {
-            next(e);
-        }
-    }
-
-    async createAdmin(req: Request, res: Response, next: NextFunction) {
-        try {
-            const admin = await userService.createUser({
-                ...req.body,
-                roles: ['admin'],
-            });
-            res.status(201).json(admin);
-        } catch (e) {
-            next(e);
-        }
-    }
-
 
     async banUser(req: Request, res: Response, next: NextFunction) {
         try {

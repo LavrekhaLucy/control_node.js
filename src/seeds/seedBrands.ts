@@ -1,10 +1,10 @@
-import {BrandModel} from '../models/brand.model';
+import {Brand} from '../models/brand.model';
 
 
 export const seedBrandsWithModels = async () => {
     try {
 
-           await BrandModel.deleteMany({});
+           await Brand.deleteMany({});
 
         const brandsWithModels = [
     {
@@ -77,7 +77,13 @@ export const seedBrandsWithModels = async () => {
     }
 ];
 
-        await BrandModel.insertMany( brandsWithModels);
+        for (const brand of brandsWithModels) {
+            await Brand.findOneAndUpdate(
+                { name: brand.name },
+                { name: brand.name, models: brand.models },
+                { upsert: true, new: true }
+            );
+        }
     console.log('Brands and models seeded');
 
     } catch (error) {
@@ -85,7 +91,3 @@ export const seedBrandsWithModels = async () => {
     }
 
 };
-
-seedBrandsWithModels().catch(err => {
-    console.error(' Error seeding database:', err);
-});

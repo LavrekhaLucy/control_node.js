@@ -4,4 +4,13 @@ export type EmailPayloadCombined = {
     email?: string;
     actionToken?: string;
     verifyLink?: string;
+    brandName: string;
+    userName: string;
+    userEmail: string;
+    carId: string;
+    carTitle: string;
+    sellerName: string;
+    sellerEmail: string;
+    reason: string;
+    adStatus: string;
 };

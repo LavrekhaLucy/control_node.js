@@ -1,6 +1,7 @@
 import {NextFunction, Request, Response} from 'express';
 import {userRepository} from '../repositories/user.repository';
 import {Types} from 'mongoose';
+import {userService} from '../services/user.service';
 
 
 class UserController {
@@ -56,6 +57,15 @@ class UserController {
             next(e);
         }
 
+    }
+    public async banUser(req: Request, res: Response, next: NextFunction) {
+        try {
+            const { userId } = req.params;
+            const updatedUser = await userService.banUser(userId);
+            res.status(200).json({ message: 'User banned', user: updatedUser });
+        } catch (err) {
+            next(err);
+        }
     }
 }
 

@@ -10,6 +10,7 @@ import {ObjectId} from '../types/common';
 export  interface IUser {
     _id: ObjectId;
     name: string;
+    age: number;
     email: string;
     password: string;
     roles: ObjectId[] | IRole[];
@@ -63,6 +64,7 @@ export interface IUserListResponse {
     order?: OrderEnum;
     orderBy?: UserListOrderByEnum;
 }
+
 
 
 

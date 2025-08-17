@@ -1,16 +1,12 @@
 import {IRole} from '../interfaces/role-interface';
 import {Role} from '../models/role.model';
 import {HydratedDocument} from 'mongoose';
-import {RoleEnum} from '../enums/role.enum';
+import {User} from '../models/user.model';
+import {ObjectId} from '../types/common';
+import {Permission} from '../models/permission.model';
+import {PermissionEnum} from '../enums/permission.enum';
 
 class RoleRepository {
-    public async getAll():Promise<HydratedDocument<IRole>[]> {
-        return Role.find().populate('permissions');
-    }
-
-    public async getById(id: string):Promise<HydratedDocument<IRole> | null> {
-        return Role.findById(id).populate('permissions');
-    }
 
     public async create(dto: Partial<IRole>):Promise<HydratedDocument<IRole>> {
         return Role.create(dto);
@@ -24,10 +20,51 @@ class RoleRepository {
         await Role.findByIdAndDelete(id);
     }
 
-    public async getByName(name: RoleEnum):Promise<HydratedDocument<IRole> | null> {
-        return Role.findOne({ name }).populate('permissions');
+    // public async upsert(
+    //     name: string,
+    //     scope: string,
+    //     permissionIds: ObjectId[]
+    // ): Promise<IRole> {
+    //     return Role.findOneAndUpdate(
+    //         { name },
+    //         { $set: { scope, permissions: permissionIds } },
+    //         { upsert: true, new: true }
+    //     ).exec();
+    // }
+
+    public async upsert(roleName: string, scope: string, permissionCodes: PermissionEnum[]): Promise<IRole> {
+        // Знаходимо всі permissions за кодами
+        const permissions = await Permission.find({ code: { $in: permissionCodes } });
+
+        // Створюємо або оновлюємо роль
+        const role = await Role.findOneAndUpdate(
+            { name: roleName, scope },
+            { name: roleName, scope, permissions },
+            { upsert: true, new: true }
+        );
+
+        return role;
     }
+
+    public async findByName(name: string): Promise<IRole | null> {
+        return Role.findOne({ name }).populate('permissions').exec();
+    }
+
+    public async findAll(): Promise<IRole[]> {
+        return Role.find().populate('permissions').exec();
+    }
+
+    public async assignRoleToUser(
+        userId: string | ObjectId,
+        roleId: string | ObjectId
+    ) {
+        return User.findByIdAndUpdate(
+            userId,
+            { $addToSet: { roles: roleId } },
+            { new: true }
+        ).populate('roles');
+    }
+
 }
 
 export const roleRepository = new RoleRepository();
-

@@ -1,17 +1,10 @@
-import {Role} from '../models/role.model';
+import { roleRepository } from '../repositories/role.repository';
 
 class RoleService {
 
-    public async  getDefaultRole() {
-        let role = await Role.findOne({ name: 'buyer' });
-        if (!role) {
-            role = await Role.create({
-                name: 'buyer',
-                permissions: ['VIEW_CAR']
-            });
-        }
-        return role;
+    public async assignRole(userId: string, roleId: string) {
+        return roleRepository.assignRoleToUser(userId, roleId);
     }
 }
-export const roleService = new RoleService();
 
+export const roleService = new RoleService();

@@ -28,119 +28,10 @@ export interface ISignUpDTO {
     accountType?: 'base' | 'premium';
 }
 class AuthService {
-    // public async signUp(dto: Partial<IUser>): Promise<{ user: IUser; tokens: ITokenPair }> {
-    //
-    //     const password = await passwordService.hashPassword(dto.password);
-    //
-    //     const user = await userRepository.create({...dto, password});
-    //
-    //     console.log('Created user:', user);
-    //     const rolesEnum = await mapRolesToEnum(user.roles);
-    //
-    //     const tokens = tokenService.generateTokens({
-    //         userId: user._id.toString(),
-    //         roles:rolesEnum,
-    //         name: user.name,
-    //         email: user.email,
-    //     });
-    //
-    //     await tokenRepository.create({...tokens, _userId: user._id});
-    //
-    //
-    //     const verificationToken = tokenService.generateActionTokens(
-    //         {
-    //             userId: user._id.toString(),
-    //             roles: rolesEnum,
-    //             email: user.email,
-    //             name: user.name,
-    //         },
-    //         ActionTokenTypeEnum.VERIFY_EMAIL
-    //     );
-    //
-    //     await actionTokenRepository.create({
-    //         _userId: user._id,
-    //         token: verificationToken,
-    //         type: ActionTokenTypeEnum.VERIFY_EMAIL
-    //     });
-    //
-    //     const verificationLink = `${configs.APP_FRONT_URL}/auth/verify-email?token=${verificationToken}`;
-    //
-    //     await emailService.sendMail(
-    //         EmailTypeEnum.VERIFY_EMAIL,
-    //         'lavreha7@gmail.com',
-    //         // user.email,
-    //         {
-    //             name: user.name,
-    //             verifyLink: verificationLink,
-    //         });
-    //     return {user, tokens};
-    // }
-
-    // public async signUp(dto: ISignUpDTO): Promise<{ user: IUser; tokens: ITokenPair }> {
-    //     const password = await passwordService.hashPassword(dto.password);
-    //
-    //     // Значення за замовчуванням
-    //     const roleName = dto.roleName || 'buyer';
-    //
-    //     if (!['buyer', 'seller'].includes(roleName)) {
-    //         throw new Error('You cannot assign this role');
-    //     }
-    //
-    //     // Знаходимо роль
-    //     const roleDoc = await Role.findOne({ name: roleName });
-    //     if (!roleDoc) throw new Error(`Role ${roleName} not found`);
-    //
-    //     // Створюємо користувача з цією роллю
-    //     const user = await userRepository.create({
-    //         ...dto,
-    //         password,
-    //         roles: [roleDoc._id], // тут масив ObjectId
-    //     });
-    //
-    //     await user.populate('roles');
-    //
-    //     const rolesEnum = await mapRolesToEnum(user.roles);
-    //
-    //     const tokens = tokenService.generateTokens({
-    //         userId: user._id.toString(),
-    //         roles: rolesEnum,
-    //         name: user.name,
-    //         email: user.email,
-    //     });
-    //
-    //     await tokenRepository.create({ ...tokens, _userId: user._id });
-    //
-    //     const verificationToken = tokenService.generateActionTokens(
-    //         {
-    //             userId: user._id.toString(),
-    //             roles: rolesEnum,
-    //             email: user.email,
-    //             name: user.name,
-    //         },
-    //         ActionTokenTypeEnum.VERIFY_EMAIL
-    //     );
-    //
-    //     await actionTokenRepository.create({
-    //         _userId: user._id,
-    //         token: verificationToken,
-    //         type: ActionTokenTypeEnum.VERIFY_EMAIL
-    //     });
-    //
-    //     const verificationLink = `${configs.APP_FRONT_URL}/auth/verify-email?token=${verificationToken}`;
-    //
-    //     await emailService.sendMail(
-    //         EmailTypeEnum.VERIFY_EMAIL,
-    //         user.email,
-    //         { name: user.name, verifyLink: verificationLink }
-    //     );
-    //
-    //     return { user, tokens };
-    // }
 
     public async signUp(dto: ISignUpDTO): Promise<{ user: IUser; tokens: ITokenPair }> {
         const password = await passwordService.hashPassword(dto.password);
 
-        // Присвоюємо ролі
         let rolesToAssign: IRole[] = [];
         if (dto.roles && dto.roles.length > 0) {
             rolesToAssign = await Role.find({ name: { $in: dto.roles } });
@@ -171,7 +62,7 @@ class AuthService {
 
         await tokenRepository.create({ ...tokens, _userId: user._id });
 
-        // Генеруємо action token для верифікації email
+
         const verificationToken = tokenService.generateActionTokens(
             {
                 userId: user._id.toString(),
@@ -187,7 +78,7 @@ class AuthService {
             type: ActionTokenTypeEnum.VERIFY_EMAIL,
         });
 
-        // Надсилаємо лист для підтвердження email
+
         const verificationLink = `${configs.APP_FRONT_URL}/auth/verify-email?token=${verificationToken}`;
         await emailService.sendMail(
             EmailTypeEnum.VERIFY_EMAIL,

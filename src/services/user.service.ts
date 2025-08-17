@@ -40,10 +40,6 @@ class UserService {
         return await userRepository.update(userId, dto);
     }
 
-    public async deleteMe(jwtPayload: ITokenPayload): Promise<void> {
-        const userId = new Types.ObjectId(jwtPayload.userId);
-        return await userRepository.delete(userId);
-    }
     public async delete(userId: string): Promise<void> {
         const id = new Types.ObjectId(userId);
         await userRepository.delete(id);
@@ -117,7 +113,6 @@ class UserService {
 
         return updatedUser;
     }
-
 
 
 }

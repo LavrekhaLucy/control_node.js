@@ -1,10 +1,7 @@
-
 import { User } from '../models/user.model';
 import {IUser, IUserListQuery} from '../interfaces/user-interface';
 import {FilterQuery, HydratedDocument, Types} from 'mongoose';
 import {ObjectId} from '../types/common';
-
-
 
 
 class UserRepository {
@@ -31,18 +28,18 @@ class UserRepository {
     }
 
     public async findById(id: ObjectId): Promise<HydratedDocument<IUser> | null> {
-        return User.findById(id).populate('roles');
+        return User.findById(id).populate('roles').exec();
     }
+
     public async findByIdWithRoles  (userId: Types.ObjectId):Promise<HydratedDocument<IUser> | null> {
 
         return User.findById(userId)
             .populate({
                 path: 'roles',
-                populate: { path: 'permissions' } // одночасно підтягуємо permissions
+                populate: { path: 'permissions' }
             });
 
     };
-
     public async findByEmail(email: string): Promise<HydratedDocument<IUser> | null> {
         return User.findOne({email}).populate('roles').select('+password');
     }
@@ -52,7 +49,7 @@ class UserRepository {
     }
 
     public async update(id: ObjectId, dto: Partial<IUser>): Promise<HydratedDocument<IUser>> {
-        return User.findByIdAndUpdate(id, dto, {new: true});
+        return User.findByIdAndUpdate(id, dto, {new: true}).exec();
     }
 
     public async delete(id: ObjectId): Promise<void> {

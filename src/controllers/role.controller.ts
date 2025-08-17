@@ -1,69 +1,24 @@
-// import {NextFunction, Request, Response} from 'express';
-// import {roleRepository} from '../repositories/role.repository';
-// import {RoleEnum} from '../enums/role.enum';
-//
-//
-//
-// class RoleController {
-//     async getAllRoles(req: Request, res: Response, next: NextFunction) {
-//         try {
-//             const roles = await roleRepository.getAll();
-//             res.json(roles);
-//         } catch (e) {
-//             next(e);
-//         }
-//     }
-//
-//     async getRoleById(req: Request, res: Response, next: NextFunction) {
-//         try {
-//             const {id} = req.params;
-//             const role = await roleRepository.getById(id);
-//             res.json(role);
-//         } catch (e) {
-//             next(e);
-//         }
-//     }
-//
-//     async createRole(req: Request, res: Response, next: NextFunction) {
-//         try {
-//             const role = await roleRepository.create(req.body);
-//             res.status(201).json(role);
-//         } catch (e) {
-//             next(e);
-//         }
-//     }
-//
-//     async updateRole(req: Request, res: Response, next: NextFunction) {
-//         try {
-//             const {id} = req.params;
-//             const updatedRole = await roleRepository.update(id, req.body);
-//             res.json(updatedRole);
-//         } catch (e) {
-//             next(e);
-//         }
-//     }
-//
-//     async deleteRole(req: Request, res: Response, next: NextFunction) {
-//         try {
-//             const {id} = req.params;
-//             await roleRepository.delete(id);
-//             res.sendStatus(204);
-//         } catch (e) {
-//             next(e);
-//         }
-//     }
-//
-//     async getRoleByName(req: Request, res: Response, next: NextFunction) {
-//         try {
-//             const name = req.params.name as RoleEnum;
-//             const role = await roleRepository.getByName(name);
-//             res.json(role);
-//         } catch (e) {
-//             next(e);
-//         }
-//     }
-// }
-//
-// export const roleController = new RoleController();
-//
-//
+import { NextFunction, Request, Response } from 'express';
+import { roleService } from '../services/role.service';
+
+class RoleController {
+    public async assignRole(req: Request, res: Response, next: NextFunction) {
+        try {
+            const { userToAssign, roleToAssign } = res.locals;
+
+            const updatedUser = await roleService.assignRole(
+                userToAssign._id.toString(),
+                roleToAssign._id.toString()
+            );
+
+            res.status(200).json({
+                message: `Role ${roleToAssign.name} assigned successfully`,
+                user: updatedUser,
+            });
+        } catch (err) {
+            next(err);
+        }
+    }
+}
+
+export const roleController = new RoleController();

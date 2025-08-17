@@ -14,6 +14,7 @@ import {managerRoutes} from './routes/manager.routes';
 import {seedDatabase} from './seeds/seedData';
 
 import {carRoutes} from './routes/car.routes';
+import {brandRoutes} from './routes/brand.routes';
 
 
 const app = express();
@@ -39,6 +40,7 @@ app.use('/users', adminRoutes);
 app.use('/auth', authRoutes);
 app.use('/cars', carRoutes);
 app.use('/manager', managerRoutes);
+app.use('/brands', brandRoutes);
 
 
 

@@ -21,6 +21,14 @@ export const emailConstants = {
         subject: 'Verify email',
         template: 'verify-email'
 },
+    [EmailTypeEnum.BRAND_SUGGESTION]: {
+        subject: 'Brand Suggestion',
+        template: 'brand-suggestion',
+    },
+    [EmailTypeEnum.CAR_MODERATION]: {
+        subject: 'URGENT: Ad Moderation Required',
+        template: 'car-moderation',
+    },
 };
 
 

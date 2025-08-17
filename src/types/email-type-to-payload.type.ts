@@ -17,6 +17,7 @@ export type EmailTypeToPayload = {
 
     [EmailTypeEnum.VERIFY_EMAIL]: PickRequired<EmailPayloadCombined, 'name'|'verifyLink'>;
 
+    [EmailTypeEnum.BRAND_SUGGESTION]: PickRequired<EmailPayloadCombined, 'brandName'| 'userName'| 'userEmail'>;
 
-
-};
+    [EmailTypeEnum.CAR_MODERATION]: PickRequired<EmailPayloadCombined, 'carId'| 'carTitle'| 'sellerName'| 'sellerEmail' | 'reason'| 'adStatus'>;
+       };
