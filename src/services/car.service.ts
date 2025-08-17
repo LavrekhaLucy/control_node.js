@@ -136,15 +136,25 @@ export class CarService {
         if (query.region) filter.region = query.region;
         if (query.brand) filter.brand = query.brand;
         if (query.currency) filter.currency = query.currency;
+        if (query.adStatus) filter.adStatus = query.adStatus;
 
         if (query.minPrice) filter.price = { ...(filter.price as Record<string, unknown>), $gte: Number(query.minPrice) };
         if (query.maxPrice) filter.price = { ...(filter.price as Record<string, unknown>), $lte: Number(query.maxPrice) };
 
-        if (user && user.accountType !== AccountType.PREMIUM) {
+
+        if (user?.accountType === AccountType.PREMIUM) {
+            if (query.adStatus) filter.adStatus = query.adStatus;
+        } else {
             filter.adStatus = AdStatusEnum.ACTIVE;
         }
+        const cars = await carRepository.findQuery(filter).sort({ createdAt: -1 });
 
-        return carRepository.findQuery(filter).sort({ createdAt: -1 });
+        console.log(`Found cars: ${cars.length}`);
+        if (cars.length > 0) {
+            console.log('Sample car:', cars[0]);
+        }
+
+        return cars;
     }
     public async verifyCar(carId: string) {
         const objectId = new Types.ObjectId(carId);

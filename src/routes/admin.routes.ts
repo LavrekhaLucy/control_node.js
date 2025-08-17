@@ -9,41 +9,44 @@ import {validateAssignRoleMiddleware} from '../middlewares/validate-assign-role.
 const router = Router();
 
 
+
+router.get(
+    '/',
+    authMiddleware.checkAccessToken,
+    requirePermissionMiddleware(PermissionEnum.ALL),
+    adminController.listUsers
+);
+
 router.post(
     '/assign',
     authMiddleware.checkAccessToken,
-    requirePermissionMiddleware(PermissionEnum.CREATE_MANAGER),
+    requirePermissionMiddleware('all'),
     validateAssignRoleMiddleware,
     roleController.assignRole
 );
 
-
-router.post(
-    '/:userId/ban',
+router.patch(
+    '/ban/:userId',
     authMiddleware.checkAccessToken,
-    requirePermissionMiddleware(PermissionEnum.BAN_USER),
+    requirePermissionMiddleware('ban_user'),
     adminController.banUser
 );
 
 router.post(
-    '/:userId/unban',
+    '/unban/:userId',
     authMiddleware.checkAccessToken,
-    requirePermissionMiddleware(PermissionEnum.UNBAN_USER),
+    requirePermissionMiddleware('unban_user'),
     adminController.unbanUser
 );
 
 router.delete(
     '/:userId',
     authMiddleware.checkAccessToken,
-    requirePermissionMiddleware(PermissionEnum.DELETE_USER),
+    requirePermissionMiddleware('delete_user'),
     adminController.deleteUser
 );
 
-router.get(
-    '/',
-    authMiddleware.checkAccessToken,
-    requirePermissionMiddleware(PermissionEnum.VIEW_USERS),
-    adminController.listUsers
-);
+
 
 export const adminRoutes = router;
+

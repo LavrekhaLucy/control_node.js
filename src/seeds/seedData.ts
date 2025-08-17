@@ -4,7 +4,6 @@ import {PermissionEnum} from '../enums/permission.enum';
 
 export const seedDatabase = async () => {
     try {
-            // --- Створюємо permissions ---
             const permissionsData = [
                 { code: PermissionEnum.ALL, description: 'Full access (super admin only)' },
                 { code: PermissionEnum.VIEW_CAR, description: 'View cars' },
@@ -26,11 +25,6 @@ export const seedDatabase = async () => {
                 createdPermissions.push(updated);
             }
 
-            // --- Допоміжна функція для отримання _id по коду ---
-            // const findByCode = (code: PermissionEnum) =>
-            //     createdPermissions.find(p => p.code === code)?._id!;
-
-            // --- Створюємо ролі ---
             await roleRepository.upsert('buyer', 'platform', [
                 (PermissionEnum.VIEW_CAR),
             ]);
@@ -71,36 +65,3 @@ export const seedDatabase = async () => {
     }
 };
 
-
-// await roleRepository.upsert('buyer', 'platform', [
-//     findByCode(PermissionEnum.VIEW_CAR),
-// ]);
-//
-// await roleRepository.upsert('seller', 'platform', [
-//     findByCode(PermissionEnum.CREATE_CAR),
-//     findByCode(PermissionEnum.EDIT_CAR),
-//     findByCode(PermissionEnum.VIEW_CAR),
-// ]);
-//
-// await roleRepository.upsert('manager', 'platform', [
-//     findByCode(PermissionEnum.BAN_USER),
-//     findByCode(PermissionEnum.DELETE_CAR),
-//     findByCode(PermissionEnum.VERIFY_CAR),
-//     findByCode(PermissionEnum.MANAGE_SALON),
-//     findByCode(PermissionEnum.VIEW_CAR),
-// ]);
-//
-// const adminRole =  await roleRepository.upsert('admin', 'platform', [
-//     findByCode(PermissionEnum.ALL),
-//     findByCode(PermissionEnum.VIEW_CAR),
-//     findByCode(PermissionEnum.CREATE_CAR),
-//     findByCode(PermissionEnum.EDIT_CAR),
-//     findByCode(PermissionEnum.DELETE_CAR),
-//     findByCode(PermissionEnum.BAN_USER),
-//     findByCode(PermissionEnum.UNBAN_USER),
-//     findByCode(PermissionEnum.VIEW_USERS),
-//     findByCode(PermissionEnum.DELETE_USER),
-//     findByCode(PermissionEnum.CREATE_MANAGER),
-//     findByCode(PermissionEnum.MANAGE_SALON),
-//     findByCode(PermissionEnum.VERIFY_CAR),
-// ]);

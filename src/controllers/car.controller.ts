@@ -13,15 +13,6 @@ class CarController {
             const user = req.user as IUser;
             const car = await carService.createCar(user, req.body);
 
-            // if (containsProfanity(car.title) || containsProfanity(car.description)) {
-            //     await emailService.sendCarModerationEmail(
-            //         car,
-            //         { name: user.name, email: user.email },
-            //         'Suspicious language'
-            //     );
-            // }
-
-
             if (req.body.hasProfanity) {
                 await emailService.sendCarModerationEmail(
                     car,

@@ -17,7 +17,10 @@ export class CarRepository {
     }
 
     public findQuery(filters: FilterQuery<ICar> = {}) {
-        return Car.find({ ...filters, isDeleted: false });
+        return  Car.find({
+            ...filters,
+            $or: [{ isDeleted: false }, { isDeleted: { $exists: false } }]
+        });
     }
 
     public async countActiveBySeller(sellerId: ObjectId | string): Promise<number> {

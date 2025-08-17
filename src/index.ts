@@ -3,18 +3,13 @@ import {ApiError} from './errors/api-error';
 import {configs} from './configs/config';
 import * as mongoose from 'mongoose';
 import fileUpload from 'express-fileupload';
-
-// import swaggerUi from 'swagger-ui-express';
-// import swaggerDocument from '../docs/swagger.json';
-
 import {cronRunner} from './cron';
 import {authRoutes} from './routes/auth.routes';
 import {adminRoutes} from './routes/admin.routes';
-import {managerRoutes} from './routes/manager.routes';
 import {seedDatabase} from './seeds/seedData';
-
 import {carRoutes} from './routes/car.routes';
-import {brandRoutes} from './routes/brand.routes';
+import {brandRoutes} from "./routes/brand.routes";
+
 
 
 const app = express();
@@ -27,7 +22,6 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(fileUpload());
 
-// app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use((req: Request, res: Response, next: NextFunction) => {
 
@@ -39,10 +33,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 app.use('/users', adminRoutes);
 app.use('/auth', authRoutes);
 app.use('/cars', carRoutes);
-app.use('/manager', managerRoutes);
 app.use('/brands', brandRoutes);
-
-
 
 
 
@@ -53,17 +44,16 @@ app.use((error: ApiError, req: Request, res: Response, _next: NextFunction) => {
 
 process.on('uncaughtException', (error) => {
     console.error('uncaughtException', error.message, error.stack);
-    // process.exit(1);
 });
 
 
 app.listen(port, async () => {
     try {
         await mongoose.connect(mongo);
-        console.log(' MongoDB connected');
+        console.log('MongoDB connected');
 
         await seedDatabase();
-        console.log(' Database seeded');
+        console.log('Database seeded');
 
         cronRunner();
 

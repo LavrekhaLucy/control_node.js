@@ -3,7 +3,6 @@ import {carController} from '../controllers/car.controller';
 import {authMiddleware} from '../middlewares/auth.middleware';
 import {carMiddleware} from '../middlewares/car.middleware';
 import {requirePermissionMiddleware} from '../middlewares/require-permission';
-import {PermissionEnum} from '../enums/permission.enum';
 
 
 const router = Router();
@@ -15,31 +14,45 @@ router.get('/stats/:id',
 
 router.get('/:id',
     authMiddleware.checkAccessToken,
+    requirePermissionMiddleware('view_car'),
     carMiddleware.filterActiveAds,
     carController.getById);
 
 router.get('/',
     authMiddleware.checkAccessToken,
+    requirePermissionMiddleware('view_car'),
     carMiddleware.filterActiveAds,
     carController.getAll);
 
 router.post('/create',
     authMiddleware.checkAccessToken,
-    requirePermissionMiddleware(PermissionEnum.CREATE_CAR),
+    requirePermissionMiddleware('create_car'),
     carMiddleware.checkProfanity,
     carController.createCar);
 
 router.put('/edit/:id',
     authMiddleware.checkAccessToken,
-    requirePermissionMiddleware(PermissionEnum.EDIT_CAR),
+    requirePermissionMiddleware('edit_car'),
     carMiddleware.checkProfanity,
     carController.editCar);
 
 router.patch('/update-prices',
     authMiddleware.checkAccessToken,
-    requirePermissionMiddleware(PermissionEnum.ALL),
-    carMiddleware.checkAdmin,
+    requirePermissionMiddleware('all'),
     carController.updatePrices);
+
+router.post(
+    '/verify-car/:carId',
+    authMiddleware.checkAccessToken,
+    requirePermissionMiddleware('verify_car'),
+    carController.verifyCar
+);
+
+
+router.delete('/:carId',
+    authMiddleware.checkAccessToken,
+    requirePermissionMiddleware('delete_car'),
+    carController.delete);
 
 export const carRoutes = router;
 
