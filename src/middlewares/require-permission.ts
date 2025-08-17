@@ -1,6 +1,6 @@
 import {NextFunction, Request, Response} from 'express';
 import {hasPermission} from '../services/permission.service';
-import {ApiError} from "../errors/api-error";
+import {ApiError} from '../errors/api-error';
 
 
 export const requirePermissionMiddleware = (permissionCode: string) => {
