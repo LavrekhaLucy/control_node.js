@@ -1,24 +1,30 @@
-#version: '3.8'
-#
-#services:
-#  app:
-#    build:
-#      context: .
-#    ports:
-#      - "8888:3000"
-#    env_file:
-#      - .env
-#    restart: on-failure
-#    command: npm run start
-#
-#  db:
-#    image: mongo
-#    ports:
-#      - "5555:27017"
-#    env_file:
-#      - .env
-#    volumes:
-#      - ./mongo_db:/data/db
-#      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
-#    restart: on-failure
-#
+services:
+  app:
+    build:
+      context: .
+    ports:
+      - "8888:3000"
+    env_file:
+      - .env
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: on-failure
+    command: npm run start
+
+  db:
+    image: mongo
+    ports:
+      - "5555:27017"
+    env_file:
+      - .env
+    volumes:
+      - ./mongo_db:/data/db
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    restart: on-failure
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.runCommand({ping: 1})", "--quiet"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 40s

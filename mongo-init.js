@@ -7,4 +7,4 @@ db.createUser({
             db:'control_node_db'
         }
     ]
-})
+});
