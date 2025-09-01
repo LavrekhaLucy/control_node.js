@@ -1,7 +1,6 @@
 import {NextFunction, Request, Response} from 'express';
 import {userRepository} from '../repositories/user.repository';
 import {Types} from 'mongoose';
-import {userService} from '../services/user.service';
 
 
 class UserController {
@@ -28,7 +27,6 @@ class UserController {
         try {
             const userId = new Types.ObjectId(req.params.id);
             const user = await userRepository.findById(userId);
-            if (!user) return res.status(404).json({message: 'User not found'});
             res.json(user);
         } catch (e) {
             next(e);
@@ -58,15 +56,6 @@ class UserController {
         }
 
     }
-    public async banUser(req: Request, res: Response, next: NextFunction) {
-        try {
-            const { userId } = req.params;
-            const updatedUser = await userService.banUser(userId);
-            res.status(200).json({ message: 'User banned', user: updatedUser });
-        } catch (err) {
-            next(err);
-        }
-    }
-}
+   }
 
 export const userController = new UserController();

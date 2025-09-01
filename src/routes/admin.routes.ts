@@ -5,6 +5,7 @@ import {requirePermissionMiddleware} from '../middlewares/require-permission';
 import {PermissionEnum} from '../enums/permission.enum';
 import {roleController} from '../controllers/role.controller';
 import {validateAssignRoleMiddleware} from '../middlewares/validate-assign-role.middleware';
+import {userMiddleware} from '../middlewares/user.middleware';
 
 const router = Router();
 
@@ -29,15 +30,10 @@ router.patch(
     '/ban/:userId',
     authMiddleware.checkAccessToken,
     requirePermissionMiddleware('ban_user'),
-    adminController.banUser
+    userMiddleware.checkUserExists,
+    adminController.toggleBanUser
 );
 
-router.post(
-    '/unban/:userId',
-    authMiddleware.checkAccessToken,
-    requirePermissionMiddleware('unban_user'),
-    adminController.unbanUser
-);
 
 router.delete(
     '/:userId',

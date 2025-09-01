@@ -3,21 +3,12 @@ import { userService } from '../services/user.service';
 
 class AdminController {
 
-    async banUser(req: Request, res: Response, next: NextFunction) {
+    public async toggleBanUser(req: Request, res: Response, next: NextFunction) {
         try {
-            const { userId } = req.params;
-            const bannedUser = await userService.banUser(userId);
-            res.json({ message: `User ${bannedUser.email} has been banned` });
-        } catch (e) {
-            next(e);
-        }
-    }
-
-    async unbanUser(req: Request, res: Response, next: NextFunction) {
-        try {
-            const { userId } = req.params;
-            const unbannedUser = await userService.unbanUser(userId);
-            res.json({ message: `User ${unbannedUser.email} has been unbanned` });
+            const user = res.locals.foundUser;
+            const { isBanned } = req.body;
+            await userService.toggleBanUser(user._id, isBanned);
+            res.status(204).send();
         } catch (e) {
             next(e);
         }

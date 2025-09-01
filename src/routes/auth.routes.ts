@@ -7,37 +7,17 @@ import {authController} from '../controllers/auth.controller';
 
 const router = Router();
 
-router.post('/sign-up/buyer',
+router.post('/sign-up',
     commonMiddleware.isBodyValid(userBodySchema),
     userMiddleware.isEmailExist,
     authController.signUp);
 
-router.post('/sign-up/seller',
-    commonMiddleware.isBodyValid(userBodySchema),
-    userMiddleware.isEmailExist,
-    authController.signUp);
+router.post(
+    '/sign-in',
+    commonMiddleware.isBodyValid(signInSchema),
+    authController.signIn
+);
 
-
-router.post(
-    '/sign-in/seller',
-    commonMiddleware.isBodyValid(signInSchema),
-    authController.signIn
-);
-router.post(
-    '/sign-in/buyer',
-    commonMiddleware.isBodyValid(signInSchema),
-    authController.signIn
-);
-router.post(
-    '/sign-in/admin',
-    commonMiddleware.isBodyValid(signInSchema),
-    authController.signIn
-);
-router.post(
-    '/sign-in/manager',
-    commonMiddleware.isBodyValid(signInSchema),
-    authController.signIn
-);
 
 // Routes на майбутнє:
 //

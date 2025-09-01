@@ -18,21 +18,12 @@ class UserService {
 
     public async getById(userId: string): Promise<IUser> {
         const objectId = new Types.ObjectId(userId);
-
-        const user = await userRepository.findById(objectId);
-        if (!user) {
-            throw new ApiError('User not found', 404);
-        }
-        return user;
+        return await userRepository.findById(objectId);
     }
 
     public async get(jwtPayload: ITokenPayload): Promise<IUser> {
         const userId = new Types.ObjectId(jwtPayload.userId);
-        const user = await userRepository.findById(userId);
-        if (!user) {
-            throw new ApiError('User not found', 404);
-        }
-        return user;
+        return  await userRepository.findById(userId);
     }
 
     public async update(jwtPayload: ITokenPayload, dto: IUser): Promise<IUser> {
@@ -89,31 +80,13 @@ class UserService {
         return user;
     }
 
-    public async banUser(userId: string): Promise<IUser> {
+
+
+    public async toggleBanUser(userId: string, isBanned: boolean): Promise<IUser> {
         const objectId = new Types.ObjectId(userId);
-        const user = await userRepository.findById(objectId);
+        return await userRepository.update(objectId, { isDeleted: isBanned });
 
-        if (!user) {
-            throw new ApiError('User not found', 404);
-        }
-
-        const updatedUser = await userRepository.update(objectId, { isDeleted: true });
-
-        return updatedUser;
     }
-    public async unbanUser(userId: string): Promise<IUser> {
-        const objectId = new Types.ObjectId(userId);
-        const user = await userRepository.findById(objectId);
-
-        if (!user) {
-            throw new ApiError('User not found', 404);
-        }
-
-        const updatedUser = await userRepository.update(objectId, { isDeleted: false});
-
-        return updatedUser;
-    }
-
 
 }
 
