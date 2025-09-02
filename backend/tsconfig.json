@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "outDir": "dist",          // папка dist всередині backend
+    "rootDir": "src",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "removeComments": true,
+    "noUnusedLocals": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+//    "typeRoots": [
+//      "./src/types", "./node_modules/@types"],
+//    "types": ["node", "express"],
+
+
+//    "typeRoots": ["./node_modules/@types"],   // <-- обов'язково
+//    "types": ["node", "express"]
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/types/**/*.d.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+
+}
+

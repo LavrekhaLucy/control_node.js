@@ -1,20 +1,21 @@
 import { defineConfig } from 'eslint/config';
-import tseslint from 'typescript-eslint';
+import parser from '@typescript-eslint/parser';
+import pluginTs from '@typescript-eslint/eslint-plugin';
 import globals from 'globals';
 
 export default defineConfig([
   {
-    files: ['**/*.{ts,js}'],
+    files: ['backend/src/**/*.{ts,js}'],
     languageOptions: {
       ecmaVersion: 'latest',
       sourceType: 'module',
-      parser: tseslint.parser,
+      parser,
       globals: {
         ...globals.node
       }
     },
     plugins: {
-      '@typescript-eslint': tseslint.plugin
+      '@typescript-eslint': pluginTs
     },
     rules: {
       semi: ['error', 'always'],
@@ -23,8 +24,6 @@ export default defineConfig([
       '@typescript-eslint/explicit-function-return-type': 'off',
       '@typescript-eslint/no-explicit-any': 'off'
     }
-  },
-
-  ...tseslint.configs.recommended
+  }
 ]);
 

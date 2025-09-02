@@ -5,8 +5,8 @@ dotenv.config();
 
 
 export const configs = {
-    APP_PORT: process.env.APP_PORT || 3001,
-    APP_HOST: process.env.APP_HOST,
+    APP_PORT: Number (process.env.APP_PORT) || 3000,
+    APP_HOST: process.env.APP_HOST || '0.0.0.0',
     APP_FRONT_URL: process.env.APP_FRONT_URL,
     APP_PRIVAT_URL: process.env.APP_PRIVAT_URL,
 
