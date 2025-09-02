@@ -11,7 +11,7 @@
     "noUnusedLocals": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
-    "typeRoots": ["./node_modules/@types", "./types"]
+    "typeRoots": ["./node_modules/@types", "./src/types"]
   },
   "include": [
     "src/**/*.ts",
@@ -21,6 +21,3 @@
     "node_modules"
   ]
 }
-
-
-
