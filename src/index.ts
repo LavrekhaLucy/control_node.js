@@ -18,10 +18,6 @@ const port = configs.APP_PORT;
 const host = configs.APP_HOST;
 const mongo = configs.MONGO_URI;
 
-app._router.stack
-    .filter(r => r.route)
-    .map(r => console.log(r.route.path, Object.keys(r.route.methods)));
-
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));

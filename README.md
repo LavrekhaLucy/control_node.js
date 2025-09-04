@@ -53,7 +53,13 @@ Postman-колекція
 
 Для запуску тестів та локальної розробки:
           npm test
+
+
+
+Переглянути контрольну роботу можна за цим посиланням https://github.com/LavrekhaLucy/control_node.js.
+
+Також доступна копія на AWS http://node-control.eu-north-1.elasticbeanstalk.com/.
+
+
           
-Для отримання додаткової інформації:
-          https://github.com/LavrekhaLucy/control_node.js
 
