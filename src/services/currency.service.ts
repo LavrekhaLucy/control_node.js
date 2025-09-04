@@ -6,7 +6,7 @@ import {ApiError} from '../errors/api-error';
 
 const APP_PRIVAT_URL =configs.APP_PRIVAT_URL;
 if (!APP_PRIVAT_URL) {
-    throw new Error('APP_PRIVAT_URL is not defined in environment variables.');
+    throw new ApiError('APP_PRIVAT_URL is not defined in environment variables.', 500);
 }
 
 export class CurrencyService {
