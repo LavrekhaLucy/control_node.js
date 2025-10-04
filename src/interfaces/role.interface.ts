@@ -1,4 +1,4 @@
-import {IPermission} from './permission-interface';
+import {IPermission} from './permission.interface';
 import { ObjectId } from '../types/common';
 import {RoleEnum} from '../enums/role.enum';
 

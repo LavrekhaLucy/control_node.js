@@ -28,12 +28,14 @@ router.post('/create',
     authMiddleware.checkAccessToken,
     requirePermissionMiddleware('create_car'),
     carMiddleware.checkProfanity,
+    carMiddleware.validateBody,
     carController.createCar);
 
 router.put('/edit/:id',
     authMiddleware.checkAccessToken,
     requirePermissionMiddleware('edit_car'),
     carMiddleware.checkProfanity,
+    carMiddleware.validateBody,
     carController.editCar);
 
 router.patch('/update-prices',

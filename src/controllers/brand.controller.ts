@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { Brand } from '../models/brand.model';
 import {emailService} from '../services/email.service';
-import {IUser} from '../interfaces/user-interface';
+import {IUser} from '../interfaces/user.interface';
 
 class BrandController {
     public async getAllBrands(req: Request, res: Response, next: NextFunction) {

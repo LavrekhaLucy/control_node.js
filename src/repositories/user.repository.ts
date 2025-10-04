@@ -1,5 +1,5 @@
 import { User } from '../models/user.model';
-import {IUser, IUserListQuery} from '../interfaces/user-interface';
+import {IUser, IUserListQuery} from '../interfaces/user.interface';
 import {FilterQuery, HydratedDocument, Types} from 'mongoose';
 import {ObjectId} from '../types/common';
 

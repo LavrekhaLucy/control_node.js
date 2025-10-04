@@ -1,4 +1,4 @@
-import {IRole} from '../interfaces/role-interface';
+import {IRole} from '../interfaces/role.interface';
 import {Role} from '../models/role.model';
 import {HydratedDocument} from 'mongoose';
 import {User} from '../models/user.model';

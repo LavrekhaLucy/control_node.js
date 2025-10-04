@@ -1,6 +1,6 @@
 import {NextFunction, Request, Response} from 'express';
 import {ITokenPair, ITokenPayload} from '../interfaces/token.interface';
-import {IChangePassword, IResetPasswordSend, IResetPasswordSet} from '../interfaces/user-interface';
+import {IChangePassword, IResetPasswordSend, IResetPasswordSet} from '../interfaces/user.interface';
 import {authService, ISignUpDTO} from '../services/auth.service';
 import {emailService} from '../services/email.service';
 import {EmailTypeEnum} from '../enums/email-type.enum';

@@ -2,7 +2,7 @@ import {ApiError} from '../errors/api-error';
 import {ITokenPayload} from '../interfaces/token.interface';
 import {s3Service} from './s3.service';
 import {UploadedFile} from 'express-fileupload';
-import {IUser, IUserListQuery, IUserListResponse} from '../interfaces/user-interface';
+import {IUser, IUserListQuery, IUserListResponse} from '../interfaces/user.interface';
 import {userRepository} from '../repositories/user.repository';
 import {userPresenter} from '../presenters/user.presenter';
 import {FileItemTypeEnum} from '../enums/file-item-type.enum';
@@ -66,18 +66,21 @@ class UserService {
         return await userRepository.update(user.id, { avatar: null });
     }
 
-    public async createUser(dto: Partial<IUser>): Promise<IUser> {
+    public async createUser(dto: Partial<IUser>): Promise<Omit<IUser, 'password'>> {
         if (!dto.password) {
             throw new ApiError('Password is required', 400);
         }
+
         const hashedPassword = await passwordService.hashPassword(dto.password);
 
         const user = await userRepository.create({
             ...dto,
             password: hashedPassword,
         });
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const { password:_, ...userWithoutPassword } = user.toObject ? user.toObject() : user;
 
-        return user;
+        return userWithoutPassword;
     }
 
 

@@ -1,5 +1,5 @@
 import { Organization } from '../models/organization.model';
-import {IOrganization} from '../interfaces/organization-interface';
+import {IOrganization} from '../interfaces/organization.interface';
 import {HydratedDocument} from 'mongoose';
 
 class OrganizationRepository {

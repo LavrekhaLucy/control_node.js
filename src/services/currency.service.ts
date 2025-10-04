@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {ICurrencyRate} from '../interfaces/currency-rate-interface';
+import {ICurrencyRate} from '../interfaces/currency-rate.interface';
 import {configs} from '../configs/config';
 import {ApiError} from '../errors/api-error';
 

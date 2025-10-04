@@ -90,6 +90,13 @@ export const  changePasswordSchema = Joi.object({
     price: Joi.number().positive().required(),
 });
 
-
+    export const updateSchema = Joi.object({
+        title: Joi.string(),
+        description: Joi.string().allow('', null),
+        brand: Joi.string(),
+        model: Joi.string(),
+        currency: Joi.string().valid(...Object.values(CurrencyEnum)),
+        price: Joi.number().positive(),
+    });
 
 

@@ -1,6 +1,6 @@
 import {model, Schema} from 'mongoose';
 import {RoleScope} from '../enums/role-scope.enum';
-import {IRole} from '../interfaces/role-interface';
+import {IRole} from '../interfaces/role.interface';
 import {RoleEnum} from '../enums/role.enum';
 
 

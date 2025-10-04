@@ -3,7 +3,7 @@ import {
     IUserListQuery,
     IUserListResponse,
     IUserResponse,
-} from '../interfaces/user-interface';
+} from '../interfaces/user.interface';
 import {configs} from '../configs/config';
 
 class UserPresenter {

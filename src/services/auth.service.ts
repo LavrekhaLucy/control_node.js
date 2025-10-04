@@ -7,7 +7,7 @@ import {TokenTypeEnum} from '../enums/token-type.enum';
 import {emailService} from './email.service';
 import {EmailTypeEnum} from '../enums/email-type.enum';
 import {ActionTokenTypeEnum} from '../enums/action-token-type.enum';
-import {IChangePassword, IResetPasswordSend, IResetPasswordSet, ISignIn, IUser} from '../interfaces/user-interface';
+import {IChangePassword, IResetPasswordSend, IResetPasswordSet, ISignIn, IUser} from '../interfaces/user.interface';
 import {userRepository} from '../repositories/user.repository';
 import {tokenRepository} from '../repositories/token.repository';
 import {actionTokenRepository} from '../repositories/action-token.repository';
@@ -17,7 +17,7 @@ import {mapRolesToEnum} from '../utils/map-roles-to-enum';
 import {configs} from '../configs/config';
 import {Role} from '../models/role.model';
 import {AccountType} from '../enums/account-type.enum';
-import {IRole} from '../interfaces/role-interface';
+import {IRole} from '../interfaces/role.interface';
 
 export interface ISignUpDTO {
     name: string;

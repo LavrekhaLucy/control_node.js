@@ -6,8 +6,6 @@ import {ITokenPayload} from '../interfaces/token.interface';
 import {tokenRepository} from '../repositories/token.repository';
 import {ActionTokenTypeEnum} from '../enums/action-token-type.enum';
 import {actionTokenRepository} from '../repositories/action-token.repository';
-import {userRepository} from '../repositories/user.repository';
-import {Types} from 'mongoose';
 
 
 class AuthMiddleware {
@@ -24,14 +22,6 @@ class AuthMiddleware {
             if (!pair) {
                 throw new ApiError('Token is not valid', 401);
             }
-            const userId = new Types.ObjectId(payload.userId);
-            const user = await userRepository.findById(userId);
-            if (!user) {
-                throw new ApiError('User not found', 401);
-            }
-
-            req.user = user;
-            console.log(payload);
 
             res.locals.jwtPayload = payload;
             next();

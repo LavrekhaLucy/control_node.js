@@ -1,9 +1,10 @@
 import {NextFunction, Request, Response} from 'express';
-import {IUser} from '../interfaces/user-interface';
+import {IUser} from '../interfaces/user.interface';
 import {ApiError} from '../errors/api-error';
 import {AccountType} from '../enums/account-type.enum';
 import {containsProfanity} from '../utils/check-profanity';
 import {AdStatusEnum} from '../enums/ad-status.enum';
+import {createSchema, updateSchema} from '../validators/user.validator';
 
 export class CarMiddleware {
 
@@ -58,7 +59,21 @@ export class CarMiddleware {
             next(err);
         }
     }
-}
 
+
+
+    public async validateBody(req: Request, res: Response, next: NextFunction) {
+        try {
+            const schema = req.method === 'POST' ? createSchema : updateSchema;
+            const { error } = schema.validate(req.body);
+            if (error) {
+                return next(new ApiError(error.details[0].message, 400));
+            }
+            next();
+        } catch (err) {
+            next(err);
+        }
+    }
+}
 
 export const carMiddleware = new CarMiddleware();

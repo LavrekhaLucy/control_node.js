@@ -1,6 +1,6 @@
 import {NextFunction, Request, Response} from 'express';
 import {carService} from '../services/car.service';
-import {IUser} from '../interfaces/user-interface';
+import {IUser} from '../interfaces/user.interface';
 import {GetCarsQuery} from '../interfaces/car-interface';
 import {ApiError} from '../errors/api-error';
 import {emailService} from '../services/email.service';
@@ -95,7 +95,7 @@ class CarController {
         try {
             const { carId } = req.params;
             await carService.deleteCar(carId);
-            res.status(200).json({ message: 'Car deleted' });
+            res.status(204).json({ message: 'Car deleted' });
         } catch (err) {
             next(err);
         }

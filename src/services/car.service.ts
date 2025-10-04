@@ -7,7 +7,7 @@ import {CurrencyService} from './currency.service';
 import {emailService} from './email.service';
 import {AdRepository} from '../repositories/ad.repository';
 import {IAd} from '../interfaces/ad.interface';
-import {IUser} from '../interfaces/user-interface';
+import {IUser} from '../interfaces/user.interface';
 import {AccountType} from '../enums/account-type.enum';
 import {carRepository} from '../repositories/car.repository';
 import {Types} from 'mongoose';

@@ -1,5 +1,5 @@
 import { Permission } from '../models/permission.model';
-import { IPermission } from '../interfaces/permission-interface';
+import { IPermission } from '../interfaces/permission.interface';
 
 class PermissionRepository {
     public async upsert(code: string, description?: string): Promise<IPermission> {
