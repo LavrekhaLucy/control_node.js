@@ -29,7 +29,7 @@ class AdminController {
         try {
             const { userId } = req.params;
             await userService.delete(userId);
-            res.json({ message: `User ${userId} has been deleted` });
+            res.status(204).send();
         } catch (e) {
             next(e);
         }

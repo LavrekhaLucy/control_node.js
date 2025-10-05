@@ -28,7 +28,7 @@ export class CarService {
             : AdStatusEnum.ACTIVE;
 
         if (!data.price || !data.currency) {
-            throw new Error('Необхідно вказати ціну та валюту авто');
+            throw new Error('You must specify the price and currency of the car');
         }
 
         const rates = await this.currencyService.getAllRates();
@@ -49,7 +49,7 @@ export class CarService {
 
     public async editCar(carId: string, dto: Partial<ICar>, user: IUser): Promise<ICar> {
         const car = await carRepository.findById(carId);
-        if (car.editAttempts >= 3) {
+        if (car.editAttempts >= 5) {
             car.adStatus = AdStatusEnum.INACTIVE;
             await emailService.sendCarModerationEmail(
                 car,
