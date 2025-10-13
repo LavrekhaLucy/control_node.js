@@ -4,7 +4,8 @@ import {ApiError} from '../errors/api-error';
 import {AccountType} from '../enums/account-type.enum';
 import {containsProfanity} from '../utils/check-profanity';
 import {AdStatusEnum} from '../enums/ad-status.enum';
-import {createSchema, updateSchema} from '../validators/user.validator';
+import {createSchema, updateSchema} from '../validators/car.validator';
+
 
 export class CarMiddleware {
 

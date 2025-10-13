@@ -117,7 +117,7 @@ class AuthService {
         delete userData.password;
 
         return { user: userData, tokens };
-        // return {user, tokens};
+
     }
 
     public async refreshToken(refreshToken: string): Promise<ITokenPair> {
