@@ -85,24 +85,32 @@ class AuthService {
             user.email,
             { name: user.name, verifyLink: verificationLink }
         );
+        const userData = user.toObject ? user.toObject() : user;
+        delete userData.password;
 
-        return { user, tokens };
+        return { user: userData, tokens };
+        // return { user, tokens };
     }
 
 
     public async signIn(dto: ISignIn,): Promise<{ user: IUser; tokens: ITokenPair }> {
+        console.log('SIGN IN start');
         const user = await userRepository.findByEmail(dto.email);
+
         if (!user) {
             throw new ApiError('User not found', 404);
         }
-
+        console.log('USER FOUND', user?.email);
         const isPasswordCorrect = await passwordService.comparePassword(
             dto.password,
             user.password,
         );
+
         if (!isPasswordCorrect) {
             throw new ApiError('Invalid credentials', 401);
         }
+        console.log('Password exists:', !!user.password);
+
         const rolesEnum = await mapRolesToEnum(user.roles);
 
         const tokens = tokenService.generateTokens({
@@ -112,13 +120,61 @@ class AuthService {
             email: user.email,
         });
         await tokenRepository.create({...tokens, _userId: user._id});
-
+        console.log('Comparing password...');
         const userData = user.toObject ? user.toObject() : user;
         delete userData.password;
 
         return { user: userData, tokens };
-
+        // return { user, tokens };
     }
+
+    // public async signIn(dto: ISignIn): Promise<{ user: IUser; tokens: ITokenPair }> {
+    //     console.log('🔹 SIGN IN start');
+    //     const user = await userRepository.findByEmail(dto.email);
+    //
+    //     if (!user) {
+    //         console.log('❌ User not found for email:', dto.email);
+    //         throw new ApiError('User not found', 404);
+    //     }
+    //
+    //     console.log('✅ User found:', {
+    //         email: user.email,
+    //         hasPassword: !!user.password,
+    //         roles: user.roles?.map((r: any) => r.name),
+    //     });
+    //
+    //     const isPasswordCorrect = await passwordService.comparePassword(
+    //         dto.password,
+    //         user.password,
+    //     );
+    //
+    //     console.log('🧩 Password check result:', isPasswordCorrect);
+    //
+    //     if (!isPasswordCorrect) {
+    //         throw new ApiError('Invalid credentials', 401);
+    //     }
+    //
+    //     const rolesEnum = await mapRolesToEnum(user.roles);
+    //
+    //     const tokens = tokenService.generateTokens({
+    //         userId: user._id.toString(),
+    //         roles: rolesEnum,
+    //         name: user.name,
+    //         email: user.email,
+    //     });
+    //
+    //     await tokenRepository.create({ ...tokens, _userId: user._id });
+    //
+    //     // Видаляємо пароль перед поверненням
+    //     const userData = user.toObject ? user.toObject() : user;
+    //     delete userData.password;
+    //
+    //     console.log('✅ Sign in complete for:', user.email);
+    //
+    //     return { user: userData, tokens };
+    // }
+
+
 
     public async refreshToken(refreshToken: string): Promise<ITokenPair> {
 

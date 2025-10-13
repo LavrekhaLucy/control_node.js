@@ -20,6 +20,8 @@ class AuthController {
 
 
     public async signIn(req: Request, res: Response, next: NextFunction) {
+        console.log('SIGN IN controller start');
+
         try {
             const {email, password} = req.body;
             const result = await authService.signIn({email, password});

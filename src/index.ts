@@ -35,6 +35,7 @@ app.use('/users', adminRoutes);
 app.use('/auth', authRoutes);
 app.use('/cars', carRoutes);
 app.use('/brands', brandRoutes);
+app.use('/test', authRoutes);
 
 
 

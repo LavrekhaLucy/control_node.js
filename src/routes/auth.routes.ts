@@ -1,8 +1,8 @@
 import {Router} from 'express';
 import {commonMiddleware} from '../middlewares/common.middleware';
-import {signInSchema, userBodySchema} from '../validators/user.validator';
 import {userMiddleware} from '../middlewares/user.middleware';
 import {authController} from '../controllers/auth.controller';
+import {signInSchema, userBodySchema} from '../validators/user.validator';
 
 
 const router = Router();
@@ -17,7 +17,11 @@ router.post(
     commonMiddleware.isBodyValid(signInSchema),
     authController.signIn
 );
-
+router.post(
+    '/test',
+    (req, res) => {
+    res.json({ ok: true });
+});
 
 // Routes на майбутнє:
 //
