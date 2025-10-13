@@ -112,7 +112,12 @@ class AuthService {
             email: user.email,
         });
         await tokenRepository.create({...tokens, _userId: user._id});
-        return {user, tokens};
+
+        const userData = user.toObject ? user.toObject() : user;
+        delete userData.password;
+
+        return { user: userData, tokens };
+        // return {user, tokens};
     }
 
     public async refreshToken(refreshToken: string): Promise<ITokenPair> {
