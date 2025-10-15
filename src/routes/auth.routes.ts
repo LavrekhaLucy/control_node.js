@@ -17,11 +17,7 @@ router.post(
     commonMiddleware.isBodyValid(signInSchema),
     authController.signIn
 );
-router.post(
-    '/test',
-    (req, res) => {
-    res.json({ ok: true });
-});
+
 
 // Routes на майбутнє:
 //
